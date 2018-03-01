@@ -270,7 +270,43 @@ class Trabajador_laboral extends CI_Controller {
     }
 
         /////////////////////////////////// S E C C I O N   E D U C A C I O N   //////////////////////////////
-
+            ////////// CREAR //////
+            public function nueva_educacion_basica(){
+                $this->load->model('Trabajador_laboral_MO','trabajador',true);
+                $query = $this->trabajador->nueva_educacion_basica(
+                    $this->input->post('nombre_educacion_basica',TRUE),
+                    $this->input->post('id_ciudad',TRUE)
+                );    
+                echo $query;
+            }
+            
+            public function nueva_educacion_media(){
+                $this->load->model('Trabajador_laboral_MO','trabajador',true);
+                $query = $this->trabajador->nueva_educacion_media(
+                    $this->input->post('nombre_educacion_media',TRUE),
+                    $this->input->post('id_ciudad',TRUE)
+                );    
+                echo $query;
+            }
+            
+            public function nueva_educacion_universitaria(){
+                $this->load->model('Trabajador_laboral_MO','trabajador',true);
+                $query = $this->trabajador->nueva_educacion_universitaria(
+                    $this->input->post('nombre_educacion_universitaria',TRUE),
+                    $this->input->post('id_ciudad',TRUE)
+                );    
+                echo $query;
+            }
+            
+            public function nueva_educacion_posterior(){
+                $this->load->model('Trabajador_laboral_MO','trabajador',true);
+                $query = $this->trabajador->nueva_educacion_universitaria(
+                    $this->input->post('nombre_educacion_posterior',TRUE),
+                    $this->input->post('id_ciudad',TRUE)
+                );    
+                echo $query;
+            }
+            /////////////////////////////
            ////////// ELIMINAR //////
             public function eliminar_educacion_basica(){
                     $this->load->model('Trabajador_laboral_MO','trabajador',true);
@@ -486,9 +522,8 @@ class Trabajador_laboral extends CI_Controller {
             ////////////////////////////////////////////////////////////////
         /////////////////////////////////// S E C C I O N   E X P   L A B O R A L    /////////////////////////
                 public function agregar_experiencia_laboral(){
-                $CODIGO = 'EXP'.date("dmYHis").rand(1, 99);
-                $this->load->model('Trabajador_laboral_MO','trabajador',true);
-        
+                                        
+                $CODIGO = 'EXP'.date("dmYHis").rand(1, 99);        
                 $uploadDir = 'archivos/'.$this->session->userdata('sigesco_laboral_id');
                 if (!file_exists($uploadDir)) {
                        mkdir($uploadDir, 0777, true);
@@ -503,20 +538,20 @@ class Trabajador_laboral extends CI_Controller {
                 }else{
                     $filename = '';
                 }
-                
+                $this->load->model('Trabajador_laboral_MO','trabajador',true);
                 $query = $this->trabajador->agregar_experiencia_laboral(
                     $CODIGO,
                     $this->session->userdata('sigesco_laboral_id'),
-                    $this->input->post('ciudad_experiencia_laboral_sigesco_laboral',TRUE),
-                    $this->input->post('empresa_experiencia_laboral_sigesco_laboral',TRUE),
-                    $this->input->post('cargo_experiencia_laboral_sigesco_laboral',TRUE),
-                    $this->input->post('tipo_experiencia_laboral_sigesco_laboral',TRUE),
-                    $this->input->post('sueldo_experiencia_laboral_sigesco_laboral',TRUE),
-                    $this->input->post('fecha_inicio_experiencia_laboral_sigesco_laboral',TRUE),
-                    $this->input->post('fecha_termino_experiencia_laboral_sigesco_laboral',TRUE),
-                    $this->input->post('check_presente_experiencia_sigesco_laboral',TRUE),
-                    $this->input->post('descripcion_experiencia_laboral_sigesco_laboral',TRUE),
-                    $this->input->post('referencia_experiencia_laboral_sigesco_laboral',TRUE),
+                    $this->input->post('ciudad_experiencia_laboral_sigesco_laboral'),
+                    $this->input->post('empresa_experiencia_laboral_sigesco_laboral'),
+                    $this->input->post('cargo_experiencia_laboral_sigesco_laboral'),
+                    $this->input->post('tipo_experiencia_laboral_sigesco_laboral'),
+                    $this->input->post('sueldo_experiencia_laboral_sigesco_laboral'),
+                    date('Y-m-d', strtotime(str_replace('/', '-', $this->input->post('fecha_inicio_experiencia_laboral_sigesco_laboral')))),
+                    date('Y-m-d', strtotime(str_replace('/', '-', $this->input->post('fecha_termino_experiencia_laboral_sigesco_laboral')))),
+                    $this->input->post('check_presente_experiencia_sigesco_laboral'),
+                    $this->input->post('descripcion_experiencia_laboral_sigesco_laboral'),
+                    $this->input->post('referencia_experiencia_laboral_sigesco_laboral'),
                     $filename
                 );    
 
@@ -591,6 +626,39 @@ class Trabajador_laboral extends CI_Controller {
 
                     echo $query; 
             }
+    
+                public function nueva_empresa_experiencia(){
+                    $this->load->model('Trabajador_laboral_MO','trabajador',true);
+                    $query = $this->trabajador->nueva_empresa_experiencia(
+                        $this->input->post('nombre_empresa',TRUE),
+                        $this->input->post('id_ciudad',TRUE)
+                    );    
+                    echo $query;
+                }
+
+                public function buscar_empresa_experiencia(){
+                    $this->load->model('Listas','empresa_experiencia',true);
+                    $query = $this->empresa_experiencia->lista_empresas_experiencia(
+                        $this->input->get('id_ciudad',TRUE)
+                    ); 
+                    $this->output->set_content_type('application/json');
+                    $this->output->set_output(json_encode($query));
+                    return $query;
+                }
+    
+                public function nuevo_cargo_experiencia(){
+                    $CODIGO = 'CAR'.date("dmYHis").rand(1, 99);
+                    $this->load->model('Trabajador_laboral_MO','empresa_experiencia',true);
+                    $query = $this->empresa_experiencia->nuevo_cargo_experiencia(
+                        $this->input->post('nombre_cargo',TRUE),
+                        $CODIGO
+                    ); 
+                    $this->output->set_content_type('application/json');
+                    $this->output->set_output(json_encode($query));
+                    return $query;
+                }
+    
+    
         //////////////////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////// S E C C I O N   C O N O C I M I E N T O    ///////////////////////
             public function agregar_conocimiento(){
@@ -633,6 +701,184 @@ class Trabajador_laboral extends CI_Controller {
                 echo $query;
             }
     
+        //////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////// S E C C I O N   I D I O M A    //////////////////////////////////
+            public function agregar_idioma(){
+                $this->load->model('Trabajador_laboral_MO','trabajador',true);
+                $query = $this->trabajador->agregar_idioma(
+                    $this->session->userdata('sigesco_laboral_id'),
+                    $this->input->post('nombre_idioma',TRUE),
+                    $this->input->post('slider_idioma_oral',TRUE),
+                    $this->input->post('slider_idioma_escrito',TRUE),
+                    $this->input->post('id_idioma',TRUE)
+                );
+                
+                $query = explode(",",$query);
+                $datos = array(
+                    $query[0],
+                    $query[1],
+                    $this->input->post('nombre_idioma',TRUE),
+                    $this->input->post('slider_idioma_oral',TRUE),
+                    $this->input->post('slider_idioma_escrito',TRUE)
+                );
+                    echo json_encode($datos); 
+ 
+            }
+    
+            public function eliminar_idioma(){
+                $this->load->model('Trabajador_laboral_MO','trabajador',true);
+                $query = $this->trabajador->eliminar_idioma(
+                    $this->input->post('fila_idioma',TRUE),
+                    $this->session->userdata('sigesco_laboral_id')
+                );    
+                echo $query;
+            }
+           
+    
+        //////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////// S E C C I O N   D O C U M E N T A C I O N    /////////////////////
+            public function agregar_documentacion(){
+                
+                if($this->input->post('input_tipo_documentacion',TRUE) == 'Certificado de Antecedente'){
+                    $codigo_tipo ="CER_ANT";
+                    $tipo_documentacion = $this->input->post('input_tipo_documentacion',TRUE);
+                }
+                if($this->input->post('input_tipo_documentacion',TRUE) == 'Cerficado Militar al Día'){
+                    $codigo_tipo ="CER_MIL";
+                    $tipo_documentacion = $this->input->post('input_tipo_documentacion',TRUE);
+                }
+                if($this->input->post('input_tipo_documentacion',TRUE) == 'Certificado X'){
+                    $codigo_tipo ="CER_X";
+                    $tipo_documentacion = $this->input->post('input_tipo_documentacion',TRUE);
+                }
+                if($this->input->post('input_tipo_documentacion',TRUE) == 'Otro'){
+                    $codigo_tipo ="OTRO_".date("dmYHis").rand(1, 99);
+                    $tipo_documentacion = $this->input->post('titulo_otro_documentacion',TRUE);}
+                
+                $CODIGO = $codigo_tipo."_".$this->session->userdata('sigesco_laboral_id');                    
+                $uploadDir = 'archivos/'.$this->session->userdata('sigesco_laboral_id');
+                if (!file_exists($uploadDir)) {
+                       mkdir($uploadDir, 0777, true);
+                }
+                $trozos = explode(".", $_FILES['archivo_documentacion']['name']); 
+                $extension = end($trozos);
+                $tmpFile = $_FILES['archivo_documentacion']['tmp_name'];
+                $filename = $uploadDir."/".$CODIGO.".".$extension;
+                if(move_uploaded_file($tmpFile,$filename)){
+                    
+                    $this->load->model('Trabajador_laboral_MO','trabajador',true);
+                    $query = $this->trabajador->agregar_documentacion(
+                        $this->session->userdata('sigesco_laboral_id'),
+                        $CODIGO,
+                        date("Y-m-d"),
+                        $tipo_documentacion,
+                        $filename
+                    );
+                
+                    $query = explode(",",$query);
+                    $datos = array(
+                        $query[0],
+                        $query[1],
+                        date("d/m/Y"),
+                        $tipo_documentacion,
+                        $filename
+                    );
+                        echo json_encode($datos); 
+                }
+            }
+    
+            public function eliminar_documentacion(){
+                $this->load->model('Trabajador_laboral_MO','trabajador',true);
+                $query = $this->trabajador->eliminar_documentacion(
+                    $this->input->post('fila_documento',TRUE),
+                    $this->input->post('url_documento',TRUE)
+                );    
+                echo $query;
+            }
+    
+        //////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////// S E C C I O N   F O T O   P E R F I L    /////////////////////
+            
+            public function foto_perfil_editar(){
+
+                
+                $CODIGO = date("dmYHis").rand(1, 99);                    
+                $uploadDir = 'archivos/tmp';
+
+                $trozos = explode(".", $_FILES['foto_perfil_editar']['name']); 
+                $extension = end($trozos);
+                $tmpFile = $_FILES['foto_perfil_editar']['tmp_name'];
+                $filename = $uploadDir."/".$CODIGO.".".$extension;
+                
+                if(strtolower($extension) == 'jpg' || strtolower($extension) == 'jpeg' || strtolower($extension) == 'png'){
+                        
+                    if(move_uploaded_file($tmpFile,$filename)){
+                        $extension_respuesta = true;
+                        
+                        
+                    }
+                }else{
+                       $extension_respuesta = 3;
+                       $filename = '';
+                }
+                
+                $datos = array(
+                    $extension_respuesta,
+                    base_url().$filename
+                );
+                echo json_encode($datos); 
+                
+            }
+    
+            public function foto_perfil_guardar(){
+
+                
+                $CODIGO = 'perfil_'.date("dmYHis").rand(1, 99);                    
+                $uploadDir = 'archivos/'.$this->session->userdata('sigesco_laboral_id');
+
+                $trozos = explode(".", $_FILES['foto_perfil_editar']['name']); 
+                $extension = end($trozos);
+                $tmpFile = $_FILES['foto_perfil_editar']['tmp_name'];
+                $filename = $uploadDir."/".$CODIGO.".".$extension;
+                
+                if(strtolower($extension) == 'jpg' || strtolower($extension) == 'jpeg' || strtolower($extension) == 'png'){
+                        
+                    if(move_uploaded_file($tmpFile,$filename)){
+                            //////////ACTUALIZAR LA BBDD CON LA URL DE LA IMAGEN /////
+                                $query = $this->db->query(" UPDATE `trabajador_laboral` SET `foto_perfil_trabajador_laboral`='".$filename."' 
+                                WHERE `id_trabajador_laboral`='".$this->session->userdata('sigesco_laboral_id')."';");
+                            //////////////////////////////////////////////////////////
+                            //////////ACTUALIZAR LA SESION CON LA URL DE LA IMAGEN /////
+                                $this->session->set_userdata('sigesco_laboral_foto', $filename);
+                            //////////////////////////////////////////////////////////
+
+                            /////////////  M A N E J O   D E   I M A G E N  //////////
+                             /*   $config['image_library'] = 'gd2';
+                                $config['source_image'] = $filename;
+                                $config['create_thumb'] = FALSE;
+                                $config['maintain_ratio'] = FALSE;
+                                $config['width']         = 600;
+                                $config['height']       = 800;
+                                $this->load->library('image_lib', $config);
+                                $this->image_lib->resize();*/
+                            //////////////////////////////////////////////////////////
+
+                            $extension_respuesta = TRUE;
+                    }else{
+                        $extension_respuesta = FALSE;
+                    }
+                }else{
+                       $extension_respuesta = 3;
+                }
+                
+                $datos = array(
+                    $extension_respuesta,
+                    base_url().$filename
+                );
+                
+                echo json_encode($datos);
+            }
+            
         //////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////////////////////////////
     

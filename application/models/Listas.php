@@ -121,6 +121,39 @@
                     $query->free_result();
                 $this->db_lectura->close();
             }
+        
+            function lista_empresas_experiencia($id_ciudad){
+                $this->db_lectura->reconnect();
+                    $query = $this->db_lectura->query("
+                        SELECT nombre_empresa_experiencia_laboral as name
+                        FROM empresa_experiencia_laboral 
+                        WHERE ciudad_id_ciudad = ".$id_ciudad."
+                        ORDER BY (nombre_empresa_experiencia_laboral) ASC;");
+                        return $query->result();
+                    $query->free_result();
+                $this->db_lectura->close();
+            }
+        
+            function lista_cargos_experiencia_laboral(){
+                $this->db_lectura->reconnect();
+                    $query = $this->db_lectura->query("
+                        SELECT * 
+                        FROM cargo_experiencia_laboral 
+                        ORDER BY (nombre_cargo_experiencia_laboral) ASC;");
+                        return $query->result();
+                    $query->free_result();
+                $this->db_lectura->close();
+            }
+        
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////     B A C K - E N D    I D I O M A   ///////////////////////////////////
+            function lista_idiomas(){
+                $this->db_lectura->reconnect();
+                    $query = $this->db_lectura->query("SELECT * FROM idioma order by (nombre_idioma) ASC;");
+                        return $query->result();
+                    $query->free_result();
+                $this->db_lectura->close();
+            }
         ////////////////////////////////////////////////////////////////////////////////////////////////////
 	}
 ?>

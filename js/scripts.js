@@ -107,6 +107,9 @@ $('.responsive-tabs').responsiveTabs();
       if($select.attr( "name" ) == "tipo_experiencia_laboral_editar_sigesco_laboral"){ id = "tipo_experiencia_laboral_editar_sigesco_laboral";}
       //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       
+      /////////////////////////////////////////////////// D O C U M E N T A C I O N  ///////////////////////////////////////////////////////
+      if($select.attr( "name" ) == "tipo_documentacion"){ id = "tipo_documentacion";}
+      //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     $select.wrap('<div id="'+id+'" class="uou-custom-select"></div>');
 
     var $container = $select.parent('.uou-custom-select');
@@ -424,7 +427,46 @@ function mobileHeaderSearchToggle(SM_XS) {
   }
 }
 
+// Maps
+// ---------------------------------------------------------
+if ($('#contact-page-map').length > 0) {
+  new Maplace({
+    map_div: '#contact-page-map',
+    controls_type: 'list',
+    map_options: {
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      scrollwheel: false,
+      zoom: 15
+    },
+    locations: [
+      {
+        lat: -33.445793,
+        lon: -70.6506052,
+        title: 'SIGESCO SANTIAGO',
+        icon: marker
+      }
+    ]
+  }).Load();
+}
 
+if ($('#jobs-page-map').length > 0) {
+  new Maplace({
+    map_div: '#jobs-page-map',
+    map_options: {
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      scrollwheel: false,
+      zoom: 15
+    },
+    locations: [
+      {
+        lat: -27.3632204,
+        lon: -70.34263570000002,
+        title: 'SIGESCO COPIAPÓ',
+        icon: marker
+      }
+    ]
+  }).Load();
+}
 
 // Advanced Search
 // ---------------------------------------------------------
@@ -546,162 +588,6 @@ $('.accordion').each(function () {
   });
 
 });
-
-
-
-
-
-
-
-// Maps
-// ---------------------------------------------------------
-if ($('#mapa_santiago').length > 0) {
-  new Maplace({
-    map_div: '#mapa_santiago',
-    controls_type: 'list',
-    map_options: {
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      scrollwheel: false,
-      zoom: 14
-    },
-    locations: [
-      {
-        lat: -37.83527632292268,
-        lon: 145.01455307006836,
-        title: 'Secondary Office',
-        html: '<strong>Secondary Office</strong> <br> 47 Queen Street, Melbourne <br> Victoria 3000 Australia <br> Envato Pty Ltd',
-        icon: marker
-      }
-    ]
-  }).Load();
-}
-    
-if ($('#mapa_copiapo').length > 0) {
-  new Maplace({
-    map_div: '#mapa_copiapo',
-    controls_type: 'list',
-    map_options: {
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      scrollwheel: false,
-      zoom: 14
-    },
-    locations: [
-      {
-        lat: -37.83527632292268,
-        lon: 145.01455307006836,
-        title: 'Secondary Office',
-        html: '<strong>Secondary Office</strong> <br> 47 Queen Street, Melbourne <br> Victoria 3000 Australia <br> Envato Pty Ltd',
-        icon: marker
-      }
-    ]
-  }).Load();
-}
-
-if ($('#jobs-page-map').length > 0) {
-  new Maplace({
-    map_div: '#jobs-page-map',
-    map_options: {
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      scrollwheel: false,
-      zoom: 14
-    },
-    locations: [
-      {
-        lat: -37.817314,
-        lon: 144.95543099999998,
-        title: 'Job Title 1',
-        icon: marker
-      },
-      {
-        lat: -37.83527632292268,
-        lon: 145.01455307006836,
-        title: 'Job Title 2',
-        icon: marker
-      },
-      {
-        lat: -37.77749907004604,
-        lon: 144.9452018737793,
-        title: 'Job Title 3',
-        icon: marker
-      },
-      {
-        lat: -37.8127675575702,
-        lon: 144.87001419067383,
-        title: 'Job Title 4',
-        icon: marker
-      },
-      {
-        lat: -37.87160128507344,
-        lon: 144.90503311157227,
-        title: 'Job Title 5',
-        icon: marker
-      }
-    ]
-  }).Load();
-}
-
-if ($('#jobs-single-page-map').length > 0) {
-  new Maplace({
-    map_div: '#jobs-single-page-map',
-    map_options: {
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      scrollwheel: false,
-      zoom: 14
-    },
-    locations: [
-      {
-        lat: -37.77749907004604,
-        lon: 144.9452018737793,
-        title: 'Job Title 3',
-        icon: marker
-      }
-    ]
-  }).Load();
-}
-
-if ($('#find-job-map-tab').length > 0) {
-  new Maplace({
-    map_div: '#find-job-map-tab',
-    map_options: {
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      scrollwheel: false,
-      zoom: 14
-    },
-    locations: [
-      {
-        lat: -37.817314,
-        lon: 144.95543099999998,
-        title: 'Job Title 1',
-        icon: marker
-      },
-      {
-        lat: -37.83527632292268,
-        lon: 145.01455307006836,
-        title: 'Job Title 2',
-        icon: marker
-      },
-      {
-        lat: -37.77749907004604,
-        lon: 144.9452018737793,
-        title: 'Job Title 3',
-        icon: marker
-      },
-      {
-        lat: -37.8127675575702,
-        lon: 144.87001419067383,
-        title: 'Job Title 4',
-        icon: marker
-      },
-      {
-        lat: -37.87160128507344,
-        lon: 144.90503311157227,
-        title: 'Job Title 5',
-        icon: marker
-      }
-    ]
-  }).Load();
-}
-
 
 
 // Candidates Item

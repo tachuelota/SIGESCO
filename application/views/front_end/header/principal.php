@@ -8,6 +8,7 @@
 
     <!-- Stylesheets -->
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600" rel="stylesheet">
+    
     <link rel="stylesheet" href="<?=base_url()?>css/bootstrap.css">
     <link rel="stylesheet" href="<?=base_url()?>css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="<?=base_url()?>css/jquery.tagsinput.css" />
@@ -15,6 +16,7 @@
     <link rel="stylesheet" href="<?=base_url()?>css/styles.css">
     <link rel="stylesheet" href="<?=base_url()?>css/responsive.css">
     <link rel="stylesheet" href="<?=base_url()?>css/toastr.css">
+    <link rel="stylesheet" type="text/css" href="<?=base_url()?>css/jquery.tagsinput.css" />
     
       
     <!-- Scripts -->
@@ -25,6 +27,10 @@
       <script src="<?=base_url()?>js/jquery.Rut.js"></script>
       <script src="<?=base_url()?>js/jquery.mask.js"></script>
       <script src="<?=base_url()?>js/typeahead.js"></script>
+      <script src="<?=base_url()?>js/nicEdit.js"></script>
+      <script src="<?=base_url()?>js/jquery.tagsinput.min.js"></script>
+      
+
       
 
     <!--[if IE 9]>

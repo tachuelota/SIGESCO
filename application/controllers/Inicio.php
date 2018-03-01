@@ -22,7 +22,6 @@ class Inicio extends CI_Controller {
     ////////////////////////////////   F U N C I O N E S   D E    V I S T A S  /////////////////////////////////
         public function index()
         {
-            //if($this->session->userdata('sigesco_conectado')){
                 $this->load->view('front_end/header/principal');
                 $this->load->view('front_end/menu_top/invitado');
 
@@ -32,13 +31,12 @@ class Inicio extends CI_Controller {
                 $this->load->view('front_end/inicio/invitado',$datos);
 
                 $this->load->view('front_end/footer/principal');
-            //} else {redirect('/login', 'refresh');}
         }
     
-        public function registro()
+     /*   public function registro()
         {
             header('Content-Type: text/html; charset=UTF-8');
-            //if($this->session->userdata('sigesco_conectado')){
+            if($this->session->userdata('sigesco_laboral_conectado')){
                 $codigo = $this->input->get('token',FALSE);
                 $codigo = str_replace('|','+',$codigo);
                 $this->load->model('trabajador_laboral_MO','trabajador',true);
@@ -46,9 +44,9 @@ class Inicio extends CI_Controller {
                             $codigo
                 );
             $this->load->view('front_end/inicio/registro');
-            //} else {redirect('/login', 'refresh');}
+            } else {redirect('/login', 'refresh');}
         }
-    
+    */
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     
@@ -59,24 +57,23 @@ class Inicio extends CI_Controller {
         {
            // if($this->session->userdata('sigesco_conectado')){
                 $CODIGO = date('dmYHis').rand(1,1000);
-                $letras1 = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T');
-                        $letras2 = array('K','L','M','N','O','P','Q','R','S','T');
+                        //$letras1 = array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T');
+                        //$letras2 = array('K','L','M','N','O','P','Q','R','S','T');
 
-                        $array_anno = str_split(date("y"));
-                        $array_hora = str_split(date("H"));
-                        $array_minuto = str_split(date("i"));
+                        //$array_anno = str_split(date("y"));
+                        //$array_hora = str_split(date("H"));
+                        //$array_minuto = str_split(date("i"));
 
-                        $ANNO = $letras1[$array_anno[0]].$letras1[$array_anno[1]];
-                        $HORA = $letras2[$array_hora[0]].$letras2[$array_hora[1]];
-                        $MINUTO = $letras2[$array_minuto[0]].$letras2[$array_minuto[1]];
+                        //$ANNO = $letras1[$array_anno[0]].$letras1[$array_anno[1]];
+                        //$HORA = $letras2[$array_hora[0]].$letras2[$array_hora[1]];
+                        //$MINUTO = $letras2[$array_minuto[0]].$letras2[$array_minuto[1]];
 
-                        $DIA = date("d")+rand(1,68);
+                        //$DIA = date("d")+rand(1,68);
 
-                        $ALEATORIO = rand(0,9).$letras1[rand(0,19)];
-                        
+                        //$ALEATORIO = rand(0,9).$letras1[rand(0,19)];
 
                         /////////// F O R M U L A   D E   P A S S W O R D  = MesAñoDiaSegundoHoraMinutosAleatorio (MAS-SHM-Aleatorio) ///////////
-                        $password =  (date('m')+rand(1,74)).$ANNO.$DIA.(date('s')+rand(1,38)).$HORA.$MINUTO.$ALEATORIO;
+                        $password =  $this->input->post('pass_sigesco_laboral',TRUE);
                         $enc_password = $this->encryption->encrypt($password);
                         ////////////////////////////////////////////////////////////////////////////////////////
             

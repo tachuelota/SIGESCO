@@ -136,7 +136,7 @@
     </head>
 <body>
 <form>
-  <p><img width="450" height="" src="<?=base_url()?>img/logo_email_bienvenida.png" alt=" "></p>
+  <p><img width="450" height="" src="<?=base_url()?>img/logo_login.png" alt=" "></p>
   <input checked id='signin' class="activo" onClick="activar(1)" name='action' type='radio' value='signin'>
   <label for='signin'>Chileno</label>
   <input id='signup' onClick="activar(2)" name='action' type='radio' value='signup'>

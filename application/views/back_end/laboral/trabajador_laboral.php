@@ -6,6 +6,10 @@
         padding-top:35px;
     }
     
+    #editar_perfil:hover{
+        background-color: aqua;
+    }
+    
     @media screen and (min-width: 600px) {
         #modal_informacion_personal, #modal_experiencia_laboral,#modal_experiencia_laboral_editar {
             /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
@@ -15,10 +19,8 @@
             margin: 0 auto;
             width:85%;
         }
-    }
-    
-    @media screen and (min-width: 600px) {
-        #modal_estudio, #modal_estudio_editar_basica, #modal_estudio_editar_media, #modal_estudio_editar_universitaria {
+        
+        #modal_estudio, #modal_estudio_editar_basica, #modal_estudio_editar_media, #modal_estudio_editar_universitaria,  {
             /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
             width:inherit;
             height:inherit;
@@ -26,11 +28,38 @@
             margin: 0 auto;
             width:60%;
         }
+        
+        .barra_progreso{
+            padding:10px 10px 10px 10px;
+        }
+        
+        .detalle_idioma_tabla{
+            padding:5px 10px 0px 10px;
+        }
+        
+        .detalle_idioma_tabla2{
+            padding:5px 10px 5px 10px;
+        }
+        .detalle_idioma_tabla3{
+            padding:5px 10px 5px 10px;
+        }
     }
+    
+    @media screen and (min-width: 600px) {
+        #modal_foto_perfil {
+            /* Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it */
+            width:inherit;
+            height:inherit;
+            /* To center horizontally */
+            margin: 0 auto;
+            width:50%;
+        }
+    }
+
     
     .list-unstyled li{
         
-        padding: 5px 0px 5px 0px;
+        padding: 5px 0px 10px 0px;
     }
     
     label{
@@ -43,7 +72,19 @@
         top: 0;
     }
     
-    @media screen and (max-width: 350px) and (min-width: 300px) {
+    .skill-progressbar p #valor_porcentaje_idioma_oral {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    
+    .skill-progressbar p #valor_porcentaje_idioma_escrito {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    
+    @media screen and (max-width: 375px) and (min-width: 300px) {
         .texto_anuncio{
             font-size:8px;
             text-align: center;
@@ -54,6 +95,94 @@
             width:10px;
             height:10px;
         }
+        
+        .days-left{
+            max-width: 50px;
+            min-height: 50px;
+            
+        }
+        
+        .css-table{
+            width:100%;
+        }
+        
+        .col-xs-6{
+            padding: 0px;
+        }
+        
+        p.detalle_idioma_tabla{
+            margin: 0px;
+            padding: 0px
+        }
+        
+        .barra_progreso{
+            padding:0px 20px 0px 20px;
+        }
+    }
+    
+    .titulo_idioma_tabla{
+        text-transform: capitalize;
+        font-size: 19px;
+        font-weight: 600;
+        line-height: 1.1;
+        font-family: 'Raleway', sans-serif;
+        padding-top: 25px;
+    }
+    
+    .titulo_idioma_tabla2{
+        text-transform: capitalize;
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 1.1;
+        font-family: 'Raleway', sans-serif;
+        padding-top: 10px;
+    }
+    
+    .detalle_idioma_tabla{
+        color: #666;
+        font-size: 14px;
+        text-transform: capitalize;
+        font-family: 'Raleway', sans-serif;
+        font-weight: 600;
+    }
+    
+    .detalle_idioma_tabla2{
+        color: #666;
+        font-size: 14px;
+        text-transform: capitalize;
+        font-family: 'Raleway', sans-serif;
+        font-weight: 600;
+    }
+    
+    .icono_idioma{
+        cursor: pointer;
+        color: #346abb;
+        text-transform: capitalize;
+        text-align: center;
+        font-size: inherit;
+        text-rendering: auto;
+        font-size: 28px;
+        text-align: center;
+        align-content: center;
+        padding-top: 20px;
+    }
+    
+    .icono_imagen{
+        cursor: pointer;
+        color: #346abb;
+        text-transform: capitalize;
+        text-align: left;
+        font-size: inherit;
+        text-rendering: auto;
+        font-size: 28px;
+        text-align: center;
+        align-content: center;
+        padding-top: 0px;
+    }
+    
+    p.detalle_idioma_tabla3{
+        margin: 0px;
+        padding: 0px;
     }
     
 </style>
@@ -64,9 +193,10 @@
                   <div class="col-md-4">
                     <div class="motijob-sidebar">
                       <div class="candidate-profile-picture">
-                        <img src="<?=base_url().$perfil->foto_perfil_trabajador_laboral?>" alt="">
-
-                        <a href="#"><?=$this->session->userdata('sigesco_laboral_nombre')." ".$this->session->userdata('sigesco_laboral_paterno')?></a>
+                        <img id="foto_editar_perfil" src="<?=base_url().$perfil->foto_perfil_trabajador_laboral?>" alt="">
+                          <div id="editar_perfil" style="height:50px;width:100%;margin-top:-70px;background-color:black;opacity:0.5; display:none;"><a  href="#" data-toggle="modal" data-target="#modal_foto_perfil"><h5 style="opacity:0.9;color:white;margin:0px;font-size:14px;heigh:20px;padding:15px 10px 15px 10px;"><i class="fa fa-pencil" aria-hidden="true"></i> Editar Foto Perfil</h5></a></div>
+                        <div>&nbsp;</div>
+                        <a style="margin-top:15px" href="#"><?=$this->session->userdata('sigesco_laboral_nombre')." ".$this->session->userdata('sigesco_laboral_paterno')?></a>
                       </div> <!-- end .agent-profile-picture -->
 
                       <div class="candidate-general-info">
@@ -114,6 +244,7 @@
                           <li><a data-toggle="tab" href="#experiencia">Experiencia</a></li>
                           <li><a data-toggle="tab" href="#conocimiento">Conocimiento</a></li>
                           <li><a data-toggle="tab" href="#idioma">Idiomas</a></li>
+                          <li><a data-toggle="tab" href="#documentacion">Documentación</a></li>
                         </ul>
                         <div class="tab-content">
                           <div id="personal" class="tab-pane fade in active">
@@ -547,7 +678,7 @@
                                               <textarea id="descripcion_conocimiento" name="descripcion_conocimiento" placeholder="Descripción"></textarea>
                                             </div> <!-- end .skill-description -->
                                               
-                                            <div class="skill-progressbar">
+                                            <div class="skill-progressbar" style="height:25px">
                                               <p>
                                                 <span class="mini-amount">0%</span>
                                                 <input type="text" id="valor_porcentaje_conocimiento">
@@ -627,8 +758,174 @@
                             </div>
                           </div>
                           <div id="idioma" class="tab-pane fade">
-                            <h3>Menu 2</h3>
-                            <p>Some content in menu 2.</p>
+                            <div class="row">
+                                 <div class="col-sm-12"><h3>DOMINIO DE IDIOMAS</h3></div>
+                                <div class="col-md-12">
+                                        <div class="candidate-skill-single clearfix">
+                                          <div class="skill-edit-content" style="padding-left:0px;">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="skill-selectbox mb10">
+                                                      <input style="text-transform:uppercase" type="text" id="nombre_idioma" name="nombre_idioma" placeholder="Ingrese Nombre">
+                                                      <input style="display:none" type="text" id="id_idioma" name="id_idioma" placeholder="Ingrese Nombre de Idioma">
+                                                    </div> <!-- end .skill-selectbox -->
+                                                </div>
+                                                <div class="col-md-12" style="">
+                                                    <div class="row">   
+                                                        <div class="col-md-2 detalle_idioma_tabla2" style="text-align:center">
+                                                            Oral
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <div class="skill-progressbar" style="height:25px">
+                                                              <p>
+                                                                <span class="mini-amount">0%</span>
+                                                                <input type="text" id="valor_porcentaje_idioma_oral">
+                                                              </p>
+                                                              <div id="slider_idioma_oral"></div>
+                                                            </div> <!-- end .skill-progressbar -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12" style="">
+                                                    <div class="row"> 
+                                                        <div class="col-md-2 detalle_idioma_tabla2" style="text-align:center">
+                                                            Escrito
+                                                        </div>
+                                                        <div class="col-md-9">
+                                                            <div class="skill-progressbar" style="height:25px">
+                                                              <p>
+                                                                <span class="mini-amount">0%</span>
+                                                                <input type="text" id="valor_porcentaje_idioma_escrito">
+                                                              </p>
+                                                              <div id="slider_idioma_escrito"></div>
+                                                            </div> <!-- end .skill-progressbar -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                          </div> <!-- end .skill-edit-content -->
+                                        </div> <!-- end .candidate-skills-single -->
+                                        <div class="add-skill-button">
+                                          <a class="btn btn-default" onClick="agregar_idioma()">Agregar</a>
+                                        </div>
+                                </div>
+                                <div class="col-md-12" style="margin-top:10px">
+                                    <div class="assigned-job-list" id="lista_idiomas">
+                                        <?php
+                                            foreach($idiomas_trabajador as $idioma_trabajador){
+                                        ?>
+                                    <div id="fila_idioma<?=$idioma_trabajador->id_trabajador_laboral_idioma?>" class="assigned-job-single">
+                                        <div class="row" style="padding:10px 0px 10px 0px">
+                                            <div class="col-xs-12 col-md-1"></div>
+                                            <div class="col-xs-12 col-md-2" style="text-align:center;">
+                                                <p class="titulo_idioma_tabla" style="color:#346abb;"><?=$idioma_trabajador->nombre_idioma?></p>
+                                            </div>
+                                            <div class="col-xs-12 col-md-2">
+                                                <div class="row">
+                                                    <div class="col-xs-6 col-md-12" style="text-align:center;">
+                                                        <p class="detalle_idioma_tabla">Oral</p>
+                                                    </div>
+                                                    <div class="col-xs-6 col-md-12" style="text-align:center;">
+                                                        <p class="detalle_idioma_tabla">Escrito</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-12 col-md-5">
+                                                <div class="row">
+                                                    <div class="col-xs-6 col-md-12 barra_progreso" style="">
+                                                        <div class="progress-bar clearfix">
+                                                            <div class="progress-bar-inner progress<?=$idioma_trabajador->porcentaje_oral_trabajador_laboral_conocimiento?>"><span><?=$idioma_trabajador->porcentaje_oral_trabajador_laboral_conocimiento?>%</span></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xs-6 col-md-12 barra_progreso" style="">
+                                                        <div class="progress-bar clearfix">
+                                                            <div class="progress-bar-inner progress<?=$idioma_trabajador->porcentaje_escrito_trabajador_laboral_conocimiento?>"><span><?=$idioma_trabajador->porcentaje_escrito_trabajador_laboral_conocimiento?>%</span></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2" style="text-align:center;">
+                                                <i onclick="eliminar_idioma(<?=$idioma_trabajador->id_trabajador_laboral_idioma?>)" class="fa fa-trash icono_idioma" aria-hidden="true"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php }?>
+                                </div>
+                              </div>
+                            </div>
+                            
+                              
+                              
+                              
+                          </div>
+                          <div id="documentacion" class="tab-pane fade">
+                            <div class="row">
+                                <div class="col-md-12 page-content2">               
+                                  <div class="white-container mb0">
+                                    <div class="row">
+                                        <div class="col-xs-12 col-md-12">
+                                            <div class="col-xs-6 col-lg-5">
+                                                <div class="input-group input-group-lg" style="width:100%">
+                                                    <select id="tipo_documentacion" name="tipo_documentacion">
+                                                        <option name='inicio_option' selected>Tipo de Documentación</option>
+                                                        <option value="Certificado de Antecedente">Certificado de Antecedente</option>
+                                                        <option value="Cerficado Militar al Día">Cerficado Militar al Día</option>
+                                                        <option value="Certificado X">Certificado X</option>
+                                                        <option value="Otro">Otro</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-6 col-lg-5  icono_idioma">
+                                                <div class="input-group input-group-lg" style="width:100%">
+                                                    <input id="archivo_documentacion" name="archivo_documentacion" type="file" class="custom-file-input" placeholder="Ingrese Documento" aria-label="Documento" value="">
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-1 col-lg-1" onClick="subir_documentacion()" style="">
+                                                <i class="fa fa-cloud-upload icono_idioma" aria-hidden="true"> </i>
+                                            </div>
+                                            <div class="col-xs-12 col-lg-9 col-lg-offset-1">
+                                            <div id="div_titulo_otro_documentacion" class="input-group input-group-lg" style="width:100%;margin-top:2%;display:none">
+                                                <input id="titulo_otro_documentacion" name="titulo_otro_documentacion" type="text" class="form-control" placeholder="Ingrese Título de Archivo" aria-label="Carrera" value="">
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="col-lg-12" style="margin-top:2%; margin-bottom:2%; text-align:center;">
+                                            <h4>Lista de Documentos</h4>
+                                        </div>
+                                        <div class="col-lg-12" style="margin-top:2%;">
+                                                <div class="assigned-job-list" id="lista_documentacion">
+                                                            <?php
+                                                                foreach($documentos_trabajador as $documento_trabajador){
+                                                            ?>
+                                                        <div id="fila_documento<?=$documento_trabajador->id_trabajador_laboral_documentacion?>" class="assigned-job-single">
+                                                            <div class="row" style="padding:10px 0px 10px 0px">
+                                                                <div class="col-xs-12 col-md-12"></div>
+                                                                <div class="col-xs-12 col-md-7" style="text-align:center;">
+                                                                    <p class="titulo_idioma_tabla2" style="color:#346abb;"><?=$documento_trabajador->titulo_trabajador_laboral_documentacion?></p>
+                                                                </div>
+                                                                <div class="col-xs-12 col-md-3">
+                                                                    <div class="row">
+                                                                        <div class="col-xs-6 col-md-12" style="text-align:center;">
+                                                                            <p class="detalle_idioma_tabla3"><strong>Fecha de Subida</strong></p>
+                                                                        </div>
+                                                                        <div class="col-xs-6 col-md-12" style="text-align:center;">
+                                                                            <p class="detalle_idioma_tabla3"><?=$documento_trabajador->fecha?></p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-2" style="text-align:center;">
+                                                                    <i onClick="abrir_archivo('<?=base_url().$documento_trabajador->url_trabajador_laboral_documentacion?>')" class="fa fa-file-o icono_idioma" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;
+                                                                    <i onclick="eliminar_documento(<?=$documento_trabajador->id_trabajador_laboral_documentacion?>,'<?=$documento_trabajador->url_trabajador_laboral_documentacion?>')" class="fa fa-trash icono_idioma" aria-hidden="true"></i>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <?php }?>
+                                                    </div>
+                                        </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
                           </div>
                         </div>
                       </div> <!-- end .candidate-details -->
@@ -836,9 +1133,9 @@
 </div>
 <!-- FIN MODAL INFORMACION PERSONAL -->
 <!-- MODAL ESTUDIO -->
-<div id="modal_estudio" class="modal fade">
-    <div class="vertical-alignment-helper">
-      <div class="modal-dialog vertical-align-center" role="document">
+<div id="modal_estudio" class="modal fade" tabindex="-1" role="dialog">
+   <div class="vertical-alignment-helper">
+    <div class="modal-dialog vertical-align-center" role="document">
         <div class="modal-content">
           <div class="modal-header">
             <div class="row" style="padding:5px 10px;">
@@ -1609,6 +1906,7 @@
                             <div class="col-sm col-lg-6">
                                 <div class="input-group input-group-lg" style="width:100%">
                                     <input id="institucion_buscar_educacion_basica_editar_sigesco_laboral" name="institucion_educacion_basica_editar_sigesco_laboral" type="text" class="form-control validate" placeholder="Ingrese Nombre" aria-label="Ingrese Nombre" value="">
+                                    
                                     <input style="display:none" id="institucion_educacion_basica_editar_sigesco_laboral" name="institucion_educacion_basica_editar_sigesco_laboral" type="text" class="form-control validate" placeholder="Ingrese Nombre" aria-label="Ingrese Nombre" value="">
                                 </div>
                             </div>
@@ -2380,7 +2678,7 @@
                             </div>
                             <div class="col-sm col-lg-4">
                                 <div class="input-group input-group-lg" style="width:100%">
-                                    <input id="ciudad_buscar_experiencia_laboral_sigesco_laboral" name="ciudad_experiencia_laboral_sigesco_laboral" type="text" class="form-control validate" placeholder="Ingrese Nombre de Ciudad" aria-label="Ingrese Nombre de Ciudad">
+                                    <input id="ciudad_buscar_experiencia_laboral_sigesco_laboral" name="ciudad_experiencia_laboral_sigesco_laboral" onChange="buscar_empresa_experiencia()" type="text" class="form-control validate" placeholder="Ingrese Nombre de Ciudad" aria-label="Ingrese Nombre de Ciudad">
                                     <input style="display:none" id="ciudad_experiencia_laboral_sigesco_laboral" name="ciudad_experiencia_laboral_sigesco_laboral" type="text" class="form-control validate" placeholder="Ingrese Nombre" aria-label="Ingrese Nombre" value="">
                                 </div>
                             </div>
@@ -2649,8 +2947,59 @@
     </div>
 </div><!-- /.modal -->
 <!-- FIN MODAL EXPERIENCIA LABORAL EDITAR -->
+<!-- MODAL EDITAR FOTO PERFIL -->
+<div id="modal_foto_perfil" class="modal fade" tabindex="-1" role="dialog">
+   <div class="vertical-alignment-helper">
+    <div class="modal-dialog vertical-align-center" role="document">
+        <div class="modal-content">
+          <div class="modal-body">
+            <form>
+                <div class="row"  id="form_editar_basica" style="padding:5px 10px;">
+                    <div class="col-sm col-lg-12">
+                        <div class="row">
+                            <div class="col-sm col-lg-3  col-lg-offset-1">
+                                <div class="input-group input-group-lg" style="width:100%; text-align:right;">
+                                    <label for="referencia_experiencia_laboral_editar_sigesco_laboral">Subir Imagen</label>
+                                </div>
+                            </div>
+                            <div class="col-sm col-lg-6">
+                                <div class="input-group input-group-lg" style="width:100%">
+                                    <input id="foto_perfil_editar" name="foto_perfil_editar" type="file" class="custom-file-input" placeholder="Seleccione Foto de Perfil" aria-label="Documento" value="">
+                                </div>
+                            </div>
+
+
+                            <div class="col-xs-1 col-lg-1" onClick="subir_foto_perfil_editar()" style="">
+                                <i class="fa fa-cloud-upload icono_imagen" aria-hidden="true"> </i>
+                            </div>
+                            </div>
+                    </div>
+                    <div class="col-sm col-lg-4  col-lg-offset-4" style="margin-top:2%">
+                        <img id="img_perfil_auxiliar" width="220" src="<?=base_url().$perfil->foto_perfil_trabajador_laboral?>" alt="">
+                    </div>
+                </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button onClick="subir_foto_perfil_guardar()" type="button" class="btn btn-success">Guardar</button>
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div>
+</div><!-- /.modal -->
+<!-- FIN MODAL EDITAR FOTO PERFIL -->
 <script>
 $( document ).ready(function() { 
+    
+$(".candidate-profile-picture").mouseover(function() {
+    $("#editar_perfil").slideDown( "slow" );
+});
+
+$(".candidate-profile-picture").mouseleave(function() {
+    $("#editar_perfil").slideUp( "slow" );
+});
+    
 $('#nacimiento_editar_sigesco_laboral').mask('00-00-0000');
 $('#nota_educacion_posterior_editar_sigesco_laboral').mask('9.99');
 $('#nota_educacion_posterior_sigesco_laboral').mask('9.99');
@@ -2706,6 +3055,7 @@ $("#ciudad_buscar_basica_sigesco_laboral").change(function() {
         // Some item from your model is active!
         if (current.name == $("#ciudad_buscar_basica_sigesco_laboral").val()) {
             $("#ciudad_basica_sigesco_laboral").val(current.value);
+            $("#institucion_buscar_educacion_basica_sigesco_laboral").val('');
           // This means the exact match is found. Use toLowerCase() if you want case insensitive match.
         } else {
           // This means it is only a partial match, you can either add a new item
@@ -2768,11 +3118,8 @@ $("#ciudad_buscar_media_sigesco_laboral").change(function() {
             $("#ciudad_media_sigesco_laboral").val(current.value);
           // This means the exact match is found. Use toLowerCase() if you want case insensitive match.
         } else {
-          // This means it is only a partial match, you can either add a new item
-          // or take the active if you don't want new items
         }
       } else {
-        // Nothing is active so it is a new value (or maybe empty value)
       }
     });
     
@@ -3136,8 +3483,50 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
 //////////////////////////   C O N O C I M I E N T O   //////////////////////////////
  $('[data-toggle="popover"]').popover({html: true});
 //////////////////////////////////////////////////////////////////////////////////
-});
+//////////////////////////////   I D I O M A   ///////////////////////////////////
+$("#nombre_idioma").typeahead({
+        displayKey: "name",  
+        source: [
+            <?php
+                $i=1;
+                foreach ($idiomas as $idioma){
+                    if($i>1){echo ",";};
+                    echo '{id: "'.$idioma->id_idioma.'", name: "'.$idioma->nombre_idioma.'", value: "'.$idioma->id_idioma.'"}';
+                $i++; 
+                }
+            ?>
+          ]
+        });
     
+$("#nombre_idioma").change(function() {
+      var current = $("#nombre_idioma").typeahead("getActive");
+      if (current) {
+        // Some item from your model is active!
+        if (current.name == $("#nombre_idioma").val()) {
+            $("#id_idioma").val(current.value);
+          // This means the exact match is found. Use toLowerCase() if you want case insensitive match.
+        } else {
+          // This means it is only a partial match, you can either add a new item
+          // or take the active if you don't want new items
+        }
+      } else {
+        // Nothing is active so it is a new value (or maybe empty value)
+      }
+    });
+    
+    
+//////////////////////////////////////////////////////////////////////////////////
+////////////////////////   D O C U M E N T A C I O N  ////////////////////////////
+    $( "#tipo_documentacion" ).click(function() {
+        if($( "#input_tipo_documentacion" ).val() == "Otro"){
+           $( "#div_titulo_otro_documentacion" ).slideDown( "slow" );
+        }else{
+            $( "#div_titulo_otro_documentacion" ).slideUp( "slow" );
+        }
+    });
+//////////////////////////////////////////////////////////////////////////////////
+});
+
 ///////////////////////////////////////////////////////////////////////////////////
 //////////////////// E X P E R I E N C I A   L A B O R A L   //////////////////////
     $('#fecha_inicio_experiencia_laboral_sigesco_laboral').datepicker({
@@ -3193,7 +3582,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
             // Nothing is active so it is a new value (or maybe empty value)
           }
         });
-    
     $("#ciudad_buscar_experiencia_laboral_editar_sigesco_laboral").typeahead({
             displayKey: "name",  
             source: [
@@ -3223,10 +3611,54 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
       } else {
         // Nothing is active so it is a new value (or maybe empty value)
       }
-    });
-    
-    
-    
+    });    
+    $("#cargo_experiencia_laboral_sigesco_laboral").typeahead({
+        displayKey: "name",  
+        source: [
+            <?php
+                $i=1;
+                foreach ($cargos_experiencia_laboral as $cargo_experiencia_laboral){
+                    if($i>1){echo ",";};
+                    echo '{name: "'.$cargo_experiencia_laboral->nombre_cargo_experiencia_laboral.'"}';
+                $i++; 
+                }
+            ?>
+          ]
+        });
+    $("#cargo_experiencia_laboral_sigesco_laboral").change(function() {
+              var current = $("#cargo_experiencia_laboral_sigesco_laboral").typeahead("getActive");
+              if (current) {
+                // Some item from your model is active!
+                if (current.name == $("#cargo_experiencia_laboral_sigesco_laboral").val()) {
+                  // This means the exact match is found. Use toLowerCase() if you want case insensitive match.
+                } else {
+                          $.ajax({                
+                            type: 'POST',
+                            url: '<?=base_url()?>trabajador_laboral/nuevo_cargo_experiencia',
+                            data: { nombre_cargo : $("#cargo_experiencia_laboral_sigesco_laboral").val().toUpperCase()
+                                  },
+                            success: function(data){                        
+                                if(data == false){
+                                    Command: toastr["error"]("Ocurrio un problema. Intente Nuevamente.", "ERROR");
+                                }
+                            }
+                          });
+                }
+              } else {
+                          $.ajax({                
+                            type: 'POST',
+                            url: '<?=base_url()?>trabajador_laboral/nuevo_cargo_experiencia',
+                            data: { nombre_cargo : $("#cargo_experiencia_laboral_sigesco_laboral").val().toUpperCase()
+                                  },
+                            success: function(data){                        
+                                if(data == false){
+                                    Command: toastr["error"]("Ocurrio un problema. Intente Nuevamente.", "ERROR");
+                                }
+                            }
+                          });
+
+              }
+            });
 ///////////////////////////////////////////////////////////////////////////////////
     //////////////////////////      C O N O C I M I E N T O     ///////////////////////
     $("#nombre_conocimiento").typeahead({
@@ -3291,7 +3723,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
         });
     });
     ///////////////////////////////////////////////////////////////////////////////////
-    
     function formatear(id,precio){
         var auxiliar_precio = precio;
 		auxiliar_precio = auxiliar_precio.replace(/[\$ abcdefghijklmnopqrstuvwxyz .]/g, '');
@@ -3343,7 +3774,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
                 break;
         }
     }
-    
     //////////////////////////////   E D U C A C I O N   B A S I C A   //////////////////////////////////////////
     function modificar_basica(id_educacion_basica){
       $.ajax({                
@@ -3387,7 +3817,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
         }
       });
     }
-    
     function modificar_educacion_basica(){
             /*Inicio Institucion */  if(($("#institucion_educacion_basica_editar_sigesco_laboral").val() != '') && ($("#institucion_buscar_educacion_basica_editar_sigesco_laboral").val() != '')){
                             $( "#institucion_educacion_basica_editar_sigesco_laboral" ).css( "border-color","#ccc" );
@@ -3492,7 +3921,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
                             Command: toastr["error"]("Ingrese el campo <strong>'Institución'</strong> por favor.", "Institución")
                         }
         }
-        
     function eliminar_basica(id_educacion_basica){
             bootbox.confirm({ 
                 buttons: {
@@ -3531,7 +3959,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
                 }  
             });
         }
-        
     function check_basica(){
         if($("#check_presente_basica_sigesco_laboral").prop('checked')){
              $( "#select_mes_fin_basica" ).addClass('readonly');
@@ -3541,7 +3968,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
              $( "#select_anno_fin_editar_basica" ).removeClass('readonly');
         }
     }
-    
     function check_basica_editar(){
         if($("#check_presente_basica_editar_sigesco_laboral").prop('checked')){
              $( "#select_mes_fin_editar_basica" ).addClass('readonly');
@@ -3553,7 +3979,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
              $( "#select_anno_fin_editar_basica" ).removeClass('readonly');
         }
     }
-        
     function empty_basica(){
             $("#select_nivel_educacion input").val("Seleccione Nivel");
             $("#select_mes_inicio_basica input").val("Seleccione Mes");
@@ -3568,7 +3993,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
             $("#sin_informacion_basica").hide();
 
         }
-        
     function buscar_institucion_basica(){
             $.get("<?=base_url()?>trabajador_laboral/buscar_institucion_basica",{id_ciudad: $("#ciudad_basica_sigesco_laboral").val()}, function(data){
                 var jsonObj = JSON.parse(JSON.stringify(data));
@@ -3591,46 +4015,43 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
                     $("#institucion_educacion_basica_sigesco_laboral").val(current.value);
                   // This means the exact match is found. Use toLowerCase() if you want case insensitive match.
                 } else {
-                  // This means it is only a partial match, you can either add a new item
-                  // or take the active if you don't want new items
+                   if($("#ciudad_basica_sigesco_laboral").val() != '' && $("#ciudad_basica_sigesco_laboral").val().lengh != 0){
+                          $.ajax({                
+                            type: 'POST',
+                            url: '<?=base_url()?>trabajador_laboral/nueva_educacion_basica',
+                            data: { 
+                                nombre_educacion_basica : $("#institucion_buscar_educacion_basica_sigesco_laboral").val().toUpperCase(), 
+                                id_ciudad : $("#ciudad_basica_sigesco_laboral").val()},
+                            success: function(data){                        
+                                if(data != false){
+                                    $("#institucion_educacion_basica_sigesco_laboral").val(data);
+                                }
+                            }
+                          });
+                    }else{
+                        Command: toastr["error"]("Primero, Ingrese una Ciudad.", "Ciudad")
+                    }
                 }
               } else {
-                // Nothing is active so it is a new value (or maybe empty value)
+                if($("#ciudad_basica_sigesco_laboral").val() != '' && $("#ciudad_basica_sigesco_laboral").val().lengh != 0){
+                          $.ajax({                
+                            type: 'POST',
+                            url: '<?=base_url()?>trabajador_laboral/nueva_educacion_basica',
+                            data: { 
+                                nombre_educacion_basica : $("#institucion_buscar_educacion_basica_sigesco_laboral").val().toUpperCase(), 
+                                id_ciudad : $("#ciudad_basica_sigesco_laboral").val()},
+                            success: function(data){                        
+                                if(data != false){
+                                    $("#institucion_educacion_basica_sigesco_laboral").val(data);
+                                }
+                            }
+                          });
+                    }else{
+                        Command: toastr["error"]("Primero, Ingrese una Ciudad.", "Ciudad")
+                    }
               }
             });
         }
-    
-    function buscar_institucion_editar_basica(){
-            $.get("<?=base_url()?>trabajador_laboral/buscar_institucion_basica",{id_ciudad: $("#ciudad_basica_editar_sigesco_laboral").val()}, function(data){
-                var jsonObj = JSON.parse(JSON.stringify(data));
-                $("#institucion_buscar_educacion_basica_editar_sigesco_laboral" ).val('');
-                $('#institucion_buscar_educacion_basica_editar_sigesco_laboral').typeahead('destroy');
-                
-                if(jsonObj != ''){
-                   $("#institucion_buscar_educacion_basica_editar_sigesco_laboral").typeahead({
-                          source:jsonObj
-                    });
-                }
-            },'json');
-            
-
-        $("#institucion_buscar_educacion_basica_editar_sigesco_laboral").change(function() {
-              var current = $("#institucion_buscar_educacion_basica_editar_sigesco_laboral").typeahead("getActive");
-              if (current) {
-                // Some item from your model is active!
-                if (current.name == $("#institucion_buscar_educacion_basica_editar_sigesco_laboral").val()) {
-                    $("#institucion_educacion_basica_editar_sigesco_laboral").val(current.value);
-                  // This means the exact match is found. Use toLowerCase() if you want case insensitive match.
-                } else {
-                  // This means it is only a partial match, you can either add a new item
-                  // or take the active if you don't want new items
-                }
-              } else {
-                // Nothing is active so it is a new value (or maybe empty value)
-              }
-            });
-        }
-    
     function buscar_institucion_editar_basica_modal(){
             $.get("<?=base_url()?>trabajador_laboral/buscar_institucion_basica",{id_ciudad: $("#ciudad_basica_editar_sigesco_laboral").val()}, function(data){
                 var jsonObj = JSON.parse(JSON.stringify(data));
@@ -3652,15 +4073,43 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
                     $("#institucion_educacion_basica_editar_sigesco_laboral").val(current.value);
                   // This means the exact match is found. Use toLowerCase() if you want case insensitive match.
                 } else {
-                  // This means it is only a partial match, you can either add a new item
-                  // or take the active if you don't want new items
+                  if($("#ciudad_basica_editar_sigesco_laboral").val() != '' && $("#ciudad_basica_editar_sigesco_laboral").val().lengh != 0){
+                          $.ajax({                
+                            type: 'POST',
+                            url: '<?=base_url()?>trabajador_laboral/nueva_educacion_basica',
+                            data: { 
+                                nombre_educacion_basica : $("#institucion_buscar_educacion_basica_editar_sigesco_laboral").val().toUpperCase(), 
+                                id_ciudad : $("#ciudad_basica_editar_sigesco_laboral").val()},
+                            success: function(data){                        
+                                if(data != false){
+                                    $("#institucion_educacion_basica_editar_sigesco_laboral").val(data);
+                                }
+                            }
+                          });
+                    }else{
+                        Command: toastr["error"]("Primero, Ingrese una Ciudad.", "Ciudad")
+                    }
                 }
               } else {
-                // Nothing is active so it is a new value (or maybe empty value)
+                if($("#ciudad_basica_editar_sigesco_laboral").val() != '' && $("#ciudad_basica_editar_sigesco_laboral").val().lengh != 0){
+                          $.ajax({                
+                            type: 'POST',
+                            url: '<?=base_url()?>trabajador_laboral/nueva_educacion_basica',
+                            data: { 
+                                nombre_educacion_basica : $("#institucion_buscar_educacion_basica_editar_sigesco_laboral").val().toUpperCase(), 
+                                id_ciudad : $("#ciudad_basica_editar_sigesco_laboral").val()},
+                            success: function(data){                        
+                                if(data != false){
+                                    $("#institucion_educacion_basica_editar_sigesco_laboral").val(data);
+                                }
+                            }
+                          });
+                    }else{
+                        Command: toastr["error"]("Primero, Ingrese una Ciudad.", "Ciudad")
+                    }
               }
             });
-        }
-        
+    }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////   E D U C A C I O N   M E D I A   //////////////////////////////////////////
     function modificar_media(id_educacion_media){
@@ -3706,7 +4155,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
         }
       });
     }
-    
     function modificar_educacion_media(){
             /*Inicio Institucion */  if(($("#institucion_educacion_media_editar_sigesco_laboral").val() != '') && ($("#institucion_buscar_educacion_media_editar_sigesco_laboral").val() != '')){
                             $( "#institucion_buscar_educacion_media_editar_sigesco_laboral" ).css( "border-color","#ccc" );
@@ -3812,7 +4260,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
                             Command: toastr["error"]("Ingrese el campo <strong>'Institución'</strong> por favor.", "Institución")
                         }
     }
-        
     function eliminar_media(id_educacion_media){
             bootbox.confirm({ 
                 buttons: {
@@ -3851,7 +4298,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
                 }  
             });
         }
-        
     function check_media(){
             if ( $("#check_presente_media_sigesco_laboral").prop('checked')){
                 $( "#select_mes_fin_media" ).addClass('readonly');
@@ -3861,7 +4307,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
                 $( "#select_anno_fin_media" ).removeClass('readonly');
             }
         }
-    
     function check_media_editar(){
         if($("#check_presente_media_editar_sigesco_laboral").prop('checked')){
              $( "#select_mes_fin_editar_media" ).addClass('readonly');
@@ -3873,7 +4318,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
              $( "#select_anno_fin_editar_media" ).removeClass('readonly');
         }
     }
-        
     function empty_media(){
             $("#select_nivel_educacion input").val("Seleccione Nivel");
             $("#select_mes_inicio_media input").val("Seleccione Mes");
@@ -3889,7 +4333,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
             $("#sin_informacion_media").hide();
 
         }
-        
     function buscar_institucion_media(){
             
             
@@ -3919,46 +4362,43 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
                     $("#institucion_educacion_media_sigesco_laboral").val(current.value);
                   // This means the exact match is found. Use toLowerCase() if you want case insensitive match.
                 } else {
-                  // This means it is only a partial match, you can either add a new item
-                  // or take the active if you don't want new items
+                      if($("#ciudad_media_sigesco_laboral").val() != '' && $("#ciudad_media_sigesco_laboral").val().lengh != 0){
+                          $.ajax({                
+                            type: 'POST',
+                            url: '<?=base_url()?>trabajador_laboral/nueva_educacion_media',
+                            data: { 
+                                nombre_educacion_media : $("#institucion_buscar_educacion_media_sigesco_laboral").val().toUpperCase(), 
+                                id_ciudad : $("#ciudad_media_sigesco_laboral").val()},
+                            success: function(data){                        
+                                if(data != false){
+                                    $("#institucion_educacion_media_sigesco_laboral").val(data);
+                                }
+                            }
+                          });
+                    }else{
+                        Command: toastr["error"]("Primero, Ingrese una Ciudad.", "Ciudad")
+                    }
                 }
               } else {
-                // Nothing is active so it is a new value (or maybe empty value)
+                if($("#ciudad_media_sigesco_laboral").val() != '' && $("#ciudad_media_sigesco_laboral").val().lengh != 0){
+                      $.ajax({                
+                        type: 'POST',
+                        url: '<?=base_url()?>trabajador_laboral/nueva_educacion_media',
+                        data: { 
+                            nombre_educacion_media : $("#institucion_buscar_educacion_media_sigesco_laboral").val().toUpperCase(), 
+                            id_ciudad : $("#ciudad_media_sigesco_laboral").val()},
+                        success: function(data){                        
+                            if(data != false){
+                                $("#institucion_educacion_media_sigesco_laboral").val(data);
+                            }
+                        }
+                      });
+                }else{
+                    Command: toastr["error"]("Primero, Ingrese una Ciudad.", "Ciudad")
+                }
               }
             });
         }
-    
-    function buscar_institucion_editar_media(){
-            $.get("<?=base_url()?>trabajador_laboral/buscar_institucion_media",{id_ciudad: $("#ciudad_media_editar_sigesco_laboral").val()}, function(data){
-                var jsonObj = JSON.parse(JSON.stringify(data));
-                $("#institucion_buscar_educacion_media_editar_sigesco_laboral" ).val('');
-                $('#institucion_buscar_educacion_media_editar_sigesco_laboral').typeahead('destroy');
-                
-                if(jsonObj != ''){
-                   $("#institucion_buscar_educacion_media_editar_sigesco_laboral").typeahead({
-                          source:jsonObj
-                    });
-                }
-            },'json');
-            
-
-        $("#institucion_buscar_educacion_media_editar_sigesco_laboral").change(function() {
-              var current = $("#institucion_buscar_educacion_media_editar_sigesco_laboral").typeahead("getActive");
-              if (current) {
-                // Some item from your model is active!
-                if (current.name == $("#institucion_buscar_educacion_media_editar_sigesco_laboral").val()) {
-                    $("#institucion_educacion_media_editar_sigesco_laboral").val(current.value);
-                  // This means the exact match is found. Use toLowerCase() if you want case insensitive match.
-                } else {
-                  // This means it is only a partial match, you can either add a new item
-                  // or take the active if you don't want new items
-                }
-              } else {
-                // Nothing is active so it is a new value (or maybe empty value)
-              }
-            });
-        }
-    
     function buscar_institucion_editar_media_modal(){
             $.get("<?=base_url()?>trabajador_laboral/buscar_institucion_media",{id_ciudad: $("#ciudad_media_editar_sigesco_laboral").val()}, function(data){
                 var jsonObj = JSON.parse(JSON.stringify(data));
@@ -3971,7 +4411,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
                 }
             },'json');
             
-
         $("#institucion_buscar_educacion_media_editar_sigesco_laboral").change(function() {
               var current = $("#institucion_buscar_educacion_media_editar_sigesco_laboral").typeahead("getActive");
               if (current) {
@@ -3980,15 +4419,43 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
                     $("#institucion_educacion_media_editar_sigesco_laboral").val(current.value);
                   // This means the exact match is found. Use toLowerCase() if you want case insensitive match.
                 } else {
-                  // This means it is only a partial match, you can either add a new item
-                  // or take the active if you don't want new items
+                  if($("#ciudad_media_editar_sigesco_laboral").val() != '' && $("#ciudad_media_editar_sigesco_laboral").val().lengh != 0){
+                          $.ajax({                
+                            type: 'POST',
+                            url: '<?=base_url()?>trabajador_laboral/nueva_educacion_media',
+                            data: { 
+                                nombre_educacion_media : $("#institucion_buscar_educacion_media_editar_sigesco_laboral").val().toUpperCase(), 
+                                id_ciudad : $("#ciudad_media_editar_sigesco_laboral").val()},
+                            success: function(data){                        
+                                if(data != false){
+                                    $("#institucion_educacion_media_editar_sigesco_laboral").val(data);
+                                }
+                            }
+                          });
+                    }else{
+                        Command: toastr["error"]("Primero, Ingrese una Ciudad.", "Ciudad")
+                    }
                 }
               } else {
-                // Nothing is active so it is a new value (or maybe empty value)
+                if($("#ciudad_media_editar_sigesco_laboral").val() != '' && $("#ciudad_media_editar_sigesco_laboral").val().lengh != 0){
+                          $.ajax({                
+                            type: 'POST',
+                            url: '<?=base_url()?>trabajador_laboral/nueva_educacion_media',
+                            data: { 
+                                nombre_educacion_media : $("#institucion_buscar_educacion_media_editar_sigesco_laboral").val().toUpperCase(), 
+                                id_ciudad : $("#ciudad_media_editar_sigesco_laboral").val()},
+                            success: function(data){                        
+                                if(data != false){
+                                    $("#institucion_educacion_media_editar_sigesco_laboral").val(data);
+                                }
+                            }
+                          });
+                    }else{
+                        Command: toastr["error"]("Primero, Ingrese una Ciudad.", "Ciudad")
+                    }
               }
             });
-        }
-        
+    }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////   E D U C A C I O N   U N I V E R S I T A R I A    ///////////////////////////
     function modificar_universitaria(id_educacion_universitaria){
@@ -4034,7 +4501,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
         }
       });
     }
-    
     function modificar_educacion_universitaria(){
         /*Inicio Institucion */  if(($("#institucion_educacion_universitaria_editar_sigesco_laboral").val() != '') && ($("#institucion_buscar_educacion_universitaria_editar_sigesco_laboral").val() != '')){
                             $( "#institucion_buscar_educacion_universitaria_editar_sigesco_laboral" ).css( "border-color","#ccc" );
@@ -4166,7 +4632,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
                             Command: toastr["error"]("Ingrese el campo <strong>'Institución'</strong> por favor.", "Institución")
                         }
     }
-        
     function eliminar_universitaria(id_educacion_universitaria){
             bootbox.confirm({ 
                 buttons: {
@@ -4205,7 +4670,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
                 }  
             });
         }
-        
     function check_universitaria(){
             if ( $("#check_presente_universitaria_sigesco_laboral").prop('checked')){
                 $( "#select_mes_fin_universitaria" ).addClass('readonly');
@@ -4215,7 +4679,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
                 $( "#select_anno_fin_universitaria" ).removeClass('readonly');
             }
         }
-    
     function check_universitaria_editar(){
         if($("#check_presente_universitaria_editar_sigesco_laboral").prop('checked')){
              $( "#select_mes_fin_editar_universitaria" ).addClass('readonly');
@@ -4227,7 +4690,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
              $( "#select_anno_fin_editar_universitaria" ).removeClass('readonly');
         }
     }
-        
     function empty_universitaria(){
             $("#select_nivel_educacion input").val("Seleccione Nivel");
             $("#select_mes_inicio_universitaria input").val("Seleccione Mes");
@@ -4243,10 +4705,7 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
             $("#sin_informacion_universitaria").hide();
 
         }
-        
     function buscar_institucion_universitaria(){
-            
-            
             $.get("<?=base_url()?>trabajador_laboral/buscar_institucion_universitaria",{id_ciudad: $("#ciudad_universitaria_sigesco_laboral").val()}, function(data){
                 var jsonObj = JSON.parse(JSON.stringify(data));
                 $("#institucion_buscar_educacion_universitaria_sigesco_laboral" ).val('');
@@ -4256,15 +4715,9 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
                    $("#institucion_buscar_educacion_universitaria_sigesco_laboral").typeahead({
                           source:jsonObj
                     });
-                }
-                
-                
-                    
+                }                    
             },'json');
             
-            
-            
-
         $("#institucion_buscar_educacion_universitaria_sigesco_laboral").change(function() {
               var current = $("#institucion_buscar_educacion_universitaria_sigesco_laboral").typeahead("getActive");
               if (current) {
@@ -4273,47 +4726,43 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
                     $("#institucion_educacion_universitaria_sigesco_laboral").val(current.value);
                   // This means the exact match is found. Use toLowerCase() if you want case insensitive match.
                 } else {
-                  // This means it is only a partial match, you can either add a new item
-                  // or take the active if you don't want new items
+                  if($("#ciudad_universitaria_sigesco_laboral").val() != '' && $("#ciudad_universitaria_sigesco_laboral").val().lengh != 0){
+                      $.ajax({                
+                        type: 'POST',
+                        url: '<?=base_url()?>trabajador_laboral/nueva_educacion_universitaria',
+                        data: { 
+                            nombre_educacion_universitaria : $("#institucion_buscar_educacion_universitaria_sigesco_laboral").val().toUpperCase(), 
+                            id_ciudad : $("#ciudad_universitaria_sigesco_laboral").val()},
+                        success: function(data){                        
+                            if(data != false){
+                                $("#institucion_educacion_universitaria_sigesco_laboral").val(data);
+                            }
+                        }
+                      });
+                }else{
+                    Command: toastr["error"]("Primero, Ingrese una Ciudad.", "Ciudad")
+                }
                 }
               } else {
-                // Nothing is active so it is a new value (or maybe empty value)
+                if($("#ciudad_universitaria_sigesco_laboral").val() != '' && $("#ciudad_universitaria_sigesco_laboral").val().lengh != 0){
+                      $.ajax({                
+                        type: 'POST',
+                        url: '<?=base_url()?>trabajador_laboral/nueva_educacion_universitaria',
+                        data: { 
+                            nombre_educacion_universitaria : $("#institucion_buscar_educacion_universitaria_sigesco_laboral").val().toUpperCase(), 
+                            id_ciudad : $("#ciudad_universitaria_sigesco_laboral").val()},
+                        success: function(data){                        
+                            if(data != false){
+                                $("#institucion_educacion_universitaria_sigesco_laboral").val(data);
+                            }
+                        }
+                      });
+                }else{
+                    Command: toastr["error"]("Primero, Ingrese una Ciudad.", "Ciudad")
+                }
               }
             });
         }
-    
-    function buscar_institucion_editar_universitaria(){
-            $.get("<?=base_url()?>trabajador_laboral/buscar_institucion_universitaria",{id_ciudad: $("#ciudad_universitaria_editar_sigesco_laboral").val()}, function(data){
-                var jsonObj = JSON.parse(JSON.stringify(data));
-                
-                $("#institucion_buscar_educacion_universitaria_editar_sigesco_laboral" ).val('');
-                $('#institucion_buscar_educacion_universitaria_editar_sigesco_laboral').typeahead('destroy');
-                
-                if(jsonObj != ''){
-                   $("#institucion_buscar_educacion_universitaria_editar_sigesco_laboral").typeahead({
-                          source:jsonObj
-                    });
-                }
-            },'json');
-            
-
-        $("#institucion_buscar_educacion_universitaria_editar_sigesco_laboral").change(function() {
-              var current = $("#institucion_buscar_educacion_universitaria_editar_sigesco_laboral").typeahead("getActive");
-              if (current) {
-                // Some item from your model is active!
-                if (current.name == $("#institucion_buscar_educacion_universitaria_editar_sigesco_laboral").val()) {
-                    $("#institucion_educacion_universitaria_editar_sigesco_laboral").val(current.value);
-                  // This means the exact match is found. Use toLowerCase() if you want case insensitive match.
-                } else {
-                  // This means it is only a partial match, you can either add a new item
-                  // or take the active if you don't want new items
-                }
-              } else {
-                // Nothing is active so it is a new value (or maybe empty value)
-              }
-            });
-        }
-    
     function buscar_institucion_editar_universitaria_modal(){
             $.get("<?=base_url()?>trabajador_laboral/buscar_institucion_universitaria",{id_ciudad: $("#ciudad_universitaria_editar_sigesco_laboral").val()}, function(data){
                 var jsonObj = JSON.parse(JSON.stringify(data));
@@ -4326,7 +4775,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
                 }
             },'json');
             
-
         $("#institucion_buscar_educacion_universitaria_editar_sigesco_laboral").change(function() {
               var current = $("#institucion_buscar_educacion_universitaria_editar_sigesco_laboral").typeahead("getActive");
               if (current) {
@@ -4335,15 +4783,43 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
                     $("#institucion_educacion_universitaria_editar_sigesco_laboral").val(current.value);
                   // This means the exact match is found. Use toLowerCase() if you want case insensitive match.
                 } else {
-                  // This means it is only a partial match, you can either add a new item
-                  // or take the active if you don't want new items
+                  if($("#ciudad_universitaria_editar_sigesco_laboral").val() != '' && $("#ciudad_universitaria_editar_sigesco_laboral").val().lengh != 0){
+                          $.ajax({                
+                            type: 'POST',
+                            url: '<?=base_url()?>trabajador_laboral/nueva_educacion_universitaria',
+                            data: { 
+                                nombre_educacion_universitaria : $("#institucion_buscar_educacion_universitaria_editar_sigesco_laboral").val().toUpperCase(), 
+                                id_ciudad : $("#ciudad_universitaria_editar_sigesco_laboral").val()},
+                            success: function(data){                        
+                                if(data != false){
+                                    $("#institucion_educacion_universitaria_editar_sigesco_laboral").val(data);
+                                }
+                            }
+                          });
+                    }else{
+                        Command: toastr["error"]("Primero, Ingrese una Ciudad.", "Ciudad")
+                    }
                 }
               } else {
-                // Nothing is active so it is a new value (or maybe empty value)
+                if($("#ciudad_universitaria_editar_sigesco_laboral").val() != '' && $("#ciudad_universitaria_editar_sigesco_laboral").val().lengh != 0){
+                          $.ajax({                
+                            type: 'POST',
+                            url: '<?=base_url()?>trabajador_laboral/nueva_educacion_universitaria',
+                            data: { 
+                                nombre_educacion_universitaria : $("#institucion_buscar_educacion_universitaria_editar_sigesco_laboral").val().toUpperCase(), 
+                                id_ciudad : $("#ciudad_universitaria_editar_sigesco_laboral").val()},
+                            success: function(data){                        
+                                if(data != false){
+                                    $("#institucion_educacion_universitaria_editar_sigesco_laboral").val(data);
+                                }
+                            }
+                          });
+                    }else{
+                        Command: toastr["error"]("Primero, Ingrese una Ciudad.", "Ciudad")
+                    }
               }
             });
-        }
-        
+    }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //////////////////////////////   E D U C A C I O N   P O S T E R I O R   ///////////////////////////
     function modificar_posterior(id_educacion_posterior){
@@ -4396,7 +4872,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
         }
       });
     }
-    
     function modificar_educacion_posterior(){
         /*Inicio Institucion */  if(($("#institucion_educacion_editar_posterior_editar_sigesco_laboral").val() != '') && ($("#institucion_buscar_educacion_editar_posterior_editar_sigesco_laboral").val() != '')){
                             $( "#institucion_buscar_educacion_editar_posterior_editar_sigesco_laboral" ).css( "border-color","#ccc" );
@@ -4540,7 +5015,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
                             Command: toastr["error"]("Ingrese el campo <strong>'Institución'</strong> por favor.", "Institución")
                         }
     }
-        
     function eliminar_posterior(id_educacion_posterior){
             bootbox.confirm({ 
                 buttons: {
@@ -4579,7 +5053,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
                 }  
             });
         }
-        
     function check_posterior(){
             if ( $("#check_presente_posterior_sigesco_laboral").prop('checked')){
                 $( "#select_mes_fin_posterior" ).addClass('readonly');
@@ -4589,7 +5062,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
                 $( "#select_anno_fin_posterior" ).removeClass('readonly');
             }
         }
-    
     function check_posterior_editar(){
         if($("#check_presente_posterior_editar_sigesco_laboral").prop('checked')){
              $( "#select_mes_fin_editar_posterior" ).addClass('readonly');
@@ -4601,7 +5073,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
              $( "#select_anno_fin_editar_posterior" ).removeClass('readonly');
         }
     }
-        
     function empty_posterior(){
             $("#select_nivel_educacion input").val("Seleccione Nivel");
             $("#select_mes_inicio_posterior input").val("Seleccione Mes");
@@ -4621,7 +5092,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
             $("#sin_informacion_posterior").hide();
 
         }
-        
     function buscar_institucion_posterior(){
             
             $.get("<?=base_url()?>trabajador_laboral/buscar_institucion_posterior",{id_ciudad: $("#ciudad_posterior_sigesco_laboral").val()}, function(data){
@@ -4646,47 +5116,43 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
                     $("#institucion_educacion_posterior_sigesco_laboral").val(current.value);
                   // This means the exact match is found. Use toLowerCase() if you want case insensitive match.
                 } else {
-                  // This means it is only a partial match, you can either add a new item
-                  // or take the active if you don't want new items
+                  if($("#ciudad_posterior_sigesco_laboral").val() != '' && $("#ciudad_posterior_sigesco_laboral").val().lengh != 0){
+                          $.ajax({                
+                            type: 'POST',
+                            url: '<?=base_url()?>trabajador_laboral/nueva_educacion_universitaria',
+                            data: { 
+                                nombre_educacion_universitaria : $("#institucion_buscar_educacion_posterior_sigesco_laboral").val().toUpperCase(), 
+                                id_ciudad : $("#ciudad_posterior_sigesco_laboral").val()},
+                            success: function(data){                        
+                                if(data != false){
+                                    $("#institucion_educacion_posterior_sigesco_laboral").val(data);
+                                }
+                            }
+                          });
+                    }else{
+                        Command: toastr["error"]("Primero, Ingrese una Ciudad.", "Ciudad")
+                    }
                 }
               } else {
-                // Nothing is active so it is a new value (or maybe empty value)
+                if($("#ciudad_posterior_sigesco_laboral").val() != '' && $("#ciudad_posterior_sigesco_laboral").val().lengh != 0){
+                          $.ajax({                
+                            type: 'POST',
+                            url: '<?=base_url()?>trabajador_laboral/nueva_educacion_universitaria',
+                            data: { 
+                                nombre_educacion_universitaria : $("#institucion_buscar_educacion_posterior_sigesco_laboral").val().toUpperCase(), 
+                                id_ciudad : $("#ciudad_posterior_sigesco_laboral").val()},
+                            success: function(data){                        
+                                if(data != false){
+                                    $("#institucion_educacion_posterior_sigesco_laboral").val(data);
+                                }
+                            }
+                          });
+                    }else{
+                        Command: toastr["error"]("Primero, Ingrese una Ciudad.", "Ciudad")
+                    }
               }
             });
         }
-    
-    function buscar_institucion_editar_posterior(){
-            $.get("<?=base_url()?>trabajador_laboral/buscar_institucion_posterior",{id_ciudad: $("#ciudad_posterior_editar_sigesco_laboral").val()}, function(data){
-                var jsonObj = JSON.parse(JSON.stringify(data));
-                
-                $("#institucion_buscar_educacion_posterior_editar_sigesco_laboral" ).val('');
-                $('#institucion_buscar_educacion_posterior_editar_sigesco_laboral').typeahead('destroy');
-                
-                if(jsonObj != ''){
-                   $("#institucion_buscar_educacion_posterior_editar_sigesco_laboral").typeahead({
-                          source:jsonObj
-                    });
-                }
-            },'json');
-            
-
-        $("#institucion_buscar_educacion_posterior_editar_sigesco_laboral").change(function() {
-              var current = $("#institucion_buscar_educacion_posterior_editar_sigesco_laboral").typeahead("getActive");
-              if (current) {
-                // Some item from your model is active!
-                if (current.name == $("#institucion_buscar_educacion_posterior_editar_sigesco_laboral").val()) {
-                    $("#institucion_educacion_posterior_editar_sigesco_laboral").val(current.value);
-                  // This means the exact match is found. Use toLowerCase() if you want case insensitive match.
-                } else {
-                  // This means it is only a partial match, you can either add a new item
-                  // or take the active if you don't want new items
-                }
-              } else {
-                // Nothing is active so it is a new value (or maybe empty value)
-              }
-            });
-        }
-    
     function buscar_institucion_editar_posterior_modal(){
             $.get("<?=base_url()?>trabajador_laboral/buscar_institucion_posterior",{id_ciudad: $("#ciudad_posterior_editar_sigesco_laboral").val()}, function(data){
                 var jsonObj = JSON.parse(JSON.stringify(data));
@@ -4699,7 +5165,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
                 }
             },'json');
             
-
         $("#institucion_buscar_educacion_posterior_editar_sigesco_laboral").change(function() {
               var current = $("#institucion_buscar_educacion_posterior_editar_sigesco_laboral").typeahead("getActive");
               if (current) {
@@ -4708,15 +5173,28 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
                     $("#institucion_educacion_posterior_editar_sigesco_laboral").val(current.value);
                   // This means the exact match is found. Use toLowerCase() if you want case insensitive match.
                 } else {
-                  // This means it is only a partial match, you can either add a new item
-                  // or take the active if you don't want new items
+                  
                 }
               } else {
-                // Nothing is active so it is a new value (or maybe empty value)
+                if($("#ciudad_posterior_editar_sigesco_laboral").val() != '' && $("#ciudad_posterior_editar_sigesco_laboral").val().lengh != 0){
+                          $.ajax({                
+                            type: 'POST',
+                            url: '<?=base_url()?>trabajador_laboral/nueva_educacion_universitaria',
+                            data: { 
+                                nombre_educacion_posterior : $("#institucion_buscar_educacion_posterior_editar_sigesco_laboral").val().toUpperCase(), 
+                                id_ciudad : $("#ciudad_posterior_editar_sigesco_laboral").val()},
+                            success: function(data){                        
+                                if(data != false){
+                                    $("#institucion_educacion_posterior_editar_sigesco_laboral").val(data);
+                                }
+                            }
+                          });
+                    }else{
+                        Command: toastr["error"]("Primero, Ingrese una Ciudad.", "Ciudad")
+                    }
               }
             });
-        }
-        
+    }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /////////////////////////////// A G R E G A R   E D U C A C I O N  //////////////////////////////////////////
@@ -5333,7 +5811,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
                 Command: toastr["error"]("Ingrese el campo <strong>'Ciudad'</strong> por favor, o esta mal escrita.", "Ciudad")
             }
         };
-    
     function eliminar_experiencia_laboral(id_experiencia_laboral){
             bootbox.confirm({ 
                 buttons: {
@@ -5371,7 +5848,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
                 }  
             });
         }
-    
     function empty_experiencia_laboral(){
             $("#cargo_experiencia_laboral_sigesco_laboral").val('');
             $("#empresa_experiencia_laboral_sigesco_laboral").val('');
@@ -5387,7 +5863,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
             $("#sin_informacion_experiencia_laboral").hide();
 
         }
-    
     function modificar_experiencia_laboral(id_experiencia_laboral){
       $.ajax({                
         type: 'POST',
@@ -5422,7 +5897,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
         }
       });
     }
-    
     function modificar_experiencia_laboral_editar() {
             var check_posterior = '';
             /*Inicio Ciudad */  if(($("#ciudad_buscar_experiencia_laboral_editar_sigesco_laboral").val() != '') && ($("#ciudad_experiencia_laboral_editar_sigesco_laboral").val() != '')){
@@ -5553,7 +6027,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
                 Command: toastr["error"]("Ingrese el campo <strong>'Ciudad'</strong> por favor, o esta mal escrita.", "Ciudad")
             }
         };
-    
     function check_experiencia_laboral(){
         if ( $("#check_presente_experiencia_sigesco_laboral").prop('checked')){
             $('#fecha_termino_experiencia_laboral_sigesco_laboral').datepicker('destroy');
@@ -5569,7 +6042,6 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
             });
         }
     }
-    
     function check_experiencia_laboral_editar(){
         if ($("#check_presente_experiencia_labora_edita_sigesco_laboral").prop('checked')){
             $('#fecha_termino_experiencia_laboral_editar_sigesco_laboral').datepicker('destroy');
@@ -5584,7 +6056,50 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
 
             });
         }
-    } 
+    }
+    function buscar_empresa_experiencia(){
+            $.get("<?=base_url()?>trabajador_laboral/buscar_empresa_experiencia",{
+                id_ciudad: $("#ciudad_experiencia_laboral_sigesco_laboral").val()}, 
+                   function(data){
+                var jsonObj = JSON.parse(JSON.stringify(data));
+                $("#empresa_experiencia_laboral_sigesco_laboral" ).val('');
+                $('#empresa_experiencia_laboral_sigesco_laboral').typeahead('destroy');
+                
+                if(jsonObj != ''){
+                   $("#empresa_experiencia_laboral_sigesco_laboral").typeahead({
+                          source:jsonObj
+                    });
+                }
+            },'json');
+           
+            $("#empresa_experiencia_laboral_sigesco_laboral").change(function() {
+              var current = $("#empresa_experiencia_laboral_sigesco_laboral").typeahead("getActive");
+              if (current) {
+                // Some item from your model is active!
+                if (current.name == $("#empresa_experiencia_laboral_sigesco_laboral").val()) {
+                    $("#empresa_experiencia_laboral_sigesco_laboral").val(current.name);
+                  // This means the exact match is found. Use toLowerCase() if you want case insensitive match.
+                } else {
+
+                }
+              } else {
+                if($("#ciudad_buscar_experiencia_laboral_sigesco_laboral").val() != '' && $("#ciudad_buscar_experiencia_laboral_sigesco_laboral").val().lengh != 0){
+                   $.ajax({                
+                            type: 'POST',
+                            url: '<?=base_url()?>trabajador_laboral/nueva_empresa_experiencia',
+                            data: { nombre_empresa : $("#empresa_experiencia_laboral_sigesco_laboral").val().toUpperCase(),
+                                   id_ciudad : $("#ciudad_experiencia_laboral_sigesco_laboral").val()
+                                  },
+                            success: function(data){                        
+                                if(data == false){
+                                    Command: toastr["error"]("Ocurrio un problema. Intente Nuevamente.", "ERROR");
+                                }
+                            }
+                          });
+                  }
+              }
+            });
+        }
     
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////   C O N O C I M I E N T O ///////////////////////////////////////////
@@ -5682,5 +6197,321 @@ $("#boton_modificar_trabajador_laboral" ).click(function() {
         });
      }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////   I D I O M A   ////////////////////////////////////////////////////
+        $( "#slider_idioma_oral" ).slider({
+          range: "max",
+              min: 0,
+              max: 100,
+              value: 0,
+              step: 10,
+              slide: function( event, ui ) {
+                $( "#valor_porcentaje_idioma_oral" ).val( ui.value + "%" );
+              }
+          });
+    
+        $( "#slider_idioma_escrito" ).slider({
+          range: "max",
+              min: 0,
+              max: 100,
+              value: 0,
+              step: 10,
+              slide: function( event, ui ) {
+                $( "#valor_porcentaje_idioma_escrito" ).val( ui.value + "%" );
+              }
+          });
+    
+        function agregar_idioma(){
+        /*Inicio Nombre Conocimiento */  if(($("#nombre_idioma").val() != '')){
+            $( "#nombre_idioma" ).css( "border-color","#ccc" );
+        /*Inicio Descripcion Conocimiento   if(($("#descripcion_conocimiento").val() != '')){
+            $( "#descripcion_conocimiento" ).css( "border-color","#ccc" );   
+        /*Inicio Slider Oral */  if(($( "#slider_idioma_oral" ).slider( "value" ) > 0)){
+        /*Inicio Slider Escrito*/  if(($( "#slider_idioma_escrito" ).slider( "value" ) > 0)){
+            
+            $.ajax({
+                    type: 'POST',
+                    url: '<?=base_url()?>trabajador_laboral/agregar_idioma',
+                    data: {nombre_idioma : $("#nombre_idioma").val().toUpperCase(),
+                           slider_idioma_oral : $( "#slider_idioma_oral" ).slider( "value" ),
+                           slider_idioma_escrito : $( "#slider_idioma_escrito" ).slider( "value" ),
+                           id_idioma : $("#id_idioma").val()
+                          }, 
+                    success: function(data){
+                        var datos = JSON.parse(data);
+                        if(datos[0] == true){
+                            
+                            $( "#lista_idiomas" ).append('<div id="fila_idioma'+datos[1]+'" class="assigned-job-single"><div class="row" style="padding:10px 0px 10px 0px"><div class="col-xs-12 col-md-1"></div><div class="col-xs-12 col-md-2" style="text-align:center;"><p class="titulo_idioma_tabla" style="color:#346abb;">'+datos[2]+'</p></div><div class="col-xs-12 col-md-2"><div class="row"><div class="col-xs-6 col-md-12" style="text-align:center;"><p class="detalle_idioma_tabla">Oral</p></div><div class="col-xs-6 col-md-12" style="text-align:center;"><p class="detalle_idioma_tabla">Escrito</p></div></div></div><div class="col-xs-12 col-md-5"><div class="row"><div class="col-xs-6 col-md-12 barra_progreso" style=""><div class="progress-bar clearfix"><div class="progress-bar-inner progress'+datos[3]+'"><span>'+datos[3]+'%</span></div></div></div><div class="col-xs-6 col-md-12 barra_progreso" style=""><div class="progress-bar clearfix"><div class="progress-bar-inner progress'+datos[4]+'"><span>'+datos[4]+'%</span></div></div></div></div></div><div class="col-md-2" style="text-align:center;"><i onclick="eliminar_idioma('+datos[0]+')" class="fa fa-trash icono_idioma" aria-hidden="true"></i></div></div></div>');
+                            
+                            Command: toastr["success"]("Idioma Agregado correctamente.", "Idioma");
+                            
+                            $("#nombre_idioma").val('');
+                            $("#id_idioma").val('');
+                            $("#slider_idioma_oral").slider( "option", "value", 0 );
+                            $("#slider_idioma_escrito").slider( "option", "value", 0 );
+                            $( "#valor_porcentaje_idioma_oral" ).val("0%");
+                            $( "#valor_porcentaje_idioma_escrito" ).val("0%");
+                            
+                        }else{
+                           if(datos[0] == 3){
+                                Command: toastr["error"]("El Idioma seleccionado ya Existe.", "Existe Idioma")
+                            }else{
+                                Command: toastr["error"]("Ocurrio un Problema.", "Intente Nuevamente")
+                            } 
+                        }
+                    }
+                });
+            
+        /*Fin Slider Escrito*/}else{
+                Command: toastr["error"]("Seleccion el <strong>'Porcentaje'</strong> de Idioma Escrito por favor.", "Porcentaje de Idioma Escrito")
+        }
+        /*Fin Slider Oral */}else{
+                Command: toastr["error"]("Seleccion el <strong>'Porcentaje'</strong> de Idioma Oral por favor.", "Porcentaje de Idioma Oral")
+        }
+        /*Fin Descripcion Conocimiento }else{
+                $( "#descripcion_conocimiento" ).css(  "border-color","red" );
+                $( "#descripcion_conocimiento" ).focus();
+                Command: toastr["error"]("Ingrese el campo <strong>'Nombre'</strong> por favor.", "Descripción Conocimiento")
+        }
+        */
+        /*Fin Nombre Conocimiento */}else{
+                $( "#nombre_idioma" ).css(  "border-color","red" );
+                $( "#nombre_idioma" ).focus();
+                Command: toastr["error"]("Ingrese el campo <strong>'Nombre'</strong> por favor.", "Nombre Idioma")
+        }
+    }
+    
+        function eliminar_idioma(fila_idioma){
+         $.ajax({
+            type: 'POST',
+            url: '<?=base_url()?>trabajador_laboral/eliminar_idioma',
+            data: {fila_idioma : fila_idioma}, 
+            success: function(data){
+                        if(data == true){
+                            $("#fila_idioma"+fila_idioma).remove();
+                            Command: toastr["success"]("Idioma Eliminado correctamente.", "Idioma Eliminado");
+                        }else{
+                            Command: toastr["error"]("Ocurrio un Problema.", "Intente Nuevamente")
+                        }
+            }
+        });
+     }
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////   D O C U M E N T A C I O N   ////////////////////////////////////////////
+    function subir_documentacion(){
+    
+        var fd = new FormData();
+    
+        fd.append( "archivo_documentacion", $("#archivo_documentacion")[0].files[0]);
+        
+    
+    /*Inicio Tipo Dcumentacion */   if(($("#input_tipo_documentacion").val() != '')){
+                                    $( "#input_tipo_documentacion" ).css( "border-color","#ccc" );
+                                    fd.append("input_tipo_documentacion", $( "#input_tipo_documentacion" ).val());
+        
+    /*Inicio Documento */   if(($("#archivo_documentacion").val() != '')){
+                                    $( "#archivo_documentacion" ).css( "border-color","#ccc" );
+                                    fd.append("archivo_documentacion", $( "#archivo_documentacion" ).val());
+        
+                            if(($("#input_tipo_documentacion").val() == 'Otro') && ($("#titulo_otro_documentacion").val() != '')){
+                                fd.append("titulo_otro_documentacion", $( "#titulo_otro_documentacion" ).val());
+                                
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '<?=base_url()?>trabajador_laboral/agregar_documentacion',
+                                    contentType: false,
+                                    data: fd, 
+                                    processData: false,
+                                    cache: false,
+                                    success: function(data){
+                                        var datos = JSON.parse(data);
+                                        if(datos[0] == true){
+
+                                            $( "#lista_documentacion" ).append('<div id="fila_documento'+datos[0]+'" class="assigned-job-single"><div class="row" style="padding:10px 0px 10px 0px"><div class="col-xs-12 col-md-12"></div><div class="col-xs-12 col-md-7" style="text-align:center;"><p class="titulo_idioma_tabla2" style="color:#346abb;">'+datos[3]+'</p></div><div class="col-xs-12 col-md-3"><div class="row"><div class="col-xs-6 col-md-12" style="text-align:center;"><p class="detalle_idioma_tabla2"><strong>Fecha de Subida</strong></p></div><div class="col-xs-6 col-md-12" style="text-align:center;"><p class="detalle_idioma_tabla2">'+datos[2]+'</p></div></div></div><div class="col-md-2" style="text-align:center;"><i onClick="abrir_archivo(\'<?=base_url()?>'+datos[4]+'\')" class="fa fa-file-o icono_idioma" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<i onclick="eliminar_documento(\''+datos[1]+'\',\''+datos[4]+'\')" class="fa fa-trash icono_idioma" aria-hidden="true"></i></div></div></div>');
+                                            
+                                            Command: toastr["success"]("Se agrego correctamente la Documentación.", "Documentación")
+                                            //redireccionarPagina('<?=base_url()?>laboral');
+                                            
+                                        }else{
+                                            $("[data-dismiss=modal]").trigger({ type: "click" });
+                                            Command: toastr["error"]("Ocurrio un Problema.", "Intente Nuevamente")
+                                            
+                                        }
+                                    }
+
+                                });
+                                
+                               }else{
+                                   $.ajax({
+                                    type: 'POST',
+                                    url: '<?=base_url()?>trabajador_laboral/agregar_documentacion',
+                                    contentType: false,
+                                    data: fd, 
+                                    processData: false,
+                                    cache: false,
+                                    success: function(data){
+                                        var datos = JSON.parse(data);
+                                        if(datos[0] == true){
+
+                                            $( "#lista_documentacion" ).append('<div id="fila_documento'+datos[0]+'" class="assigned-job-single"><div class="row" style="padding:10px 0px 10px 0px"><div class="col-xs-12 col-md-12"></div><div class="col-xs-12 col-md-7" style="text-align:center;"><p class="titulo_idioma_tabla2" style="color:#346abb;">'+datos[3]+'</p></div><div class="col-xs-12 col-md-3"><div class="row"><div class="col-xs-6 col-md-12" style="text-align:center;"><p class="detalle_idioma_tabla3"><strong>Fecha de Subida</strong></p></div><div class="col-xs-6 col-md-12" style="text-align:center;"><p class="detalle_idioma_tabla3">'+datos[2]+'</p></div></div></div><div class="col-md-2" style="text-align:center;"><i onClick="abrir_archivo(\'<?=base_url()?>'+datos[4]+'\')" class="fa fa-file-o icono_idioma" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<i onclick="eliminar_documento(\''+datos[1]+'\',\''+datos[4]+'\')" class="fa fa-trash icono_idioma" aria-hidden="true"></i></div></div></div>');
+                                            
+                                            Command: toastr["success"]("Se agrego correctamente la Documentación.", "Documentación")
+                                            //redireccionarPagina('<?=base_url()?>laboral');
+                                            
+                                        }else{
+                                            $("[data-dismiss=modal]").trigger({ type: "click" });
+                                            Command: toastr["error"]("Ocurrio un Problema.", "Intente Nuevamente")
+                                            
+                                        }
+                                    }
+
+                                });
+                               }
+    
+    /* Fin Documento */   }else{
+                            $( "#archivo_documentacion" ).css(  "border-color","red" );
+                            $( "#archivo_documentacion" ).focus();
+                            Command: toastr["error"]("Ingrese el <strong>'Archivo'</strong> por favor.", "Archivo")
+                        }
+    
+    /* Fin Tipo Documentacion */   }else{
+                            $( "#input_tipo_documentacion" ).css(  "border-color","red" );
+                            $( "#input_tipo_documentacion" ).focus();
+                            Command: toastr["error"]("Seleccione el campo <strong>'Tipo de Documentación'</strong> por favor.", "Tipo de Documentación")
+                        }
+}
+    
+    function eliminar_documento(fila_documento,url_documento){
+            bootbox.confirm({ 
+                buttons: {
+                    cancel: {
+                      label: 'Cerrar',
+                      className: 'btn-danger'
+                    },
+                    
+                    confirm: {
+                      label: 'Eliminar',
+                      className: 'btn-success'
+                    }
+                },
+                title: "Eliminar Documento",
+                message: "¿Esta seguro de <strong> Eliminar</strong> el Documento?", 
+                callback: function(result){
+                              
+                  if(result == true){
+                        
+                    $.ajax({
+                        type: 'POST',
+                        url: '<?=base_url()?>trabajador_laboral/eliminar_documentacion',
+                        data: {fila_documento : fila_documento,url_documento : url_documento},
+                        success: function(data){
+                                                        
+                            if(data == true){
+                              Command: toastr["success"]("Documento Eliminado correctamente.", "Documento Eliminado");
+                              $("#fila_documento"+fila_documento).remove();
+                            }else{
+                            Command: toastr["error"]("Ocurrio un problema. Intente Nuevamente.", "ERROR");
+                            }
+                                  
+                        }
+                    });
+                  }
+                }  
+            });
+        }
+    
+    function abrir_archivo(url){
+        window.open(url, '_blank');
+    }  
+
+    function subir_foto_perfil_editar(){
+        var fd = new FormData();
+        fd.append( "foto_perfil_editar", $("#foto_perfil_editar")[0].files[0]);
+        
+    /*Inicio Foto Perfil */   if(($("#foto_perfil_editar").val() != '')){
+                                    $( "#foto_perfil_editar" ).css( "border-color","#ccc" );
+                                    fd.append("foto_perfil_editar", $( "#foto_perfil_editar" ).val());
+                                
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '<?=base_url()?>trabajador_laboral/foto_perfil_editar',
+                                    contentType: false,
+                                    data: fd, 
+                                    processData: false,
+                                    cache: false,
+                                    success: function(data){
+                                        var datos = JSON.parse(data);
+                                        if(datos[0] == true){
+                                            
+                                            $("#img_perfil_auxiliar").attr("src",datos[1]);
+                                            Command: toastr["success"]("Se agrego correctamente la Fotografia.", "Fotografia")
+                                            //redireccionarPagina('<?=base_url()?>laboral');
+                                            
+                                        }else{
+                                            if(datos[0] == 3){
+                                               $("#foto_perfil_editar").val('');
+                                               Command: toastr["error"]("Ingrese una fotografia. (Extension: JPG o PNG).", "Ingrese Fotografia Nueva")
+                                               }else{
+                                                $("#foto_perfil_editar").val('');
+                                                $("[data-dismiss=modal]").trigger({ type: "click" });
+                                                Command: toastr["error"]("Ocurrio un Problema.", "Intente Nuevamente")
+                                               }
+                                        }
+                                    }
+                                });
+                                    
+    /* Fin Foto Perfil */   }else{
+                            $( "#foto_perfil_editar" ).css(  "border-color","red" );
+                            $( "#foto_perfil_editar" ).focus();
+                            Command: toastr["error"]("Ingrese la <strong>'Fotografia'</strong> por favor.", "Fotografia")
+                        }
+
+    }
+    
+    function subir_foto_perfil_guardar(){
+        var fd = new FormData();
+        fd.append( "foto_perfil_editar", $("#foto_perfil_editar")[0].files[0]);
+        
+    /*Inicio Foto Perfil */   if(($("#foto_perfil_editar").val() != '')){
+                                    $( "#foto_perfil_editar" ).css( "border-color","#ccc" );
+                                    fd.append("foto_perfil_editar", $( "#foto_perfil_editar" ).val());
+                                
+                                $.ajax({
+                                    type: 'POST',
+                                    url: '<?=base_url()?>trabajador_laboral/foto_perfil_guardar',
+                                    contentType: false,
+                                    data: fd, 
+                                    processData: false,
+                                    cache: false,
+                                    success: function(data){
+                                        var datos = JSON.parse(data);
+                                        if(datos[0] == true){
+                                            
+                                            $("[data-dismiss=modal]").trigger({ type: "click" });
+                                            $("#foto_editar_perfil").attr("src",datos[1]);
+                                            $("#foto_editar_perfil_superior").attr("src",datos[1]);
+                                            Command: toastr["success"]("Se actualizo correctamente.", "Fotografia Actualizada")
+                                            //redireccionarPagina('<?=base_url()?>laboral');
+                                            
+                                        }else{
+                                            if(datos[0] == 3){
+                                               $("#foto_perfil_editar").val('');
+                                               Command: toastr["error"]("Ingrese una fotografia. (Extension: JPG o PNG).", "Ingrese Fotografia Nueva")
+                                            }else{
+                                                $("#foto_perfil_editar").val('');
+                                                $("[data-dismiss=modal]").trigger({ type: "click" });
+                                                Command: toastr["error"]("Ocurrio un Problema.", "Intente Nuevamente")
+                                            }
+                                        }
+                                    }
+                                });
+                                    
+    /* Fin Foto Perfil */   }else{
+                            $( "#foto_perfil_editar" ).css(  "border-color","red" );
+                            $( "#foto_perfil_editar" ).focus();
+                            Command: toastr["error"]("Primero Ingrese la <strong>'Fotografia'</strong> por favor.", "Ingrese Fotografia")
+                        }
+
+    }
+
     
 </script>

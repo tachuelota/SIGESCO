@@ -196,7 +196,7 @@
 
         <!-- Visually Hidden Preheader Text : BEGIN -->
         <div style="display: none; font-size: 1px; line-height: 1px; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; mso-hide: all; font-family: sans-serif;">
-            Texto Opcional, BAJADA DEL CORREO
+            Mensaje recibido con Exito!!!
         </div>
         <!-- Visually Hidden Preheader Text : END -->
 
@@ -230,15 +230,15 @@
                         <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                             <tr>
                                 <td style="padding: 40px 40px 20px; text-align: center;">
-                                    <h1 style="margin: 0; font-family: sans-serif; font-size: 24px; line-height: 125%; color: #333333; font-weight: normal;"><?=$nombre?>, Bienvenido a SIGESCO!!!</h1>
+                                    <h1 style="margin: 0; font-family: sans-serif; font-size: 24px; line-height: 125%; color: #333333; font-weight: normal;"><?=$nombre?>, hemos recibido tu Correo!!!</h1>
                                 </td>
                             </tr>
                             <tr>
                                 <td style="padding: 0 40px 40px; font-family: sans-serif; font-size: 15px; line-height: 140%; color: #555555; text-align: center;">
-                                    <p style="margin: 0; text-align:justify;">Antes de continuar, para el correcto uso de la plataforma, debes activar tu cuenta en el siguiente boton.</p>
-                                    <p style="margin: 0;"><strong>Usuario: </strong><?=$email?></p>
-                                    <p style="margin: 0;"><strong>Contraseña: </strong><?=$password?></p><br>
-                                    <p style="margin: 0;">Estamos muy contentos que seas parte de nosotros, a continuación te entregamos los datos de acceso:  </p>
+                                    <p style="margin: 0; text-align:justify;">A la brevedad, nuestro equipo se pondra en contacto contigo. para responder tu siguiente mensaje:</p>
+                                    <p style="margin: 0;"><strong>Celular: </strong><?=$telefono?></p>
+                                    <p style="margin: 0;"><strong>Email: </strong><?=$email?></p><br>
+                                    <p style="margin: 0;"><strong>Mensaje: </strong><?=$mensaje?></p>
                                 </td>
                             </tr>
                         </table>

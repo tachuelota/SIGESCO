@@ -2,55 +2,7 @@
       <header id="header">
         <div class="header-top-bar">
 
-          <!--
-          HEADER TOP BAR WITH NOTIFICATION FOR REGISTER USER
-          -->
-
-          <div class="header-notification-bar" style="display:none;">
-            <div class="register-user">
-              <div class="container">
-                <div class="row">
-                  <div class="col-md-3 col-sm-3">
-                    <div class="logo-section">
-                      <a href="index.html"><img src="img/logo-bu.png" alt=""></a>
-                    </div>
-                  </div>
-
-                  <div class="col-md-6 col-sm-5">
-                    <div class="search-form">
-                      <form action="#">
-                        <button class="dropdown-search"><i class="fa fa-caret-down"></i> <i class="fa fa-bars"></i></button>
-                        <input type="search" placeholder="Search..." class="topbar-search-input">
-                        <button class="search-button"><i class="fa fa-search"></i></button>
-                      </form>
-
-                    </div>
-                  </div>
-
-                  <div class="col-md-3 col-sm-4">
-                    <div class="notification-section text-right">
-                      <ul class="list-inline">
-                        <li><a href="#"><i class="fa fa-envelope-o"></i></a><span class="new-notification">3</span></li>
-                        <li><a href="#"><i class="fa fa-bell-o"></i></a><span class="new-notification">3</span></li>
-                        <li class="user-profile-pic"><a href="#"><img src="./img/content/agent-img-1.jpg" alt=""></a></li>
-                      </ul>
-                    </div>
-                  </div>
-
-                </div> <!-- end .row -->
-              </div> <!-- end .container -->
-            </div> <!-- end .register-user -->
-          </div> <!-- end. header-notification-bar  -->
-
-          <!--
-          END HEADER NOTIFICATION TOP BAR
-          -->
-
-          <!--
-          HEADER TOP BAR FOR NON REGISTER USER
-          -->
-
-          <div class="header-notification-bar">
+         <div class="header-notification-bar" style="padding:15px 0px 5px 0px;">
             <div class="non-register-user">
 
               <div class="container">
@@ -58,7 +10,7 @@
 
                   <div class="col-md-3 col-sm-6">
                     <div class="logo-section">
-                      <a href="index.html"><img src="img/logo-bu.png" alt=""></a>
+                      <a href="<?=base_url()?>"><img src="img/logo_superior.png" alt=""></a>
                     </div>
                   </div>
                   <div class="col-md-5 col-sm-5">
@@ -77,8 +29,19 @@
 
                         </li>
                             <li><a data-toggle="modal" data-target="#modal_login" href="#">Empresa</a></li>
-                            <li><a data-toggle="modal" data-target="#modal_login" href="#">Trabajador</a></li>
-                            <li><a data-toggle="modal" data-target="#modal_registro" href="#">Registrarse</a></li>
+                            <li><a href="#">Trabajador</a>
+                                <ul>
+                                    <li><a href="#" data-toggle="modal" data-target="#modal_login" >Chileno</a></li>
+                                    <li><a href="#" data-toggle="modal" data-target="#modal_login_extranjero" >Extranjero</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#">Registrarse</a>
+                                <ul>
+                                    <li><a href="#" data-toggle="modal" data-target="#modal_registro" >Chileno</a></li>
+                                    <li><a href="#" data-toggle="modal" data-target="#modal_registro_extranjero" >Extranjero</a></li>
+                                    <li><a href="<?=base_url()?>empresa/crear">Empresa</a></li>
+                                </ul>
+                            </li>
                       </ul>
                     </div>
                   </div>
@@ -107,7 +70,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" href="index.html"><img src="img/logo-bu.png" alt=""></a>
+                  <a class="navbar-brand" href="<?=base_url()?>"><img src="img/logo_superior.png" alt=""></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->

@@ -2,14 +2,23 @@
       <footer id="footer">
         <div class="copyright">
           <div class="container">
-            <p>2016 &copy; Todos los Derechos Reservados <a href="#">SIGESCO</a></p>
-
-            <ul class="list-inline">
-              <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-              <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-              <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-              <li><a href="#"><i class="fa fa-youtube"></i></a></li>
-            </ul>
+              <div class="row">
+                <div class="col-lg-4">
+                  2018 &copy; Todos los Derechos Reservados <a href="#">SIGESCO</a>
+                </div>
+                <div class="col-lg-4" style="text-align:center">
+                    <ul class="list-inline">
+                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-4">
+                  <img class="img--responsive m-bottom--30" src="<?=base_url()?>img/corfo.png" alt="Corfo">
+                </div>
+              </div>
+            
           </div>
         </div>
       </footer>

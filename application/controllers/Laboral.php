@@ -22,7 +22,6 @@ class Laboral extends CI_Controller {
     //////////////////////////////  V I S T A S  //////////////////////////////
 	public function index()
 	{
-        //echo "<script>alert('".$this->session->userdata('sigesco_laboral_conectado')."');</script>";
         if($this->session->userdata('sigesco_laboral_conectado') == TRUE){
 			$this->load->view('back_end/header/principal');
 			$this->load->view('back_end/menu_top/trabajador_laboral');
@@ -32,6 +31,8 @@ class Laboral extends CI_Controller {
             $datos['conocimientos'] = $this->lista->lista_conocimiento();
             $datos['instituciones_basica'] = $this->lista->lista_instituciones_basicas();
             $datos['instituciones_medias'] = $this->lista->lista_instituciones_medias();
+            $datos['idiomas'] = $this->lista->lista_idiomas();
+            $datos['cargos_experiencia_laboral'] = $this->lista->lista_cargos_experiencia_laboral();
             $datos['educaciones_basicas'] = $this->lista->lista_educacion_basica($this->session->userdata('sigesco_laboral_id'));
             $datos['educaciones_medias'] = $this->lista->lista_educacion_media($this->session->userdata('sigesco_laboral_id'));
             $datos['educaciones_universitarias'] = $this->lista->lista_educacion_universitaria($this->session->userdata('sigesco_laboral_id'));
@@ -39,6 +40,8 @@ class Laboral extends CI_Controller {
             $datos['perfil'] = $this->trabajador->datos_trabajador_laboral($this->session->userdata('sigesco_laboral_id'));
             $datos['experiencias_laborales'] = $this->trabajador->experiencia_laboral($this->session->userdata('sigesco_laboral_id'));
             $datos['conocimientos_trabajador'] = $this->trabajador->conocimientos_trabajador($this->session->userdata('sigesco_laboral_id'));
+            $datos['idiomas_trabajador'] = $this->trabajador->idiomas_trabajador($this->session->userdata('sigesco_laboral_id'));
+            $datos['documentos_trabajador'] = $this->trabajador->documentos_trabajador($this->session->userdata('sigesco_laboral_id'));
             $this->load->view('back_end/laboral/trabajador_laboral',$datos);
 			$this->load->view('back_end/footer/principal');
         } else {redirect('/login', 'refresh');}

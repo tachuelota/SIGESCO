@@ -6,25 +6,25 @@
           HEADER TOP BAR WITH NOTIFICATION FOR REGISTER USER
           -->
 
-          <div class="header-notification-bar" style="display:none;">
+          <div class="header-notification-bar">
             <div class="register-user">
               <div class="container">
                 <div class="row">
                   <div class="col-md-3 col-sm-3">
                     <div class="logo-section">
-                      <a href="index.html"><img src="img/logo-bu.png" alt=""></a>
+                      <a href="<?=base_url()?>laboral"><img height="100" src="img/logo_superior.png" alt=""></a>
                     </div>
                   </div>
 
                   <div class="col-md-6 col-sm-5">
-                    <div class="search-form">
+                   <!-- <div class="search-form">
                       <form action="#">
                         <button class="dropdown-search"><i class="fa fa-caret-down"></i> <i class="fa fa-bars"></i></button>
-                        <input type="search" placeholder="Search..." class="topbar-search-input">
+                        <input type="search" placeholder="Buscar..." class="topbar-search-input">
                         <button class="search-button"><i class="fa fa-search"></i></button>
                       </form>
-
-                    </div>
+                    </div>-->
+                      &nbsp;
                   </div>
 
                   <div class="col-md-3 col-sm-4">
@@ -32,7 +32,7 @@
                       <ul class="list-inline">
                         <li><a href="#"><i class="fa fa-envelope-o"></i></a><span class="new-notification">3</span></li>
                         <li><a href="#"><i class="fa fa-bell-o"></i></a><span class="new-notification">3</span></li>
-                        <li class="user-profile-pic"><a href="#"><img src="./img/content/agent-img-1.jpg" alt=""></a></li>
+                        <li class="user-profile-pic"><a href="#"><img id="foto_editar_perfil_superior" src="<?=$this->session->userdata('sigesco_laboral_foto')?>" alt=""></a></li>
                       </ul>
                     </div>
                   </div>
@@ -44,53 +44,6 @@
 
           <!--
           END HEADER NOTIFICATION TOP BAR
-          -->
-
-          <!--
-          HEADER TOP BAR FOR NON REGISTER USER
-          -->
-
-          <div class="header-notification-bar">
-            <div class="non-register-user">
-
-              <div class="container">
-                <div class="row">
-
-                  <div class="col-md-3 col-sm-6">
-                    <div class="logo-section">
-                      <a href="index.html"><img src="img/logo-bu.png" alt=""></a>
-                    </div>
-                  </div>
-                  <div class="col-md-5 col-sm-5">
-                    &nbsp;
-                  </div>
-                  <div class="col-md-4 col-sm-6">
-                    <div class="notification-section text-right">
-
-                      <ul class="list-inline">
-                        <li style="display:none;"><a href="#">ES<i class="fa fa-caret-down"></i></a>
-                          <ul>
-                            <!--<li><a href="#">DE</a></li>
-                            <li><a href="#">ES</a></li>
-                            <li><a href="#">IT</a></li>-->
-                          </ul>
-
-                        </li>
-                            <li><a data-toggle="modal" data-target="#modal_login" href="#">Empresa</a></li>
-                            <li><a data-toggle="modal" data-target="#modal_login" href="#">Trabajador</a></li>
-                            <li><a data-toggle="modal" data-target="#modal_registro" href="#">Registrarse</a></li>
-                      </ul>
-                    </div>
-                  </div>
-
-                </div> <!-- end .row -->
-              </div> <!-- end .container -->
-            </div> <!-- end .visitors-top-bar -->
-          </div> <!-- end. header-notification-bar  -->
-
-
-          <!--
-          END HEADER TOP BAR FOR WITHOUT LOGIN USER
           -->
 
           <!-- Navigation -->
@@ -107,13 +60,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" href="index.html"><img src="img/logo-bu.png" alt=""></a>
+                  <a class="navbar-brand" href="<?=base_url()?>laboral"><img id="foto_editar_perfil_superior" src="img/logo_superior.png" alt=""></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav">
-                    <li class="active"><a href="<?=base_url()?>">Home</a></li>
+                    <li class="active"><a href="<?=base_url()?>laboral">Inicio</a></li>
 
                     <li class="dropdown" style="display:none;">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Job
@@ -126,40 +79,7 @@
 
                       </ul>
                     </li>
-                    <li class="dropdown" style="display:none;">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Candidate
-                        <span class="caret"></span></a>
-                      <ul class="dropdown-menu">
-                        <li><a href="candidate-profile.html">candidate profile</a></li>
-                        <li><a href="candidate-registration.html">Candidate registration</a></li>
-                      </ul>
-                    </li>
-                    <li style="display:none;"><a href="professionals.html">Professionals</a></li>
-                    <li class="dropdown" style="display:none;">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Our clients
-                        <span class="caret"></span></a>
-                      <ul class="dropdown-menu">
-                        <li><a href="clients.html">Our clients</a></li>
-                        <li><a href="add-client.html">Quick add client</a></li>
-                        <li><a href="client-profile(tab1).html">Client profile</a></li>
-                        <li><a href="client-profile(tab2).html">Client team</a></li>
-                        <li><a href="client-profile(tab3).html">Applicants</a></li>
-                        <li><a href="client-registration.html">Client registration</a></li>
-                      </ul>
-                    </li>
-
-                    <li class="dropdown" style="display:none;">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Agent
-                        <span class="caret"></span></a>
-                      <ul class="dropdown-menu">
-                        <li><a href="our-agents.html">Our agents</a></li>
-                        <li><a href="agent-profile.html">Agent profile</a></li>
-                        <li><a href="add-agents.html">Add agent</a></li>
-                      </ul>
-                    </li>
-                    <!-- <li><a href="#">Blog</a></li> -->
-                    <li><a href="<?=base_url()?>registro">Registro</a></li>
-                    <li><a href="<?=base_url()?>contacto">Contacto</a></li>
+                    <li><a href="<?=base_url()?>documentacion">Documentacion</a></li>
                   </ul>
 
                 </div><!-- /.navbar-collapse -->

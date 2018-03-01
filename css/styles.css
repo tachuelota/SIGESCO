@@ -3887,14 +3887,14 @@ html[xmlns] .slides {
 
 
 .single-content.location-content {
-  height: 230px;
+  height: 140px;
 }
 .single-content.location-content label {
   float: left;
   margin: 0;
   width: 30%;
   border-right: 3px solid #fff;
-  height: 230px;
+  height: 140px;
   padding-top: 14px;
   font-weight: 600;
   text-transform: capitalize;
@@ -3905,7 +3905,7 @@ html[xmlns] .slides {
   padding-top: 10px;
   padding-left: 20px;
   width: 70%;
-  height: 230px;
+  height: 140px;
 }
 
 .single-content.location-content .location-details .location-one {
@@ -4649,7 +4649,8 @@ div.tagsinput span.tag a {
   width: 100%;
 }
 .assigned-job-list .table-heading .days-left,.clients-list .table-heading .clients-job,.assigned-job-list .assigned-job-single .days-left,.clients-list .clients-job-single .clients-job {
-  min-width: 130px;
+  min-width: 100px;
+  max-width: 100px;
   color: #666;
   text-transform: capitalize;
   font-weight: 600;
@@ -5119,15 +5120,37 @@ div.tagsinput span.tag a {
   -o-transition: width .75s ease-out;
   transition: width .75s ease-out;
 }
-.progress-bar .progress-bar-inner.progress70 > span {
-  width: 70%;
+.progress-bar .progress-bar-inner.progress10 > span {
+  width: 10%;
 }
-.progress-bar .progress-bar-inner.progress90 > span {
-  width: 90%;
+.progress-bar .progress-bar-inner.progress20 > span {
+  width: 20%;
+}
+.progress-bar .progress-bar-inner.progress30 > span {
+  width: 30%;
+}
+.progress-bar .progress-bar-inner.progress40 > span {
+  width: 40%;
+}
+.progress-bar .progress-bar-inner.progress50 > span {
+  width: 50%;
 }
 .progress-bar .progress-bar-inner.progress60 > span {
   width: 60%;
 }
+.progress-bar .progress-bar-inner.progress70 > span {
+  width: 70%;
+}
+.progress-bar .progress-bar-inner.progress80 > span {
+  width: 80%;
+}
+.progress-bar .progress-bar-inner.progress90 > span {
+  width: 90%;
+}
+.progress-bar .progress-bar-inner.progress100 > span {
+  width: 100%;
+}
+
 .additional-skills li {
   margin: 0;
   padding: 1px;

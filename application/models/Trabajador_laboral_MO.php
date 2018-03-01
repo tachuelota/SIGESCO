@@ -286,13 +286,73 @@
                         }
                     $this->db_lectura->close();
                 }
+        
+                function nueva_educacion_basica($nombre,$ciudad){
+                        $this->db_escritura->reconnect();
+                            if($query = $this->db_escritura->query("Select nueva_educacion_basica('".$nombre."','".$ciudad."') as id_educacion_basica")->row()){
+                                return $query->id_educacion_basica;
+                            } else {
+                                return FALSE;
+                            }
+                        $this->db_escritura->close();
+                }  
                 
+                function nueva_educacion_media($nombre,$ciudad){
+                        $this->db_escritura->reconnect();
+                            if($query = $this->db_escritura->query("Select nueva_educacion_media('".$nombre."','".$ciudad."') as id_educacion_media")->row()){
+                                return $query->id_educacion_media;
+                            } else {
+                                return FALSE;
+                            }
+                        $this->db_escritura->close();
+                }
+        
+                function nueva_educacion_universitaria($nombre,$ciudad){
+                        $this->db_escritura->reconnect();
+                            if($query = $this->db_escritura->query("Select nueva_educacion_universitaria('".$nombre."','".$ciudad."') as id_educacion_universitaria")->row()){
+                                return $query->id_educacion_universitaria;
+                            } else {
+                                return FALSE;
+                            }
+                        $this->db_escritura->close();
+                }
+            
                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 /////////////////////////////////  E X P E R I E N C I A   L A B O R A L   ////////////////////////////////////////
-                function agregar_experiencia_laboral($codigo,$id,$ciudad,$empresa,$cargo,$tipo_cargo,$sueldo,$fecha_inicio,$fecha_termino, $alpresente,$descripcion,$referencia,$url){
+                function agregar_experiencia_laboral($codigo,$id,$ciudad,$empresa,$cargo,$tipo_cargo,$sueldo, $fecha_inicio, $fecha_termino, $alpresente,$descripcion,$referencia,$url){
                     $meses = 0;
                     
-                    if($this->db_escritura->query("INSERT INTO `experiencia_laboral` (`codigo_experiencia_laboral`,`cargo_experiencia_laboral`, `empresa_experiencia_laboral`, `descripcion_experiencia_laboral`, `fecha_inicio_experiencia_laboral`, `fecha_fin_experiencia_laboral`, `alpresente_experiencia_laboral`, `sueldo_bruto_experiencia_laboral`, `meses_experiencia_laboral`, `nombre_referencia_experiencia_laboral`, `url_referencia_experiencia_laboral`, `tipo_cargo_experiencia_laboral`, `trabajador_laboral_id_trabajador_laboral`, `ciudad_id_ciudad`) VALUES ('".$codigo."','".$cargo."', '".$empresa."', '".$descripcion."',DATE_FORMAT(STR_TO_DATE('".$fecha_inicio."','%d/%m/%Y'),'%Y-%m-%d'), DATE_FORMAT(STR_TO_DATE('".$fecha_termino."','%d/%m/%Y'),'%Y-%m-%d'), '".$alpresente."', '".$sueldo."', '".$meses."', '".$referencia."', '".$url."', '".$tipo_cargo."', '".$id."', '".$ciudad."');")){
+                    if($this->db_escritura->query("
+                    INSERT INTO `experiencia_laboral` (
+                        `codigo_experiencia_laboral`,
+                        `cargo_experiencia_laboral`, 
+                        `empresa_experiencia_laboral`, 
+                        `descripcion_experiencia_laboral`, 
+                        `fecha_inicio_experiencia_laboral`, 
+                        `fecha_fin_experiencia_laboral`, 
+                        `alpresente_experiencia_laboral`, 
+                        `sueldo_bruto_experiencia_laboral`, 
+                        `meses_experiencia_laboral`, 
+                        `nombre_referencia_experiencia_laboral`, 
+                        `url_referencia_experiencia_laboral`, 
+                        `tipo_cargo_experiencia_laboral`, 
+                        `trabajador_laboral_id_trabajador_laboral`, 
+                        `ciudad_id_ciudad`) 
+                    VALUES (
+                        '".$codigo."',
+                        '".$cargo."', 
+                        '".$empresa."', 
+                        '".$descripcion."',
+                        '".$fecha_inicio."',
+                        '".$fecha_termino."', 
+                        '".$alpresente."', 
+                        '".$sueldo."', 
+                        '".$meses."', 
+                        '".$referencia."', 
+                        '".$url."', 
+                        '".$tipo_cargo."', 
+                        '".$id."', 
+                        '".$ciudad."');")){
                         return TRUE.",".$this->db_escritura->insert_id();
                     }else{
                         echo FALSE;
@@ -338,7 +398,28 @@
                     }
                 }
                 
-
+                function nueva_empresa_experiencia($nombre,$ciudad){
+                        $this->db_escritura->reconnect();
+                            if($query = $this->db_escritura->query("Select nueva_empresa_experiencia('".$nombre."','".$ciudad."') as id_empresa_experiencia")->row()){
+                                return $query->id_empresa_experiencia;
+                            } else {
+                                return FALSE;
+                            }
+                        $this->db_escritura->close();
+                }
+        
+                function nuevo_cargo_experiencia($nombre,$codigo){
+                    
+                        $this->db_escritura->reconnect();
+                            if($this->db_escritura->query("Select nuevo_cargo_experiencia('".$nombre."','".$codigo."') as cargo_experiencia")){
+                                return TRUE;
+                            } else {
+                                return FALSE;
+                            }
+                        $this->db_escritura->close();
+                }
+        
+        
                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 //////////////////////////////////////      C O N O C I M I E N T O   /////////////////////////////////////////////        
                     function agregar_conocimiento($id,$nombre,$descripcion,$porcentaje,$conocimiento){                        
@@ -388,6 +469,62 @@
                         $this->db_escritura->close();
                     }
                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                ///////////////////////////////////////////      I D I O M A   ////////////////////////////////////////////////////        
+                    function agregar_idioma($id,$nombre,$porcentaje_oral,$porcentaje_escrito,$idioma){                        
+                        $this->db_lectura->reconnect();
+                            if($query=$this->db_escritura->query("SELECT count(*) as cantidad FROM trabajador_laboral_idioma 
+                            WHERE idioma_id_idioma = '".$idioma."' AND trabajador_laboral_id_trabajador_laboral = '".$id."';")->row()){
+                                $this->db_lectura->close();
+                                if($query->cantidad == 0){
+                                    $this->db_escritura->reconnect();
+                                        if($this->db_escritura->query("INSERT INTO `trabajador_laboral_idioma` (`porcentaje_oral_trabajador_laboral_conocimiento`, `porcentaje_escrito_trabajador_laboral_conocimiento`, `trabajador_laboral_id_trabajador_laboral`, `idioma_id_idioma`) VALUES ('".$porcentaje_oral."', '".$porcentaje_escrito."', '".$id."', '".$idioma."');")){
+                                            return TRUE.",".$this->db_escritura->insert_id();
+                                        } else {
+                                            return FALSE;
+                                        }
+                                    $this->db_escritura->close();
+                            }else{
+                                return "3,0"; /////// EXISTE////////
+                                }
+                        }else{
+                                $this->db_lectura->close();
+                            }
+                    }
+        
+                    function eliminar_idioma($fila_idioma){
+                        $this->db_escritura->reconnect();
+                            if($query = $this->db_escritura->query("DELETE FROM `trabajador_laboral_idioma` WHERE `id_trabajador_laboral_idioma`='".$fila_idioma."';")){
+                                return TRUE;
+                            } else {
+                                return FALSE;
+                            }
+                        $this->db_escritura->close();
+                    }
+                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+                ///////////////////////////////////////////      I D I O M A   ////////////////////////////////////////////////////        
+                    function agregar_documentacion($id,$codigo,$fecha,$titulo,$url){                        
+                        $this->db_escritura->reconnect();
+                            if($this->db_escritura->query("INSERT INTO `trabajador_laboral_documentacion` (`codigo_trabajador_laboral_documentacion`, `titulo_trabajador_laboral_documentacion`, `fecha_subida_trabajador_laboral_documentacion`, `url_trabajador_laboral_documentacion`, `trabajador_laboral_id_trabajador_laboral`) VALUES ('".$codigo."', '".$titulo."', '".$fecha."', '".$url."', '".$id."');")){
+                                return TRUE.",".$this->db_escritura->insert_id();
+                            } else {
+                                return FALSE;
+                            }
+                        $this->db_escritura->close();
+                    }
+        
+                    function eliminar_documentacion($fila_documento,$url_documento){
+                        $this->db_escritura->reconnect();
+                            if($query = $this->db_escritura->query("DELETE FROM `trabajador_laboral_documentacion` WHERE `id_trabajador_laboral_documentacion`='".$fila_documento."';")){
+                                unlink($url_documento);
+                                return TRUE;
+                            } else {
+                                return FALSE;
+                            }
+                        $this->db_escritura->close();
+                    }
+                ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
         //////////////////////////////////////////////////////////////////////////////////////////////////////
         
         //////////////////////////////  Q U E R Y S   D E   L E C T U R A   //////////////////////////////
@@ -401,21 +538,23 @@
                                     'sigesco_laboral_nombre' => $row->nombre_trabajador_laboral,
                                     'sigesco_laboral_paterno' => $row->paterno_trabajador_laboral,
                                     'sigesco_laboral_id' => $row->id_trabajador_laboral,
+                                    'sigesco_laboral_id' => $row->id_trabajador_laboral,
+                                    'sigesco_laboral_foto' => $row->foto_perfil_trabajador_laboral,
                                     'sigesco_laboral_aviso' => 0,
                                     'sigesco_laboral_conectado' => TRUE
                                 );
                                 $this->session->set_userdata($datos);
 
-                            echo TRUE;
+                            return TRUE;
 
                             } else{
                                 
-                                echo FALSE;
+                                return FALSE;
                             }
 
                     } else {
 
-                    echo FALSE;
+                    return FALSE;
                     }
                 
                 $this->db_escritura->close();
@@ -451,7 +590,7 @@
         
             function conocimientos_trabajador($id_trabajador){
                 $this->db_lectura->reconnect();
-                 if($query = $this->db->query("SELECT trabajador_laboral_conocimiento.*,conocimiento.nombre_conocimiento 
+                 if($query = $this->db_lectura->query("SELECT trabajador_laboral_conocimiento.*,conocimiento.nombre_conocimiento 
                  FROM trabajador_laboral_conocimiento,conocimiento 
                  WHERE trabajador_laboral_conocimiento.conocimiento_id_conocimiento = conocimiento.id_conocimiento AND
                  trabajador_laboral_id_trabajador_laboral = '".$id_trabajador."' ORDER BY nivel_trabajador_laboral_conocimiento desc,nombre_conocimiento asc;")){
@@ -462,7 +601,28 @@
                 $this->db_lectura->close();
             }
         
-            
+            function idiomas_trabajador($id_trabajador){
+                $this->db_lectura->reconnect();
+                 if($query = $this->db_lectura->query("SELECT trabajador_laboral_idioma.*,nombre_idioma 
+                 FROM trabajador_laboral_idioma,idioma 
+                 WHERE trabajador_laboral_idioma.idioma_id_idioma = idioma.id_idioma AND
+                 trabajador_laboral_id_trabajador_laboral = '".$id_trabajador."' ORDER BY nombre_idioma asc;")){
+                     return $query->result();
+                } else {
+                    return FALSE;
+                }
+                $this->db_lectura->close();
+            }
+        
+            function documentos_trabajador($id_trabajador){
+                $this->db_lectura->reconnect();
+                 if($query = $this->db_lectura->query("SELECT trabajador_laboral_documentacion.*, DATE_FORMAT(STR_TO_DATE(fecha_subida_trabajador_laboral_documentacion,'%Y-%m-%d'),'%d/%m/%Y') as fecha FROM sigesco_laborum.trabajador_laboral_documentacion where trabajador_laboral_id_trabajador_laboral = '".$id_trabajador."' ORDER BY(titulo_trabajador_laboral_documentacion) ASC;")){
+                     return $query->result();
+                } else {
+                    return FALSE;
+                }
+                $this->db_lectura->close();
+            }
         //////////////////////////////////////////////////////////////////////////////////////////////////////
         
 	}
