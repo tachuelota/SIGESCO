@@ -27,6 +27,13 @@ class Login extends CI_Controller {
             //} else {redirect('/login', 'refresh');}
         }
     
+        public function empresa()
+        {
+            //if($this->session->userdata('sigesco_conectado')){
+                $this->load->view('front_end/inicio/login_empresa');
+            //} else {redirect('/login', 'refresh');}
+        }
+    
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     
@@ -45,6 +52,25 @@ class Login extends CI_Controller {
             
             $this->load->model('trabajador_laboral_MO','trabajador',true);
             $query = $this->trabajador->validad_trabajador_laboral($usuario,$this->input->post('pass'));    
+                echo $query;
+            
+        }
+    
+        public function validar_empresa()
+        {
+                        
+            if(!strpos($this->input->post('user'), '@')){
+               $usuario = $this->input->post('user');
+                
+            }
+            else{
+                $remplazar = array('-','.');
+                $auxiliar_usuario = str_replace($remplazar, '' ,$this->input->post('user'));
+                $usuario = number_format( substr (intval($auxiliar_usuario), 0 , -1 ) , 0, "", ".") . '-' . substr (intval($auxiliar_usuario), strlen(intval($auxiliar_usuario)) -1 , 1 );
+            }
+            
+            $this->load->model('Empresas','trabajador',true);
+            $query = $this->trabajador->validar_empresa($usuario,$this->input->post('pass'));    
                 echo $query;
             
         }

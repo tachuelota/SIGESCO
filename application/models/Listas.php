@@ -21,6 +21,70 @@
 			$this->db_lectura->close();
 		}
         
+        function lista_trabajadores($palabra,$ciudad){
+            $this->db_lectura->reconnect();
+				$query = $this->db_lectura->query("
+                    Select trabajador_laboral.*,nombre_ciudad
+                    FROM trabajador_laboral,ciudad
+                    WHERE trabajador_laboral.ciudad_id_ciudad = '".$ciudad."' AND
+                    trabajador_laboral.ciudad_id_ciudad = ciudad.id_ciudad AND
+                    Match(presentacion_trabajador_laboral) AGAINST ('*".$palabra."*')
+
+                    UNION
+
+                    Select trabajador_laboral.*,nombre_ciudad
+                    FROM trabajador_laboral,trabajador_laboral_educacion_media,ciudad
+                    WHERE 
+                    trabajador_laboral.id_trabajador_laboral = trabajador_laboral_educacion_media.trabajador_laboral_id_trabajador_laboral AND
+                    trabajador_laboral.ciudad_id_ciudad = ciudad.id_ciudad AND
+                    trabajador_laboral.ciudad_id_ciudad = '".$ciudad."' AND
+                    Match(especialidad_trabajador_laboral_educacion_media) AGAINST ('*".$palabra."*')
+                    
+                    UNION
+
+                    Select trabajador_laboral.*,nombre_ciudad
+                    FROM trabajador_laboral,trabajador_laboral_educacion_universitaria,ciudad
+                    WHERE 
+                    trabajador_laboral.id_trabajador_laboral = trabajador_laboral_educacion_universitaria.trabajador_laboral_id_trabajador_laboral AND
+                    trabajador_laboral.ciudad_id_ciudad = ciudad.id_ciudad AND
+                    trabajador_laboral.ciudad_id_ciudad = '".$ciudad."' AND
+                    Match(especialidad_trabajador_laboral_educacion_universitaria) AGAINST ('*".$palabra."*')
+
+                    UNION
+
+                    Select trabajador_laboral.*,nombre_ciudad
+                    FROM trabajador_laboral,educacion_posterior,ciudad
+                    WHERE 
+                    trabajador_laboral.id_trabajador_laboral = educacion_posterior.trabajador_laboral_id_trabajador_laboral AND
+                    trabajador_laboral.ciudad_id_ciudad = ciudad.id_ciudad AND
+                    trabajador_laboral.ciudad_id_ciudad = '".$ciudad."' AND
+                    Match(especialidad_educacion_posterior) AGAINST ('*".$palabra."*')
+
+                    UNION
+
+                    Select trabajador_laboral.*,nombre_ciudad
+                    FROM trabajador_laboral,experiencia_laboral,ciudad
+                    WHERE 
+                    trabajador_laboral.id_trabajador_laboral = experiencia_laboral.trabajador_laboral_id_trabajador_laboral AND
+                    trabajador_laboral.ciudad_id_ciudad = ciudad.id_ciudad AND
+                    trabajador_laboral.ciudad_id_ciudad = '".$ciudad."' AND
+                    Match(descripcion_experiencia_laboral) AGAINST ('*".$palabra."*')
+
+                    UNION
+					
+                    Select trabajador_laboral.*,nombre_ciudad
+                    FROM trabajador_laboral,educacion_posterior,ciudad
+                    WHERE 
+                    trabajador_laboral.id_trabajador_laboral = educacion_posterior.trabajador_laboral_id_trabajador_laboral AND
+                    trabajador_laboral.ciudad_id_ciudad = ciudad.id_ciudad AND
+                    trabajador_laboral.ciudad_id_ciudad = '".$ciudad."' AND
+                    Match(especialidad_educacion_posterior) AGAINST ('*".$palabra."*')");
+					return $query->result();
+				$query->free_result();
+			$this->db_lectura->close();
+		}
+        
+        
         /////////////////////////     B A C K - E N D    I N S T I T U C I O N   ///////////////////////////
             function lista_instituciones_basicas(){
                 $this->db_lectura->reconnect();
@@ -150,6 +214,22 @@
             function lista_idiomas(){
                 $this->db_lectura->reconnect();
                     $query = $this->db_lectura->query("SELECT * FROM idioma order by (nombre_idioma) ASC;");
+                        return $query->result();
+                    $query->free_result();
+                $this->db_lectura->close();
+            }
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////     B A C K - E N D    E J E C U T I V O   ///////////////////////////////////
+            function lista_trabajadores_empresa_contratista($id_empresa){
+                $this->db_lectura->reconnect();
+                    $query = $this->db_lectura->query("
+                        SELECT ejecutivo_empresa_contratista.*, nombre_ciudad,nombre_tipo_ejecutivo_ec 
+                        FROM ejecutivo_empresa_contratista,sucursal_empresa_contratista,ciudad, tipo_ejecutivo_ec
+                        WHERE  ejecutivo_empresa_contratista.sucursal_empresa_contratista_id_sucursal_empresa_contratista = sucursal_empresa_contratista.id_sucursal_empresa_contratista AND
+                        sucursal_empresa_contratista.ciudad_id_ciudad = ciudad.id_ciudad AND
+                        ejecutivo_empresa_contratista.tipo_ejecutivo_ec_id_tipo_ejecutivo_ec = tipo_ejecutivo_ec.id_tipo_ejecutivo_ec AND
+                        empresa_contratista_id_empresa_contratista = '".$id_empresa."'
+                        ORDER BY(nombre_ejecutivo_empresa_contratista) ASC;");
                         return $query->result();
                     $query->free_result();
                 $this->db_lectura->close();

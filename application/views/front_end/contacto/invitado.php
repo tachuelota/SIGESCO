@@ -14,7 +14,7 @@
                     <address>
                       Padre Alonso de Ovalle 868 <br>
                       Piso 10, Oficina 1011 <br>
-                      Satiago Centro
+                      Santiago Centro
                     </address>
 
                     <p>

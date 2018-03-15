@@ -40,10 +40,8 @@ class Busqueda extends CI_Controller {
             if($this->input->post('ciudad_busqueda',TRUE) != ''){
                 $datos['ciudad_busqueda'] = $this->input->post('ciudad_busqueda',TRUE);}
             else{$datos['ciudad_busqueda'] = '';}
-        
-            if($this->input->post('ciudad_busqueda_id',TRUE) != ''){
-                $datos['ciudad_busqueda_id'] = $this->input->post('ciudad_busqueda_id',TRUE);}
-            else{$datos['ciudad_busqueda_id'] = '';}
+            $this->load->model('listas','lista',TRUE);
+            $datos['trabajadores'] = $this->lista->lista_trabajadores($this->input->post('palabra_busqueda',TRUE), $this->input->post('ciudad_busqueda_id',TRUE));
         
 			$this->load->view('front_end/header/principal');
 			$this->load->view('front_end/menu_top/invitado');

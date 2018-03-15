@@ -319,13 +319,17 @@
                                             }else{
                                                 $fecha_termino = $educacion_basica->mes_termino_trabajador_laboral_educacion_basica."-".$educacion_basica->anno_termino_trabajador_laboral_educacion_basica;
                                             }
+                                                
+                                            if($educacion_basica->situacion_trabajador_laboral_educacion_basica == 1){$situacion = 'Completo';}
+                                            if($educacion_basica->situacion_trabajador_laboral_educacion_basica == 3){$situacion = 'Cursando';}
+                                            if($educacion_basica->situacion_trabajador_laboral_educacion_basica == 4){$situacion = 'Incompleto';}
                                         ?>
                                         
                                             <div id="fila_educacion_basica<?=$educacion_basica->id_trabajador_laboral_educacion_basica?>" class="assigned-job-single">
                                               <div class="css-table">
                                                 <div class="table-details css-table-cell">
                                                   <div class="job-description">
-                                                    <h4><a id="titulo_institucion_basica<?=$educacion_basica->id_trabajador_laboral_educacion_basica?>" href="#"><?=$educacion_basica->nombre_educacion_basica?></a><a id="titulo_situacion_basica<?=$educacion_basica->id_trabajador_laboral_educacion_basica?>" style="color: #666;font-size: 12px;">  -  <i class="fa fa-bell"></i><?=$educacion_basica->situacion_trabajador_laboral_educacion_basica?></a></h4>
+                                                    <h4><a id="titulo_institucion_basica<?=$educacion_basica->id_trabajador_laboral_educacion_basica?>" href="#"><?=$educacion_basica->nombre_educacion_basica?></a><a id="titulo_situacion_basica<?=$educacion_basica->id_trabajador_laboral_educacion_basica?>" style="color: #666;font-size: 12px;">  -  <i class="fa fa-bell"></i><?=$situacion?></a></h4>
                                                   </div> <!-- end .job-description -->
 
                                                 <div class="job-location-stat">
@@ -379,13 +383,17 @@
                                             }else{
                                                 $fecha_termino = $educacion_media->mes_termino_trabajador_laboral_educacion_media."-".$educacion_media->anno_termino_trabajador_laboral_educacion_media;
                                             }
+                                            
+                                            if($educacion_media->situacion_trabajador_laboral_educacion_media == 1){$situacion = 'Completo';}
+                                            if($educacion_media->situacion_trabajador_laboral_educacion_media == 3){$situacion = 'Cursando';}
+                                            if($educacion_media->situacion_trabajador_laboral_educacion_media == 4){$situacion = 'Incompleto';}
                                         ?>
                                         
                                             <div id="fila_educacion_media<?=$educacion_media->id_trabajador_laboral_educacion_media?>" class="assigned-job-single">
                                               <div class="css-table">
                                                 <div class="table-details css-table-cell">
                                                   <div class="job-description">
-                                                    <h4><a id="titulo_institucion_media<?=$educacion_media->id_trabajador_laboral_educacion_media?>" href="#"><?=$educacion_media->nombre_educacion_media?></a><a id="titulo_situacion_media<?=$educacion_media->id_trabajador_laboral_educacion_media?>" style="color: #666;font-size: 12px;">  -  <i class="fa fa-bell"></i><?=$educacion_media->situacion_trabajador_laboral_educacion_media?></a></h4>
+                                                    <h4><a id="titulo_institucion_media<?=$educacion_media->id_trabajador_laboral_educacion_media?>" href="#"><?=$educacion_media->nombre_educacion_media?></a><a id="titulo_situacion_media<?=$educacion_media->id_trabajador_laboral_educacion_media?>" style="color: #666;font-size: 12px;">  -  <i class="fa fa-bell"></i><?=$situacion?></a></h4>
                                                   </div> <!-- end .job-description -->
                                                     
                                                   <?php
@@ -449,13 +457,17 @@
                                             }else{
                                                 $fecha_termino = $educacion_universitaria->mes_termino_trabajador_laboral_educacion_universitaria."-".$educacion_universitaria->anno_termino_trabajador_laboral_educacion_universitaria;
                                             }
+                                            if($educacion_universitaria->situacion_trabajador_laboral_educacion_universitaria == 1){$situacion = 'Titulado';}
+                                            if($educacion_universitaria->situacion_trabajador_laboral_educacion_universitaria == 1){$situacion = 'Egresado';}
+                                            if($educacion_universitaria->situacion_trabajador_laboral_educacion_universitaria == 3){$situacion = 'Cursando';}
+                                            if($educacion_universitaria->situacion_trabajador_laboral_educacion_universitaria == 4){$situacion = 'Incompleto';}
                                         ?>
                                         
                                             <div id="fila_educacion_universitaria<?=$educacion_universitaria->id_trabajador_laboral_educacion_universitaria?>" class="assigned-job-single">
                                               <div class="css-table">
                                                 <div class="table-details css-table-cell">
                                                   <div class="job-description">
-                                                    <h4><a id="titulo_institucion_universitaria<?=$educacion_universitaria->id_trabajador_laboral_educacion_universitaria?>" href="#"><?=$educacion_universitaria->nombre_educacion_universitaria?></a><a id="titulo_situacion_universitaria<?=$educacion_universitaria->id_trabajador_laboral_educacion_universitaria?>" style="color: #666;font-size: 12px;">  -  <i class="fa fa-bell"></i><?=$educacion_universitaria->situacion_trabajador_laboral_educacion_universitaria?></a></h4>
+                                                    <h4><a id="titulo_institucion_universitaria<?=$educacion_universitaria->id_trabajador_laboral_educacion_universitaria?>" href="#"><?=$educacion_universitaria->nombre_educacion_universitaria?></a><a id="titulo_situacion_universitaria<?=$educacion_universitaria->id_trabajador_laboral_educacion_universitaria?>" style="color: #666;font-size: 12px;">  -  <i class="fa fa-bell"></i><?$situacion?></a></h4>
                                                   </div> <!-- end .job-description -->
                                                     
                                                   <?php
@@ -519,13 +531,17 @@
                                             }else{
                                                 $fecha_termino = $educacion_posterior->mes_termino_educacion_posterior."-".$educacion_posterior->anno_termino_educacion_posterior;
                                             }
+                                            if($educacion_posterior->situacion_educacion_posterior == 1){$situacion = 'Titulado';}
+                                            if($educacion_posterior->situacion_educacion_posterior == 1){$situacion = 'Egresado';}
+                                            if($educacion_posterior->situacion_educacion_posterior == 3){$situacion = 'Cursando';}
+                                            if($educacion_posterior->situacion_educacion_posterior == 4){$situacion = 'Incompleto';}
                                         ?>
                                         
                                             <div id="fila_educacion_posterior<?=$educacion_posterior->id_educacion_posterior?>" class="assigned-job-single">
                                               <div class="css-table">
                                                 <div class="table-details css-table-cell">
                                                   <div class="job-description">
-                                                    <h4><a id="titulo_institucion_posterior<?=$educacion_posterior->id_educacion_posterior?>" href="#"><?=$educacion_posterior->nombre_educacion_universitaria?></a><a id="titulo_situacion_posterior<?=$educacion_posterior->id_educacion_posterior?>" style="color: #666;font-size: 12px;">  -  <i class="fa fa-bell"></i><?=$educacion_posterior->situacion_educacion_posterior?></a></h4>
+                                                    <h4><a id="titulo_institucion_posterior<?=$educacion_posterior->id_educacion_posterior?>" href="#"><?=$educacion_posterior->nombre_educacion_universitaria?></a><a id="titulo_situacion_posterior<?=$educacion_posterior->id_educacion_posterior?>" style="color: #666;font-size: 12px;">  -  <i class="fa fa-bell"></i><?=$situacion?></a></h4>
                                                   </div> <!-- end .job-description -->
                                                     
                                                   <?php
@@ -629,7 +645,7 @@
                                                 <div class="days-left css-table-cell">
                                                     <h3 style="cursor:pointer; color:#346abb;">
                                                       <i onClick="modificar_experiencia_laboral(<?=$experiencia_laboral->id_experiencia_laboral?>)" class="fa fa-pencil-square-o" aria-hidden="true"></i> 
-                                                      <i onClick="eliminar_experiencia_laboral(<?=$experiencia_laboral->id_experiencia_laboral?>)" class="fa fa-trash" aria-hidden="true"></i>
+                                                      <i onClick="eliminar_experiencia_laboral(<?=$experiencia_laboral->id_experiencia_laboral?>,<?=$experiencia_laboral->trabajador_laboral_id_trabajador_laboral?>)" class="fa fa-trash" aria-hidden="true"></i>
                                                     </h3>
                                                 </div> <!-- end .days-left -->
 
@@ -1309,9 +1325,9 @@
                                 <div class="input-group input-group-lg" style="width:100%">
                                     <select id="situacion_educacion_basica_sigesco_laboral" name="situacion_educacion_basica_sigesco_laboral">
                                         <option name='inicio_option' selected>Seleccione Situación</option>
-                                        <option value="Cursando">Cursando</option>
-                                        <option value="Completo">Completo</option>
-                                        <option value="Incompleto">Incompleto</option>
+                                        <option value="1">Completo</option>
+                                        <option value="3">Cursando</option>
+                                        <option value="4">Incompleto</option>
                                     </select>
                                 </div>
                             </div>
@@ -1467,9 +1483,9 @@
                                 <div class="input-group input-group-lg" style="width:100%">
                                     <select id="situacion_educacion_media_sigesco_laboral" name="situacion_educacion_media_sigesco_laboral">
                                         <option name='inicio_option' selected>Seleccione Situación</option>
-                                        <option value="Cursando">Cursando</option>
-                                        <option value="Completo">Completo</option>
-                                        <option value="Incompleto">Incompleto</option>
+                                        <option value="1">Completo</option>
+                                        <option value="3">Cursando</option>
+                                        <option value="4">Incompleto</option>
                                     </select>
                                 </div>
                             </div>
@@ -1640,10 +1656,10 @@
                                 <div class="input-group input-group-lg" style="width:100%">
                                     <select id="situacion_educacion_universitaria_sigesco_laboral" name="situacion_educacion_universitaria_sigesco_laboral">
                                         <option name='inicio_option' selected>Seleccione Situación</option>
-                                        <option value="Cursando">Cursando</option>
-                                        <option value="Egresado">Egresado</option>
-                                        <option value="Titulado">Titulado</option>
-                                        <option value="Incompleto">Incompleto</option>
+                                        <option value="3">Cursando</option>
+                                        <option value="2">Egresado</option>
+                                        <option value="1">Titulado</option>
+                                        <option value="4">Incompleto</option>
                                     </select>
                                 </div>
                             </div>
@@ -1785,7 +1801,7 @@
                                 </div>
                                 <div class="col-sm col-lg-3">
                                     <div class="input-group input-group-lg" style="width:100%">
-                                        <select id="tipo_posterior_educacion_posterior_sigesco_laboral" name="">
+                                        <select id="tipo_posterior_educacion_posterior_sigesco_laboral" name="tipo_posterior_educacion_posterior_sigesco_laboral">
                                             <option name='inicio_option' selected>Seleccione Tipo Estudio</option>
                                             <option value="1">Doctorado</option>
                                             <option value="2">Magister</option>
@@ -1799,10 +1815,10 @@
                                 <div class="input-group input-group-lg" style="width:100%">
                                     <select id="situacion_educacion_posterior_sigesco_laboral" name="situacion_educacion_posterior_sigesco_laboral">
                                         <option name='inicio_option' selected>Seleccione Situación</option>
-                                        <option value="Cursando">Cursando</option>
-                                        <option value="Egresado">Egresado</option>
-                                        <option value="Titulado">Titulado</option>
-                                        <option value="Incompleto">Incompleto</option>
+                                        <option value="3">Cursando</option>
+                                        <option value="2">Egresado</option>
+                                        <option value="1">Titulado</option>
+                                        <option value="4">Incompleto</option>
                                     </select>
                                 </div>
                             </div>
@@ -1892,6 +1908,7 @@
                                     <input id="ciudad_buscar_basica_editar_sigesco_laboral" name="ciudad_buscar_basica_editar_sigesco_laboral" type="text" class="form-control validate" placeholder="Ingrese Nombre" aria-label="Ingrese Ciudad" onChange="buscar_institucion_editar_basica()">
                                     <input style="display:none" id="ciudad_basica_editar_sigesco_laboral" name="ciudad_basica_editar_sigesco_laboral" type="text" class="form-control validate" placeholder="Ingrese Nombre" aria-label="Ingrese Nombre" value="">
                                     <input style="display:none" id="id_basica_editar_sigesco_laboral" name="id_basica_editar_sigesco_laboral" type="text">
+                                    <input style="display:none" id="id_trabajador_basica_editar_sigesco_laboral" name="id_trabajador_basica_editar_sigesco_laboral" type="text">
                                 </div>
                             </div>
                         </div>
@@ -2030,9 +2047,9 @@
                                 <div class="input-group input-group-lg" style="width:100%">
                                     <select id="situacion_educacion_basica_editar_sigesco_laboral" name="situacion_educacion_basica_editar_sigesco_laboral">
                                         <option name='inicio_option' selected>Seleccione Situación</option>
-                                        <option value="Cursando">Cursando</option>
-                                        <option value="Completo">Completo</option>
-                                        <option value="Incompleto">Incompleto</option>
+                                        <option value="1">Completo</option>
+                                        <option value="3">Cursando</option>
+                                        <option value="4">Incompleto</option>
                                     </select>
                                 </div>
                             </div>
@@ -2073,7 +2090,8 @@
                                 <div class="input-group input-group-lg" style="width:100%">
                                     <input id="ciudad_buscar_media_editar_sigesco_laboral" name="ciudad_buscar_media_editar_sigesco_laboral" type="text" class="form-control validate" placeholder="Ingrese Nombre Ciudad" aria-label="Ingrese Nombre Ciudad" onChange="buscar_institucion_editar_media()">
                                     <input style="display:none" id="ciudad_media_editar_sigesco_laboral" name="ciudad_media_editar_sigesco_laboral" type="text" class="form-control validate" placeholder="Ingrese Nombre" aria-label="Ingrese Nombre" value="">
-                                    <input style="display:none" id="id_media_editar_sigesco_laboral" name="id_basica_editar_sigesco_laboral" type="text">
+                                    <input style="display:none" id="id_media_editar_sigesco_laboral" name="id_media_editar_sigesco_laboral" type="text">
+                                    <input style="display:none" id="id_trabajador_media_editar_sigesco_laboral" name="id_trabajador_media_editar_sigesco_laboral" type="text">
                                 </div>
                             </div>
                         </div>
@@ -2211,9 +2229,9 @@
                                 <div class="input-group input-group-lg" style="width:100%">
                                     <select id="situacion_educacion_media_editar_sigesco_laboral" name="situacion_educacion_media_editar_sigesco_laboral">
                                         <option name='inicio_option' selected>Seleccione Situación</option>
-                                        <option value="Cursando">Cursando</option>
-                                        <option value="Completo">Completo</option>
-                                        <option value="Incompleto">Incompleto</option>
+                                        <option value="1">Completo</option>
+                                        <option value="3">Cursando</option>
+                                        <option value="4">Incompleto</option>
                                     </select>
                                 </div>
                             </div>
@@ -2256,6 +2274,7 @@
                                     <input id="ciudad_buscar_universitaria_editar_sigesco_laboral" name="ciudad_buscar_universitaria_editar_sigesco_laboral" type="text" class="form-control validate" placeholder="Ingrese Nombre de Ciudad" aria-label="Ingrese Ciudad" onChange="buscar_institucion_universitaria()">
                                     <input style="display:none" id="ciudad_universitaria_editar_sigesco_laboral" name="ciudad_universitaria_editar_sigesco_laboral" type="text" class="form-control validate" placeholder="Ingrese Nombre" aria-label="Ingrese Nombre" value="">
                                     <input style="display:none" id="id_universitaria_editar_sigesco_laboral" name="id_universitaria_editar_sigesco_laboral" type="text">
+                                    <input style="display:none" id="id_trabajador_universitaria_editar_sigesco_laboral" name="id_trabajador_universitaria_editar_sigesco_laboral" type="text">
                                 </div>
                             </div>
                         </div>
@@ -2407,10 +2426,10 @@
                                 <div class="input-group input-group-lg" style="width:100%">
                                     <select id="situacion_educacion_universitaria_editar_sigesco_laboral" name="situacion_educacion_universitaria_editar_sigesco_laboral">
                                         <option name='inicio_option' selected>Seleccione Situación</option>
-                                        <option value="Cursando">Cursando</option>
-                                        <option value="Egresado">Egresado</option>
-                                        <option value="Titulado">Titulado</option>
-                                        <option value="Incompleto">Incompleto</option>
+                                        <option value="3">Cursando</option>
+                                        <option value="2">Egresado</option>
+                                        <option value="1">Titulado</option>
+                                        <option value="4">Incompleto</option>
                                     </select>
                                 </div>
                             </div>
@@ -2454,6 +2473,7 @@
                                         <input id="ciudad_buscar_posterior_editar_sigesco_laboral" name="ciudad_buscar_posterior_editar_sigesco_laboral" type="text" class="form-control validate" placeholder="Ingrese Nombre de Ciudad" aria-label="Ingrese Ciudad" onChange="buscar_institucion_posterior()">
                                         <input style="display:none" id="ciudad_posterior_editar_sigesco_laboral" name="ciudad_posterior_editar_sigesco_laboral" type="text" class="form-control validate" placeholder="Ingrese Nombre" aria-label="Ingrese Nombre" value="">
                                         <input style="display:none" id="id_posterior_editar_sigesco_laboral" name="id_posterior_editar_sigesco_laboral" type="text">
+                                        <input style="display:none" id="id_trabajador_posterior_editar_sigesco_laboral" name="id_trabajador_posterior_editar_sigesco_laboral" type="text">
                                     </div>
                                 </div>
                             </div>
@@ -2588,10 +2608,10 @@
                                 <div class="input-group input-group-lg" style="width:100%">
                                     <select id="situacion_educacion_posterior_editar_sigesco_laboral" name="situacion_educacion_posterior_editar_sigesco_laboral">
                                         <option name='inicio_option' selected>Seleccione Situación</option>
-                                        <option value="Cursando">Cursando</option>
-                                        <option value="Egresado">Egresado</option>
-                                        <option value="Titulado">Titulado</option>
-                                        <option value="Incompleto">Incompleto</option>
+                                        <option value="3">Cursando</option>
+                                        <option value="2">Egresado</option>
+                                        <option value="1">Titulado</option>
+                                        <option value="4">Incompleto</option>
                                     </select>
                                 </div>
                             </div>
@@ -2825,7 +2845,8 @@
                                 <div class="input-group input-group-lg" style="width:100%">
                                     <input id="ciudad_buscar_experiencia_laboral_editar_sigesco_laboral" name="ciudad_buscar_experiencia_laboral_editar_sigesco_laboral" type="text" class="form-control validate" placeholder="Ingrese Nombre de Ciudad" aria-label="Ingrese Nombre de Ciudad">
                                     <input style="display:none" id="ciudad_experiencia_laboral_editar_sigesco_laboral" name="ciudad_experiencia_laboral_editar_sigesco_laboral" type="text" class="form-control validate" placeholder="Ingrese Nombre" aria-label="Ingrese Nombre" value="">
-                                    <input style="display:none" id="id_experiencia_laboral_editar_sigesco_laboral" name="id_experiencia_laboral_editar_sigesco_laboral" type="text" class="form-control validate" placeholder="Ingrese Nombre" aria-label="Ingrese Nombre" value="">
+                                    <input style="display:none" id="id_experiencia_laboral_editar_sigesco_laboral" name="id_experiencia_laboral_editar_sigesco_laboral" type="text">
+                                    <input style="display:none" id="id_trabajador_experiencia_laboral_editar_sigesco_laboral" name="id_trabajador_experiencia_laboral_editar_sigesco_laboral" type="text">
                                 </div>
                             </div>
                             <div class="col-sm col-lg-4">
@@ -3539,6 +3560,7 @@ $("#nombre_idioma").change(function() {
         format: "dd/mm/yyyy",
         language: "ES",
         autoclose: true,
+        weekStart: 1
         
     });
     $('#fecha_inicio_experiencia_laboral_editar_sigesco_laboral').datepicker({
@@ -3551,6 +3573,7 @@ $("#nombre_idioma").change(function() {
         format: "dd/mm/yyyy",
         language: "ES",
         autoclose: true,
+        weekStart: 1
         
     });
     $("#ciudad_buscar_experiencia_laboral_sigesco_laboral").typeahead({
@@ -3659,6 +3682,9 @@ $("#nombre_idioma").change(function() {
 
               }
             });
+    $("#input_select_tipo_posterior").change(function() {
+        alert($("#input_select_tipo_posterior").val());
+    });
 ///////////////////////////////////////////////////////////////////////////////////
     //////////////////////////      C O N O C I M I E N T O     ///////////////////////
     $("#nombre_conocimiento").typeahead({
@@ -3783,11 +3809,15 @@ $("#nombre_idioma").change(function() {
         success: function(data){
             if(data != false){
             dato_trabajador_laboral = JSON.parse(JSON.stringify(data));
+            if(dato_trabajador_laboral[0].situacion_trabajador_laboral_educacion_basica == 1){var situacion = 'Completo';}
+            if(dato_trabajador_laboral[0].situacion_trabajador_laboral_educacion_basica == 3){var situacion = 'Cursando';}
+            if(dato_trabajador_laboral[0].situacion_trabajador_laboral_educacion_basica == 4){var situacion = 'Incompleto';}
             $('#id_basica_editar_sigesco_laboral').val(dato_trabajador_laboral[0].id_trabajador_laboral_educacion_basica);
             $('#ciudad_buscar_basica_editar_sigesco_laboral').val(dato_trabajador_laboral[0].nombre_ciudad);
             $('#ciudad_basica_editar_sigesco_laboral').val(dato_trabajador_laboral[0].id_ciudad);
             buscar_institucion_editar_basica_modal();
             $('#input_select_mes_inicio_editar_basica').val(dato_trabajador_laboral[0].mes_inicio_trabajador_laboral_educacion_basica);
+            $('#id_trabajador_basica_editar_sigesco_laboral').val(dato_trabajador_laboral[0].trabajador_laboral_id_trabajador_laboral);
             $('#mes_inicio_educacion_basica_editar_sigesco_laboral').val(dato_trabajador_laboral[0].mes_inicio_trabajador_laboral_educacion_basica);
             $('#anno_inicio_educacion_basica_editar_sigesco_laboral').val(dato_trabajador_laboral[0].anno_inicio_trabajador_laboral_educacion_basica);
             $('#input_select_anno_inicio_editar_basica').val(dato_trabajador_laboral[0].anno_inicio_trabajador_laboral_educacion_basica);
@@ -3808,7 +3838,7 @@ $("#nombre_idioma").change(function() {
                 ///////////////////////////////////////////////////////////////
             }
             $('#situacion_educacion_basica_editar_sigesco_laboral').val(dato_trabajador_laboral[0].situacion_trabajador_laboral_educacion_basica);
-            $('#input_select_situacion_editar_basica').val(dato_trabajador_laboral[0].situacion_trabajador_laboral_educacion_basica);
+            $('#input_select_situacion_editar_basica').val(situacion);
             $('#anno_inicio_educacion_basica_editar_sigesco_laboral').val(dato_trabajador_laboral[0].anno_inicio_trabajador_laboral_educacion_basica);
             $('#institucion_buscar_educacion_basica_editar_sigesco_laboral').val(dato_trabajador_laboral[0].nombre_educacion_basica);
             $('#institucion_educacion_basica_editar_sigesco_laboral').val(dato_trabajador_laboral[0].educacion_basica_id_educacion_basica);
@@ -3861,7 +3891,8 @@ $("#nombre_idioma").change(function() {
                                         anno_fin_educacion_basica_editar_sigesco_laboral: $( "#anno_fin_educacion_basica_editar_sigesco_laboral" ).val(),
                                         situacion_educacion_basica_editar_sigesco_laboral: $( "#situacion_educacion_basica_editar_sigesco_laboral" ).val(),
                                         especialidad_educacion_basica_editar_sigesco_laboral: '',
-                                        check_presente_basica_editar_sigesco_laboral: check_basica
+                                        check_presente_basica_editar_sigesco_laboral: check_basica,
+                                        id_trabajador_basica_editar_sigesco_laboral : $('#id_trabajador_basica_editar_sigesco_laboral').val() 
                                     },
                                     success: function(data){
                                         if(data == true){
@@ -4120,7 +4151,11 @@ $("#nombre_idioma").change(function() {
         success: function(data){
             if(data != false){
             dato_trabajador_laboral = JSON.parse(JSON.stringify(data));
+            if(dato_trabajador_laboral[0].situacion_trabajador_laboral_educacion_media == 1){var situacion = 'Completo';}
+            if(dato_trabajador_laboral[0].situacion_trabajador_laboral_educacion_media == 3){var situacion = 'Cursando';}
+            if(dato_trabajador_laboral[0].situacion_trabajador_laboral_educacion_media == 4){var situacion = 'Incompleto';}        
             $('#id_media_editar_sigesco_laboral').val(dato_trabajador_laboral[0].id_trabajador_laboral_educacion_media);
+            $('#id_trabajador_media_editar_sigesco_laboral').val(dato_trabajador_laboral[0].trabajador_laboral_id_trabajador_laboral);
             $('#ciudad_buscar_media_editar_sigesco_laboral').val(dato_trabajador_laboral[0].nombre_ciudad);
             $('#ciudad_media_editar_sigesco_laboral').val(dato_trabajador_laboral[0].id_ciudad);
             buscar_institucion_editar_media_modal();
@@ -4146,7 +4181,7 @@ $("#nombre_idioma").change(function() {
                 ///////////////////////////////////////////////////////////////
             }
             $('#situacion_educacion_media_editar_sigesco_laboral').val(dato_trabajador_laboral[0].situacion_trabajador_laboral_educacion_media);
-            $('#input_select_situacion_editar_media').val(dato_trabajador_laboral[0].situacion_trabajador_laboral_educacion_media);
+            $('#input_select_situacion_editar_media').val(situacion);
             $('#anno_inicio_educacion_media_editar_sigesco_laboral').val(dato_trabajador_laboral[0].anno_inicio_trabajador_laboral_educacion_media);
             $('#institucion_buscar_educacion_media_editar_sigesco_laboral').val(dato_trabajador_laboral[0].nombre_educacion_media);
             $('#institucion_educacion_media_editar_sigesco_laboral').val(dato_trabajador_laboral[0].educacion_media_id_educacion_media);
@@ -4199,7 +4234,8 @@ $("#nombre_idioma").change(function() {
                                         anno_fin_educacion_media_editar_sigesco_laboral: $( "#anno_fin_educacion_media_editar_sigesco_laboral" ).val(),
                                         situacion_educacion_media_editar_sigesco_laboral: $( "#situacion_educacion_media_editar_sigesco_laboral" ).val(),
                                         especialidad_educacion_media_editar_sigesco_laboral: $( "#especialidad_educacion_media_editar_sigesco_laboral" ).val(),
-                                        check_presente_media_editar_sigesco_laboral: check_media
+                                        check_presente_media_editar_sigesco_laboral: check_media,
+                                        id_trabajador_media_editar_sigesco_laboral : $('#id_trabajador_media_editar_sigesco_laboral').val()
                                     },
                                     success: function(data){
                                         if(data == true){
@@ -4466,7 +4502,12 @@ $("#nombre_idioma").change(function() {
         success: function(data){
             if(data != false){
             dato_trabajador_laboral = JSON.parse(JSON.stringify(data));
+            if(dato_trabajador_laboral[0].situacion_trabajador_laboral_educacion_universitaria == 1){var situacion = 'Titulado';}
+            if(dato_trabajador_laboral[0].situacion_trabajador_laboral_educacion_universitaria == 1){var situacion = 'Egresado';}
+            if(dato_trabajador_laboral[0].situacion_trabajador_laboral_educacion_universitaria == 3){var situacion = 'Cursando';}
+            if(dato_trabajador_laboral[0].situacion_trabajador_laboral_educacion_universitaria == 4){var situacion = 'Incompleto';}
             $('#id_universitaria_editar_sigesco_laboral').val(dato_trabajador_laboral[0].id_trabajador_laboral_educacion_universitaria);
+            $('#id_trabajador_universitaria_editar_sigesco_laboral').val(dato_trabajador_laboral[0].trabajador_laboral_id_trabajador_laboral);
             $('#ciudad_buscar_universitaria_editar_sigesco_laboral').val(dato_trabajador_laboral[0].nombre_ciudad);
             $('#ciudad_universitaria_editar_sigesco_laboral').val(dato_trabajador_laboral[0].id_ciudad);
             buscar_institucion_editar_universitaria_modal();
@@ -4492,7 +4533,7 @@ $("#nombre_idioma").change(function() {
                 ///////////////////////////////////////////////////////////////
             }
             $('#situacion_educacion_universitaria_editar_sigesco_laboral').val(dato_trabajador_laboral[0].situacion_trabajador_laboral_educacion_universitaria);
-            $('#input_select_situacion_editar_universitaria').val(dato_trabajador_laboral[0].situacion_trabajador_laboral_educacion_universitaria);
+            $('#input_select_situacion_editar_universitaria').val(situacion);
             $('#anno_inicio_educacion_universitaria_editar_sigesco_laboral').val(dato_trabajador_laboral[0].anno_inicio_trabajador_laboral_educacion_universitaria);
             $('#institucion_buscar_educacion_universitaria_editar_sigesco_laboral').val(dato_trabajador_laboral[0].nombre_educacion_universitaria);
             $('#institucion_educacion_universitaria_editar_sigesco_laboral').val(dato_trabajador_laboral[0].educacion_universitaria_id_educacion_universitaria);
@@ -4555,6 +4596,8 @@ $("#nombre_idioma").change(function() {
                             fd.append("situacion_educacion_universitaria_editar_sigesco_laboral", $( "#situacion_educacion_universitaria_editar_sigesco_laboral" ).val());
                             fd.append("especialidad_educacion_universitaria_editar_sigesco_laboral", $( "#especialidad_educacion_universitaria_editar_sigesco_laboral" ).val());
                             fd.append("check_presente_universitaria_editar_sigesco_laboral", check_universitaria);
+                            fd.append("id_trabajador_universitaria_editar_sigesco_laboral", $('#id_trabajador_universitaria_editar_sigesco_laboral').val());
+                
                             
                             ///////////////////////////////////////////////////////////////////////////////////////////
                 
@@ -4829,8 +4872,13 @@ $("#nombre_idioma").change(function() {
         data: {id_educacion : id_educacion_posterior},
         success: function(data){
             if(data != false){
-            dato_trabajador_laboral = JSON.parse(JSON.stringify(data));                
+            dato_trabajador_laboral = JSON.parse(JSON.stringify(data)); 
+            if(dato_trabajador_laboral[0].situacion_educacion_posterior == 1){var situacion = 'Titulado';}
+            if(dato_trabajador_laboral[0].situacion_educacion_posterior == 1){var situacion = 'Egresado';}
+            if(dato_trabajador_laboral[0].situacion_educacion_posterior == 3){var situacion = 'Cursando';}
+            if(dato_trabajador_laboral[0].situacion_educacion_posterior == 4){var situacion = 'Incompleto';}
             $('#id_posterior_editar_sigesco_laboral').val(dato_trabajador_laboral[0].id_educacion_posterior);
+            $('#id_trabajador_posterior_editar_sigesco_laboral').val(dato_trabajador_laboral[0].trabajador_laboral_id_trabajador_laboral);
             $('#ciudad_buscar_posterior_editar_sigesco_laboral').val(dato_trabajador_laboral[0].nombre_ciudad);
             $('#ciudad_posterior_editar_sigesco_laboral').val(dato_trabajador_laboral[0].id_ciudad);
             buscar_institucion_editar_posterior_modal();
@@ -4857,7 +4905,7 @@ $("#nombre_idioma").change(function() {
             }
             $('#especialidad_educacion_posterior_editar_sigesco_laboral').val(dato_trabajador_laboral[0].especialidad_educacion_posterior);
             $('#situacion_educacion_posterior_editar_sigesco_laboral').val(dato_trabajador_laboral[0].situacion_educacion_posterior);
-            $('#input_select_situacion_editar_posterior').val(dato_trabajador_laboral[0].situacion_educacion_posterior);
+            $('#input_select_situacion_editar_posterior').val(situacion);
             $('#tipo_posterior_educacion_posterior_editar_sigesco_laboral').val(dato_trabajador_laboral[0].nombre_tipo_educacion_posterior);
             $('#select_tipo_editar_posterior').val(dato_trabajador_laboral[0].nombre_tipo_educacion_posterior);
             $('#input_select_tipo_editar_posterior').val(dato_trabajador_laboral[0].nombre_tipo_educacion_posterior);
@@ -4930,6 +4978,7 @@ $("#nombre_idioma").change(function() {
                             fd.append("nota_educacion_posterior_editar_sigesco_laboral", $( "#nota_educacion_posterior_editar_sigesco_laboral" ).val());
                             fd.append("tipo_posterior_educacion_posterior_sigesco_laboral", $( "#id_tipo_posterior_educacion_posterior_sigesco_laboral" ).val());
                             fd.append("check_presente_posterior_editar_sigesco_laboral", check_posterior);
+                            fd.append("id_trabajador_posterior_editar_sigesco_laboral", $('#id_trabajador_posterior_editar_sigesco_laboral').val());
                             
                             ///////////////////////////////////////////////////////////////////////////////////////////
                 
@@ -5757,7 +5806,7 @@ $("#nombre_idioma").change(function() {
                                fecha_termino = datos[8];
                             }
                             
-                            $( "#lista_experiencia_laboral" ).append('<div id="fila_experiencia_laboral'+datos[1]+'" class="assigned-job-single"><div class="css-table"><div class="table-details css-table-cell"><div class="job-description"><h4><a id="titulo_cargo_experiencia_laboral'+datos[1]+'" href="#">'+datos[4]+' </a><a style="color: #666;font-size: 16px;">     en </a><a style="color:#346abb" class="company-name" id="titulo_empresa_experiencia_laboral'+datos[1]+'" href="#">'+datos[3]+'</a></h4></div><div class="job-location-stat"><p><a id="titulo_fecha_experiencia_laboral'+datos[1]+'" href="#"><i class="fa fa-calendar"></i>'+datos[7]+' - '+fecha_termino+'</a></p></div><div class="job-location-stat"><p style="text-align:justify;" id="titulo_descripcion_experiencia_laboral'+datos[1]+'">'+datos[10]+'</p></div></div><div class="days-left css-table-cell"><h3 style="cursor:pointer; color:#346abb;"><i onClick="modificar_experiencia_laboral('+datos[1]+')" class="fa fa-pencil-square-o" aria-hidden="true"></i><i onClick="eliminar_experiencia_laboral('+datos[1]+')" class="fa fa-trash" aria-hidden="true"></i></h3></div></div></div>');
+                            $( "#lista_experiencia_laboral" ).append('<div id="fila_experiencia_laboral'+datos[1]+'" class="assigned-job-single"><div class="css-table"><div class="table-details css-table-cell"><div class="job-description"><h4><a id="titulo_cargo_experiencia_laboral'+datos[1]+'" href="#">'+datos[4]+' </a><a style="color: #666;font-size: 16px;">     en </a><a style="color:#346abb" class="company-name" id="titulo_empresa_experiencia_laboral'+datos[1]+'" href="#">'+datos[3]+'</a></h4></div><div class="job-location-stat"><p><a id="titulo_fecha_experiencia_laboral'+datos[1]+'" href="#"><i class="fa fa-calendar"></i>'+datos[7]+' - '+fecha_termino+'</a></p></div><div class="job-location-stat"><p style="text-align:justify;" id="titulo_descripcion_experiencia_laboral'+datos[1]+'">'+datos[10]+'</p></div></div><div class="days-left css-table-cell"><h3 style="cursor:pointer; color:#346abb;"><i onClick="modificar_experiencia_laboral('+datos[1]+')" class="fa fa-pencil-square-o" aria-hidden="true"></i><i onClick="eliminar_experiencia_laboral('+datos[1]+','+datos[12]+')" class="fa fa-trash" aria-hidden="true"></i></h3></div></div></div>');
                                             
                             empty_experiencia_laboral();
                             $("[data-dismiss=modal]").trigger({ type: "click" });
@@ -5811,7 +5860,7 @@ $("#nombre_idioma").change(function() {
                 Command: toastr["error"]("Ingrese el campo <strong>'Ciudad'</strong> por favor, o esta mal escrita.", "Ciudad")
             }
         };
-    function eliminar_experiencia_laboral(id_experiencia_laboral){
+    function eliminar_experiencia_laboral(id_experiencia_laboral,id_trabajador){
             bootbox.confirm({ 
                 buttons: {
                     cancel: {
@@ -5833,7 +5882,7 @@ $("#nombre_idioma").change(function() {
                     $.ajax({
                         type: 'POST',
                         url: '<?=base_url()?>trabajador_laboral/eliminar_experiencia_laboral',
-                        data: {id_experiencia_laboral : id_experiencia_laboral},
+                        data: {id_experiencia_laboral : id_experiencia_laboral,id_trabajador : id_trabajador},
                         success: function(data){
                             if(data == true){
                               Command: toastr["success"]("Experiencia Laboral Eliminada correctamente.", "Experiencia Laboral");
@@ -5892,6 +5941,7 @@ $("#nombre_idioma").change(function() {
                 $( "#fecha_inicio_experiencia_laboral_editar_sigesco_laboral" ).val(dato_experiencia_laboral.fecha_inicio);
                 $( "#descripcion_experiencia_laboral_editar_sigesco_laboral" ).val(dato_experiencia_laboral.descripcion_experiencia_laboral);
                 $( "#referencia_experiencia_laboral_editar_sigesco_laboral" ).val(dato_experiencia_laboral.nombre_referencia_experiencia_laboral);
+                $( "#id_trabajador_experiencia_laboral_editar_sigesco_laboral ").val(dato_experiencia_laboral.trabajador_laboral_id_trabajador_laboral);
                 $('#modal_experiencia_laboral_editar').modal('show');
             }
         }
@@ -5940,6 +5990,7 @@ $("#nombre_idioma").change(function() {
                         fd.append( "titulo_sigesco_laboral", $("#archivo_experiencia_laboral_editar_sigesco_laboral")[0].files[0]);
                     }
                 
+                    fd.append("id_trabajador", $( "#id_trabajador_experiencia_laboral_editar_sigesco_laboral ").val());
                     fd.append("id_experiencia_laboral_editar_sigesco_laboral", $( "#id_experiencia_laboral_editar_sigesco_laboral ").val());
                     fd.append("ciudad_experiencia_laboral_editar_sigesco_laboral", $( "#ciudad_experiencia_laboral_editar_sigesco_laboral ").val());
                     fd.append("empresa_experiencia_laboral_editar_sigesco_laboral", $( "#empresa_experiencia_laboral_editar_sigesco_laboral" ).val());

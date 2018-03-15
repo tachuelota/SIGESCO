@@ -341,7 +341,7 @@ class Trabajador_laboral extends CI_Controller {
             }
             /////////////////////////////
             ///////// BUSCAR ///////////
-                public function buscar_educacion_basica(){
+            public function buscar_educacion_basica(){
                         $this->load->model('Trabajador_laboral_MO','trabajador',true);
                         $query = $this->trabajador->buscar_educacion_basica(
                             $this->input->post('id_educacion',TRUE)
@@ -349,9 +349,9 @@ class Trabajador_laboral extends CI_Controller {
                         $this->output->set_content_type('application/json');
                         $this->output->set_output(json_encode($query));
                         return $query;
-                }
+            }
 
-                public function buscar_educacion_media(){
+            public function buscar_educacion_media(){
                         $this->load->model('Trabajador_laboral_MO','trabajador',true);
                         $query = $this->trabajador->buscar_educacion_media(
                             $this->input->post('id_educacion',TRUE)
@@ -361,7 +361,7 @@ class Trabajador_laboral extends CI_Controller {
                         return $query;
                 }
 
-                public function buscar_educacion_universitaria(){
+            public function buscar_educacion_universitaria(){
                         $this->load->model('Trabajador_laboral_MO','trabajador',true);
                         $query = $this->trabajador->buscar_educacion_universitaria(
                             $this->input->post('id_educacion',TRUE)
@@ -371,7 +371,7 @@ class Trabajador_laboral extends CI_Controller {
                         return $query;
                 }
     
-                public function buscar_educacion_posterior(){
+            public function buscar_educacion_posterior(){
                         $this->load->model('Trabajador_laboral_MO','trabajador',true);
                         $query = $this->trabajador->buscar_educacion_posterior(
                             $this->input->post('id_educacion',TRUE)
@@ -382,7 +382,7 @@ class Trabajador_laboral extends CI_Controller {
                 }
             ////////////////////////////
             ///////// B U S C A R   I N S T I T U C I O N //////////////
-                public function buscar_institucion_basica(){
+            public function buscar_institucion_basica(){
                     $this->load->model('Listas','institucion',true);
                     $query = $this->institucion->buscar_institucion_basica(
                         $this->input->get('id_ciudad',TRUE)
@@ -392,7 +392,7 @@ class Trabajador_laboral extends CI_Controller {
                     return $query;
                 }
 
-                public function buscar_institucion_media(){
+            public function buscar_institucion_media(){
                     $this->load->model('Listas','institucion',true);
                     $query = $this->institucion->buscar_institucion_media(
                         $this->input->get('id_ciudad',TRUE)
@@ -402,7 +402,7 @@ class Trabajador_laboral extends CI_Controller {
                     return $query;
                 }
                 
-                public function buscar_institucion_universitaria(){
+            public function buscar_institucion_universitaria(){
                     $this->load->model('Listas','institucion',true);
                     $query = $this->institucion->buscar_institucion_universitaria(
                         $this->input->get('id_ciudad',TRUE)
@@ -412,7 +412,7 @@ class Trabajador_laboral extends CI_Controller {
                     return $query;
                 }
     
-                public function buscar_institucion_posterior(){
+            public function buscar_institucion_posterior(){
                     $this->load->model('Listas','institucion',true);
                     $query = $this->institucion->buscar_institucion_posterior(
                         $this->input->get('id_ciudad',TRUE)
@@ -424,7 +424,7 @@ class Trabajador_laboral extends CI_Controller {
             /////////////////////////////////////////////////////////////////////////
                 
             ///////// E D I T A R  E S T U D I O S   A S I G N A D O S //////////////
-                public function editar_estudio_basica(){
+            public function editar_estudio_basica(){
                     $this->load->model('Trabajador_laboral_MO','trabajador',true);
                     $query = $this->trabajador->editar_estudio_basica(
                         $this->input->post('id_basica_editar_sigesco_laboral',TRUE),
@@ -435,12 +435,13 @@ class Trabajador_laboral extends CI_Controller {
                         $this->input->post('mes_fin_educacion_basica_editar_sigesco_laboral',TRUE),
                         $this->input->post('anno_fin_educacion_basica_editar_sigesco_laboral',TRUE),
                         $this->input->post('situacion_educacion_basica_editar_sigesco_laboral',TRUE),
-                        $this->input->post('check_presente_basica_editar_sigesco_laboral',TRUE)
+                        $this->input->post('check_presente_basica_editar_sigesco_laboral',TRUE),
+                        $this->input->post('id_trabajador_basica_editar_sigesco_laboral',TRUE)
                     ); 
                      echo $query;
                 }
     
-                public function editar_estudio_media(){
+            public function editar_estudio_media(){
                     $this->load->model('Trabajador_laboral_MO','trabajador',true);
                     $query = $this->trabajador->editar_estudio_media(
                         $this->input->post('id_media_editar_sigesco_laboral',TRUE),
@@ -452,12 +453,13 @@ class Trabajador_laboral extends CI_Controller {
                         $this->input->post('anno_fin_educacion_media_editar_sigesco_laboral',TRUE),
                         $this->input->post('situacion_educacion_media_editar_sigesco_laboral',TRUE),
                         $this->input->post('especialidad_educacion_media_editar_sigesco_laboral',TRUE),
-                        $this->input->post('check_presente_media_editar_sigesco_laboral',TRUE)
+                        $this->input->post('check_presente_media_editar_sigesco_laboral',TRUE),
+                        $this->input->post('id_trabajador_media_editar_sigesco_laboral',TRUE)
                     ); 
                      echo $query;
                 }
     
-                public function editar_estudio_universitaria(){
+            public function editar_estudio_universitaria(){
                     $CODIGO = 'EDU'.date("dmYHis").rand(1, 99);
                     $uploadDir = 'archivos/'.$this->session->userdata('sigesco_laboral_id');
                     if(isset($_FILES['titulo_sigesco_editar_laboral']['tmp_name'])){
@@ -482,12 +484,13 @@ class Trabajador_laboral extends CI_Controller {
                         $this->input->post('situacion_educacion_universitaria_editar_sigesco_laboral',TRUE),
                         $this->input->post('especialidad_educacion_universitaria_editar_sigesco_laboral',TRUE),
                         $this->input->post('check_presente_universitaria_editar_sigesco_laboral',TRUE),
-                        $filename
+                        $filename,
+                        $this->input->post('id_trabajador_universitaria_editar_sigesco_laboral',TRUE)
                     ); 
                      echo $query;
                 }
                 
-                public function editar_estudio_posterior(){
+            public function editar_estudio_posterior(){
                     $CODIGO = 'EDP'.date("dmYHis").rand(1, 99);
                     $uploadDir = 'archivos/'.$this->session->userdata('sigesco_laboral_id');
                     if(isset($_FILES['titulo_sigesco_editar_laboral']['tmp_name'])){
@@ -515,7 +518,8 @@ class Trabajador_laboral extends CI_Controller {
                         $filename,
                         $this->input->post('horas_educacion_posterior_editar_sigesco_laboral',TRUE),
                         $this->input->post('nota_educacion_posterior_editar_sigesco_laboral',TRUE),
-                        $this->input->post('tipo_posterior_educacion_posterior_sigesco_laboral',TRUE)
+                        $this->input->post('tipo_posterior_educacion_posterior_sigesco_laboral',TRUE),
+                        $this->input->post('id_trabajador_posterior_editar_sigesco_laboral',TRUE)
                     ); 
                      echo $query;
                 }
@@ -569,6 +573,7 @@ class Trabajador_laboral extends CI_Controller {
                     $this->input->post('check_presente_experiencia_sigesco_laboral',TRUE),
                     $this->input->post('descripcion_experiencia_laboral_sigesco_laboral',TRUE),
                     $this->input->post('referencia_experiencia_laboral_sigesco_laboral',TRUE),
+                    $this->session->userdata('sigesco_laboral_id')
                 );
                     echo json_encode($datos); 
             }
@@ -576,7 +581,8 @@ class Trabajador_laboral extends CI_Controller {
                 public function eliminar_experiencia_laboral(){
                     $this->load->model('Trabajador_laboral_MO','trabajador',true);
                     $query = $this->trabajador->eliminar_experiencia_laboral(
-                        $this->input->post('id_experiencia_laboral',TRUE)
+                        $this->input->post('id_experiencia_laboral',TRUE),
+                        $this->input->post('id_trabajador',TRUE)
                     ); 
                      echo $query;
             }
@@ -621,7 +627,8 @@ class Trabajador_laboral extends CI_Controller {
                     $this->input->post('check_presente_experiencia_labora_edita_sigesco_laboral',TRUE),
                     $this->input->post('descripcion_experiencia_laboral_editar_sigesco_laboral',TRUE),
                     $this->input->post('referencia_experiencia_laboral_editar_sigesco_laboral',TRUE),
-                    $filename
+                    $filename,
+                    $this->input->post('id_trabajador',TRUE)
                 );    
 
                     echo $query; 

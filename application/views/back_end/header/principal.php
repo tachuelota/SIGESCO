@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="<?=base_url()?>css/responsive.css">
     <link rel="stylesheet" href="<?=base_url()?>css/toastr.css">
     <link rel="stylesheet" href="<?=base_url()?>css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="<?=base_url()?>css/datatables.css">
+    <link rel="stylesheet" href="<?=base_url()?>css/dataTables.bootstrap.css">
       
     <!-- Scripts -->
       <script src="<?=base_url()?>js/jquery-3.1.1.min.js"></script>
@@ -27,6 +29,8 @@
       <script src="<?=base_url()?>js/jquery.mask.js"></script>
       <script src="<?=base_url()?>js/typeahead.js"></script>
       <script src="<?=base_url()?>js/bootstrap-datepicker.js"></script>
+      <script src="<?=base_url()?>js/datatables.js"></script>
+      <script src="<?=base_url()?>js/dataTables.bootstrap.js"></script>
 
     <!--[if IE 9]>
     <script src="js/media.match.min.js"></script>

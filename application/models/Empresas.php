@@ -12,9 +12,7 @@
             
             
 		}
-		
-        
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		function crear_empresa_contratista($codigo, $nombre,$razonsocial,$rut,$sector,$cantidad,$presentacion, $user,$pass,$facebook,$twitter,$google, $linkedin,$youtube,$instagram, $ciudad, $direccion, $telefono, $email){
             $this->db_escritura->reconnect();
 				$query = $this->db_escritura->query("
@@ -84,7 +82,76 @@
             }else{
                 return FALSE;
             }
+            
+            $this->db_escritura->close();
         }
-        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        function actualizar_logo_empresa_contratista($url,$empresa){
+            $this->db_escritura->reconnect();
+            $this->db_escritura->query("
+                UPDATE `empresa_contratista` 
+                SET `url_logo_empresa_contratista`='".$url."' 
+                WHERE `id_empresa_contratista`='".$empresa."';");
+            $this->db_escritura->close();
+        }
+        
+        function actualizar_perfil_ejecutivo($url,$ejecutivo){
+            $this->db_escritura->reconnect();
+            $this->db_escritura->query("
+                UPDATE `ejecutivo_empresa_contratista` 
+                SET `url_foto_ejecutivo_empresa_contratista`='".$url."' 
+                WHERE `id_ejecutivo_empresa_contratista`='".$ejecutivo."';");
+            $this->db_escritura->close();
+        }
+        
+        function actualizar_portada_empresa_contratista($url,$empresa){
+            $this->db_escritura->reconnect();
+            $this->db_escritura->query("
+                UPDATE `empresa_contratista` 
+                SET `url_portada_empresa_contratista`='".$url."' 
+                WHERE `id_empresa_contratista`='".$empresa."';");
+            $this->db_escritura->close();
+        }
+        
+        function validar_empresa($usuario,$pass){
+                $this->db_escritura->reconnect();
+                    $query = $this->db->query("call validar_empresa('".$usuario."')");
+                    if($query->num_rows() > 0){
+                        $row = $query->row();
+                            if($this->encryption->decrypt($row->passwd) == $pass){
+                                $datos = array(
+                                    'sigesco_laboral_nombre' => $row->nombre,
+                                    'sigesco_laboral_paterno' => $row->apellido,
+                                    'sigesco_laboral_id' => $row->id,
+                                    'sigesco_laboral_codigo' => $row->codigo,
+                                    'sigesco_laboral_foto' => $row->foto_perfil,
+                                    'sigesco_laboral_tipo_trabajador' => $row->tipo,
+                                    'sigesco_laboral_aviso' => 0,
+                                    'sigesco_laboral_conectado' => TRUE
+                                );
+                                $this->session->set_userdata($datos);
+
+                            echo TRUE;
+
+                            } else{
+                                
+                                echo FALSE;
+                            }
+
+                    } else {
+
+                    return FALSE;
+                    }
+                
+                $this->db_escritura->close();
+            }
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        function crear_ejecutivo_empresa_contratista($codigo, $nombre, $run, $telefono, $email, $tipo, $sucursal, $pass){
+            $this->db_escritura->reconnect();
+            $query = $this->db_escritura->query(" CALL crear_ejecutivo('".$codigo."','".$nombre."','".$telefono."','".$email."','".$sucursal."','".$pass."','".$tipo."','".$run."');")->row();
+            return $query;
+            $this->db_escritura->close();
+        }
 	}
 ?>

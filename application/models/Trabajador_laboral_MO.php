@@ -129,7 +129,8 @@
                             }
                             break;
                     }
-                  $this->db_escritura->close();      
+                    $this->db_escritura->query("CALL actualizar_estado_educacion(".$id.");");
+                    $this->db_escritura->close();      
                 }
                 
                 function eliminar_educacion_basica($id){
@@ -142,13 +143,14 @@
                     $this->db_escritura->close();
                 }
                 
-                function editar_estudio_basica($id,$nombre_institucion,$institucion,$mes_inicio,$anno_inicio,$mes_termino,$anno_termino, $situacion, $alpresente){
+                function editar_estudio_basica($id,$nombre_institucion,$institucion,$mes_inicio,$anno_inicio,$mes_termino,$anno_termino, $situacion, $alpresente,$id_trabajador){
                     
                     if($this->db_escritura->query("UPDATE `trabajador_laboral_educacion_basica` SET
                         `mes_inicio_trabajador_laboral_educacion_basica`='".$mes_inicio."', `anno_inicio_trabajador_laboral_educacion_basica`='".$anno_inicio."', `mes_termino_trabajador_laboral_educacion_basica`='".$mes_termino."', `anno_termino_trabajador_laboral_educacion_basica`='".$anno_termino."', `alpresente_trabajador_laboral_educacion_basica`='".$alpresente."', `situacion_trabajador_laboral_educacion_basica`='".$situacion."', 
                         `educacion_basica_id_educacion_basica`='".$institucion."' 
                     WHERE `id_trabajador_laboral_educacion_basica`='".$id."';
 ")){
+                        $this->db_escritura->query("CALL actualizar_estado_educacion(".$id_trabajador.");");
                         return TRUE;
                     }else{
                         return FALSE;
@@ -156,9 +158,10 @@
                     
                 }
         
-                function editar_estudio_media($id,$nombre_institucion,$institucion,$mes_inicio,$anno_inicio,$mes_termino,$anno_termino, $situacion, $especialidad,$alpresente){
+                function editar_estudio_media($id,$nombre_institucion,$institucion,$mes_inicio,$anno_inicio,$mes_termino,$anno_termino, $situacion, $especialidad,$alpresente,$id_trabajador){
                     if($this->db_escritura->query("UPDATE `trabajador_laboral_educacion_media` SET `mes_inicio_trabajador_laboral_educacion_media`='".$mes_inicio."', `anno_inicio_trabajador_laboral_educacion_media`='".$anno_inicio."', `mes_termino_trabajador_laboral_educacion_media`='".$mes_termino."', `anno_termino_trabajador_laboral_educacion_media`='".$anno_termino."', `alpresente_trabajador_laboral_educacion_media`='".$alpresente."', `especialidad_trabajador_laboral_educacion_media`='".$especialidad."', `situacion_trabajador_laboral_educacion_media`='".$situacion."', 
                     `educacion_media_id_educacion_media`='".$institucion."' WHERE `id_trabajador_laboral_educacion_media`='".$id."';")){
+                        $this->db_escritura->query("CALL actualizar_estado_educacion(".$id_trabajador.");");
                         return TRUE;
                     }else{
                         return FALSE;
@@ -166,10 +169,11 @@
                     
                 }
         
-                function editar_estudio_universitaria($id,$nombre_institucion,$institucion,$mes_inicio,$anno_inicio,$mes_termino,$anno_termino, $situacion, $especialidad,$alpresente,$url){
+                function editar_estudio_universitaria($id,$nombre_institucion,$institucion,$mes_inicio,$anno_inicio,$mes_termino,$anno_termino, $situacion, $especialidad,$alpresente,$url,$id_trabajador){
                     
                     if($url == ''){
                         if($this->db_escritura->query("UPDATE `trabajador_laboral_educacion_universitaria` SET `mes_inicio_trabajador_laboral_educacion_universitaria`='".$mes_inicio."', `anno_inicio_trabajador_laboral_educacion_universitaria`='".$anno_inicio."', `mes_termino_trabajador_laboral_educacion_universitaria`='".$mes_termino."', `anno_termino_trabajador_laboral_educacion_universitaria`='".$anno_termino."', `alpresente_trabajador_laboral_educacion_universitaria`='".$alpresente."', `especialidad_trabajador_laboral_educacion_universitaria`='".$especialidad."', `situacion_trabajador_laboral_educacion_universitaria`='".$situacion."', `educacion_universitaria_id_educacion_universitaria`='".$institucion."' WHERE `id_trabajador_laboral_educacion_universitaria`='".$id."';")){
+                            $this->db_escritura->query("CALL actualizar_estado_educacion(".$id_trabajador.");");
                             return TRUE;
                         }else{
                             return FALSE;
@@ -177,6 +181,7 @@
                         
                     }else{
                         if($this->db_escritura->query("UPDATE `trabajador_laboral_educacion_universitaria` SET `mes_inicio_trabajador_laboral_educacion_universitaria`='".$mes_inicio."', `anno_inicio_trabajador_laboral_educacion_universitaria`='".$anno_inicio."', `mes_termino_trabajador_laboral_educacion_universitaria`='".$mes_termino."', `anno_termino_trabajador_laboral_educacion_universitaria`='".$anno_termino."', `alpresente_trabajador_laboral_educacion_universitaria`='".$alpresente."', `especialidad_trabajador_laboral_educacion_universitaria`='".$especialidad."', `url_titulo_trabajador_laboral_educacion_universitaria`='".$url."', `situacion_trabajador_laboral_educacion_universitaria`='".$situacion."', `educacion_universitaria_id_educacion_universitaria`='".$institucion."' WHERE `id_trabajador_laboral_educacion_universitaria`='".$id."';")){
+                            $this->db_escritura->query("CALL actualizar_estado_educacion(".$id_trabajador.");");
                             return TRUE;
                         }else{
                             return FALSE;
@@ -185,10 +190,11 @@
                     
                 }
         
-                function editar_estudio_posterior($id,$nombre_institucion,$institucion,$mes_inicio,$anno_inicio,$mes_termino,$anno_termino, $situacion, $especialidad,$alpresente,$url,$horas,$nota,$tipo_posterior){
+                function editar_estudio_posterior($id,$nombre_institucion,$institucion,$mes_inicio,$anno_inicio,$mes_termino,$anno_termino, $situacion, $especialidad,$alpresente,$url,$horas,$nota,$tipo_posterior,$id_trabajador){
                     
                     if($url == ''){
                         if($this->db_escritura->query("UPDATE `educacion_posterior` SET `mes_inicio_educacion_posterior`='".$mes_inicio."', `anno_inicio_educacion_posterior`='".$anno_inicio."', `mes_termino_educacion_posterior`='".$mes_termino."', `anno_termino_educacion_posterior`='".$anno_termino."', `alpresente_educacion_posterior`='".$alpresente."', `situacion_educacion_posterior`='".$situacion."', `especialidad_educacion_posterior`='".$especialidad."', `cantidad_horas_educacion_posterior`='".$horas."', `nota_educacion_posterior`='".$nota."', `educacion_universitaria_id_educacion_universitaria`='".$institucion."', `tipo_educacion_posterior_id_tipo_educacion_posterior`='".$tipo_posterior."' WHERE `id_educacion_posterior`='".$id."';")){
+                            $this->db_escritura->query("CALL actualizar_estado_educacion(".$id_trabajador.");");
                             return TRUE;
                         }else{
                             return FALSE;
@@ -196,6 +202,7 @@
                         
                     }else{
                         if($this->db_escritura->query("UPDATE `educacion_posterior` SET `mes_inicio_educacion_posterior`='".$mes_inicio."', `anno_inicio_educacion_posterior`='".$anno_inicio."', `mes_termino_educacion_posterior`='".$mes_termino."', `anno_termino_educacion_posterior`='".$anno_termino."', `alpresente_educacion_posterior`='".$alpresente."', `situacion_educacion_posterior`='".$situacion."', `especialidad_educacion_posterior`='".$especialidad."', `cantidad_horas_educacion_posterior`='".$horas."', `nota_educacion_posterior`='".$nota."', `url_certificado_educacion_posterior`='".$url."', `educacion_universitaria_id_educacion_universitaria`='".$institucion."', `tipo_educacion_posterior_id_tipo_educacion_posterior`='".$tipo_posterior."' WHERE `id_educacion_posterior`='".$id."';")){
+                            $this->db_escritura->query("CALL actualizar_estado_educacion(".$id_trabajador.");");
                             return TRUE;
                         }else{
                             return FALSE;
@@ -352,16 +359,21 @@
                         '".$url."', 
                         '".$tipo_cargo."', 
                         '".$id."', 
-                        '".$ciudad."');")){
+                        '".$ciudad."');
+                        ")){
+                        $this->db_escritura->query("CALL actualizar_experiencia_laboral(".$id.");");
                         return TRUE.",".$this->db_escritura->insert_id();
                     }else{
                         echo FALSE;
                     }
                 }
                 
-                function eliminar_experiencia_laboral($id){
+                function eliminar_experiencia_laboral($id_fila,$id_trabajador){
                     $this->db_escritura->reconnect();
-                        if($this->db_escritura->query("DELETE FROM `experiencia_laboral` WHERE `id_experiencia_laboral`='".$id."';")){
+                        if($this->db_escritura->query("
+                                DELETE FROM `experiencia_laboral` WHERE `id_experiencia_laboral`='".$id_fila."';
+                                ")){
+                            $this->db_escritura->query("CALL actualizar_experiencia_laboral(".$id_trabajador.");");
                             return TRUE;
                         }else{
                             return FALSE;
@@ -379,18 +391,20 @@
                     $this->db_lectura->close();
                 }
                 
-                function editar_experiencia_laboral($id,$ciudad,$empresa,$cargo,$tipo_cargo,$sueldo,$fecha_inicio,$fecha_termino, $alpresente,$descripcion,$referencia,$url){
+                function editar_experiencia_laboral($id,$ciudad,$empresa,$cargo,$tipo_cargo,$sueldo,$fecha_inicio,$fecha_termino, $alpresente,$descripcion,$referencia,$url,$id_trabajador){
                     
                     $meses = 0;
                     
                     if($url == ''){
                         if($this->db_escritura->query("UPDATE `experiencia_laboral` SET `cargo_experiencia_laboral`='".$cargo."', `empresa_experiencia_laboral`='".$empresa."', `descripcion_experiencia_laboral`='".$descripcion."', `fecha_inicio_experiencia_laboral`=DATE_FORMAT(STR_TO_DATE('".$fecha_inicio."','%d/%m/%Y'),'%Y-%m-%d'), `fecha_fin_experiencia_laboral`=DATE_FORMAT(STR_TO_DATE('".$fecha_termino."','%d/%m/%Y'),'%Y-%m-%d'), `alpresente_experiencia_laboral`='".$alpresente."', `sueldo_bruto_experiencia_laboral`='".$sueldo."', `nombre_referencia_experiencia_laboral`='".$referencia."', `tipo_cargo_experiencia_laboral`='".$tipo_cargo."', `ciudad_id_ciudad`='".$ciudad."', `meses_experiencia_laboral`='".$meses."' WHERE `id_experiencia_laboral`='".$id."';")){
+                        $this->db_escritura->query("CALL actualizar_experiencia_laboral(".$id_trabajador.");");
                         return TRUE;
                     }else{
                         echo FALSE;
                     }
                     }else{
                         if($this->db_escritura->query("UPDATE `experiencia_laboral` SET `cargo_experiencia_laboral`='".$cargo."', `empresa_experiencia_laboral`='".$empresa."', `descripcion_experiencia_laboral`='".$descripcion."', `fecha_inicio_experiencia_laboral`=DATE_FORMAT(STR_TO_DATE('".$fecha_inicio."','%d/%m/%Y'),'%Y-%m-%d'), `fecha_fin_experiencia_laboral`=DATE_FORMAT(STR_TO_DATE('".$fecha_termino."','%d/%m/%Y'),'%Y-%m-%d'), `alpresente_experiencia_laboral`='".$alpresente."', `sueldo_bruto_experiencia_laboral`='".$sueldo."', `nombre_referencia_experiencia_laboral`='".$referencia."', `url_referencia_experiencia_laboral`='".$url."', `tipo_cargo_experiencia_laboral`='".$tipo_cargo."', `ciudad_id_ciudad`='".$ciudad."', `meses_experiencia_laboral`='".$meses."' WHERE `id_experiencia_laboral`='".$id."';")){
+                        $this->db_escritura->query("CALL actualizar_experiencia_laboral(".$id_trabajador.");");
                         return TRUE;
                     }else{
                         echo FALSE;
@@ -422,7 +436,7 @@
         
                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 //////////////////////////////////////      C O N O C I M I E N T O   /////////////////////////////////////////////        
-                    function agregar_conocimiento($id,$nombre,$descripcion,$porcentaje,$conocimiento){                        
+                function agregar_conocimiento($id,$nombre,$descripcion,$porcentaje,$conocimiento){                        
                         $this->db_lectura->reconnect();
                             if($query=$this->db_escritura->query("SELECT count(*) as cantidad FROM trabajador_laboral_conocimiento 
                             WHERE conocimiento_id_conocimiento = '".$conocimiento."' AND trabajador_laboral_id_trabajador_laboral = '".$id."';")->row()){
@@ -444,7 +458,7 @@
                         
                     }
         
-                    function nuevo_conocimiento($nombre){
+                function nuevo_conocimiento($nombre){
                         $this->db_escritura->reconnect();
                             if($query = $this->db_escritura->query("Select nuevo_conocimiento('".$nombre."') as id_conocimiento")->row()){
                                 return $query->id_conocimiento;
@@ -454,7 +468,7 @@
                         $this->db_escritura->close();
                     }
         
-                    function eliminar_conocimiento($fila_conocimiento,$id_conocimiento,$id_trabajador){
+                function eliminar_conocimiento($fila_conocimiento,$id_conocimiento,$id_trabajador){
                         $this->db_escritura->reconnect();
                             if($query = $this->db_escritura->query("DELETE FROM `trabajador_laboral_conocimiento` WHERE `id_trabajador_laboral_conocimiento`='".$fila_conocimiento."';")){
                                 if($query = $this->db_escritura->query("DELETE FROM `trabajador_laboral_conocimiento` WHERE `conocimiento_id_conocimiento`='".$id_conocimiento."' AND `trabajador_laboral_id_trabajador_laboral`='".$id_trabajador."';")){
@@ -470,7 +484,7 @@
                     }
                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                 ///////////////////////////////////////////      I D I O M A   ////////////////////////////////////////////////////        
-                    function agregar_idioma($id,$nombre,$porcentaje_oral,$porcentaje_escrito,$idioma){                        
+                function agregar_idioma($id,$nombre,$porcentaje_oral,$porcentaje_escrito,$idioma){                        
                         $this->db_lectura->reconnect();
                             if($query=$this->db_escritura->query("SELECT count(*) as cantidad FROM trabajador_laboral_idioma 
                             WHERE idioma_id_idioma = '".$idioma."' AND trabajador_laboral_id_trabajador_laboral = '".$id."';")->row()){
@@ -491,7 +505,7 @@
                             }
                     }
         
-                    function eliminar_idioma($fila_idioma){
+                function eliminar_idioma($fila_idioma){
                         $this->db_escritura->reconnect();
                             if($query = $this->db_escritura->query("DELETE FROM `trabajador_laboral_idioma` WHERE `id_trabajador_laboral_idioma`='".$fila_idioma."';")){
                                 return TRUE;
@@ -503,7 +517,7 @@
                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
                 ///////////////////////////////////////////      I D I O M A   ////////////////////////////////////////////////////        
-                    function agregar_documentacion($id,$codigo,$fecha,$titulo,$url){                        
+                function agregar_documentacion($id,$codigo,$fecha,$titulo,$url){                        
                         $this->db_escritura->reconnect();
                             if($this->db_escritura->query("INSERT INTO `trabajador_laboral_documentacion` (`codigo_trabajador_laboral_documentacion`, `titulo_trabajador_laboral_documentacion`, `fecha_subida_trabajador_laboral_documentacion`, `url_trabajador_laboral_documentacion`, `trabajador_laboral_id_trabajador_laboral`) VALUES ('".$codigo."', '".$titulo."', '".$fecha."', '".$url."', '".$id."');")){
                                 return TRUE.",".$this->db_escritura->insert_id();
@@ -513,7 +527,7 @@
                         $this->db_escritura->close();
                     }
         
-                    function eliminar_documentacion($fila_documento,$url_documento){
+                function eliminar_documentacion($fila_documento,$url_documento){
                         $this->db_escritura->reconnect();
                             if($query = $this->db_escritura->query("DELETE FROM `trabajador_laboral_documentacion` WHERE `id_trabajador_laboral_documentacion`='".$fila_documento."';")){
                                 unlink($url_documento);
@@ -538,7 +552,6 @@
                                     'sigesco_laboral_nombre' => $row->nombre_trabajador_laboral,
                                     'sigesco_laboral_paterno' => $row->paterno_trabajador_laboral,
                                     'sigesco_laboral_id' => $row->id_trabajador_laboral,
-                                    'sigesco_laboral_id' => $row->id_trabajador_laboral,
                                     'sigesco_laboral_foto' => $row->foto_perfil_trabajador_laboral,
                                     'sigesco_laboral_aviso' => 0,
                                     'sigesco_laboral_conectado' => TRUE
@@ -558,7 +571,7 @@
                     }
                 
                 $this->db_escritura->close();
-            }        
+            } 
         
             function datos_trabajador_laboral($id_trabajador){
                 $this->db_lectura->reconnect();

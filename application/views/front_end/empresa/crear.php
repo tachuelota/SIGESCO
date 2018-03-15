@@ -1,6 +1,4 @@
-<style>
-
-    
+<style>    
 input[type="file"]#mi_archivo {
  width: 0.1px;
  height: 0.1px;
@@ -8,16 +6,21 @@ input[type="file"]#mi_archivo {
  overflow: hidden;
  position: absolute;
  z-index: -1;
+ display: none;
  }
     
 input[type="text"]{
  height: 35px;   
 }
+    
+input[type="password"]{
+    height: 35px;  
+    width:100%;
+}
 
-    a{
-        cursor: pointer;
-    }
-
+a{
+    cursor: pointer;
+}
 </style>
 
 <div id="page-content" class="job-registration job-registration full-width">
@@ -51,19 +54,28 @@ input[type="text"]{
                           </div>
                           <div class="company-name" style="width:22%;margin-right:2%;margin-left:2%;">
                             <select id="sector_empresa_sigesco" name="sector_empresa_sigesco">
-                              <option value="#">Apparel &amp; Accessories</option>
-                              <option value="#">Basic</option>
-                              <option value="#">Free</option>
-                              <option value="#">Premium</option>
+                              
+                                <option value="">Seleccione Sector</option>
+                                <option value="Almacenamiento">Almacenamiento</option>
+                                <option value="Comercio">Comercio</option>
+                                <option value="Comunicaciones">Comunicaciones</option>
+                                <option value="Construcción">Construcción</option>
+                                <option value="Hoteles y Restoranes">Hoteles y Restoranes</option>
+                                <option value="Industria Manufacturera">Industria Manufacturera</option>
+                                <option value="Minería">Minería</option>
+                                <option value="Pesca">Pesca</option>                            
+                                <option value="Silvoagropecuario">Silvoagropecuario</option>
+                                <option value="Transporte">Transporte</option>
                             </select>
                           </div>
                           <div class="company-name" style="width:22%;">
                             <select id="cantidad_empleados_empresa_sigesco" name="cantidad_empleados_empresa_sigesco" >
-                              <option value="#">0 - 50</option>
-                              <option value="#">51 - 100</option>
-                              <option value="#">101- 150</option>
-                              <option value="#">151 - 200</option>
-                              <option value="#">+200</option>
+                                <option value="">Seleccione Rango</option>
+                                <option value="0 - 50">0 - 50</option>
+                                <option value="51 - 100">51 - 100</option>
+                                <option value="101- 150">101- 150</option>
+                                <option value="151 - 200">151 - 200</option>
+                                <option value="+200">+200</option>
                             </select>
                           </div>
                         </div>
@@ -155,10 +167,10 @@ input[type="text"]{
                                 <input id="direccion1_empresa_sigesco" name="direccion1_empresa_sigesco" type="text" placeholder="Dirección">
                               </div>
                               <div class="unit-name" style="width:49%">
-                                <input id="telefono1_empresa_sigesco" name="telefono1_empresa_sigesco" type="text" placeholder="Teléfono">
+                                <input id="telefono1_empresa_sigesco" name="telefono1_empresa_sigesco" type="text" placeholder="Teléfono Ej: 52 2 2137XX / +569 512325XX">
                               </div>
                               <div class="floor" style="width:49%">
-                                <input id="email1_empresa_sigesco" name="email1_empresa_sigesco" type="text" placeholder="Email">
+                                <input id="email1_empresa_sigesco" name="email1_empresa_sigesco" type="email" placeholder="Email">
                               </div>
                             </div> <!-- end .location-one -->
                           </div> <!-- end .location-details -->
@@ -187,7 +199,7 @@ input[type="text"]{
                         <div class="single-content">
                           <label><span>*</span>Contraseña</label>
                           <div class="legal-entity">
-                            <input id="pass_empresa_sigesco" name="pass_empresa_sigesco" type="text" placeholder="">
+                            <input id="pass_empresa_sigesco" name="pass_empresa_sigesco" type="password" placeholder="">
                           </div>
                         </div>
                     </div>
@@ -199,15 +211,17 @@ input[type="text"]{
                         <div class="single-content company-logo-content">
                           <label >Logo de la Empresa</label>
                           <div class="company-logo">
-                            <div class="logo-preview-area">
+                            <div class="logo-preview-area" style="text-align:center;">
+                                <h5 id="titulo_logo_previo" style="padding:75px 0px 0px 0px;margin:0px;">SIN IMAGEN</h5>
+                                <img id="archivo_logo_previo" height="160" style="height:160px">
                             </div>
                               <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-6" style="display:none">
                                     <span style="width:100px;" class="mi_archivo">
                                         <input type="file" id="archivo_logo" name="archivo_logo" style="display:none">
                                     </span>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-12">
                                     <label class="btn btn-default" for="archivo_logo" style="margin-top:1%;float:right">
                                         <span>Seleccionar Imagen</span>
                                     </label>
@@ -220,16 +234,18 @@ input[type="text"]{
                         <div class="single-content company-banner-content">
                           <label >Portada de la Empresa</label>
 
-                          <div class="company-banner">
+                          <div class="company-banner" style="text-align:center;">
                             <div class="banner-preview-area">
+                                <h5 id="titulo_portada_previo" style="padding:75px 0px 0px 0px;margin:0px;">SIN IMAGEN</h5>
+                                <img id="archivo_portada_previo" height="160" style="height:160px">
                             </div>
                             <div class="row">
-                                <div class="col-lg-6">
+                                <div class="col-lg-6" style="display:none">
                                     <span class="mi_archivo">
                                         <input type="file" id="archivo_portada" name="archivo_portada" style="display:none">
                                     </span>
                                 </div>
-                                <div class="col-lg-6">
+                                <div class="col-lg-12">
                                     <label class="btn btn-default" for="archivo_portada" style="margin-top:1%;float:right">
                                         <span>Seleccionar Imagen</span>
                                     </label>
@@ -258,6 +274,36 @@ input[type="text"]{
         $('#archivo_portada').click(function(){
             fileInput.click();
         }).show();
+        
+        $('#rut_empresa_sigesco').Rut({
+            validation:true,
+            format:true,
+            format_on:'keyup',
+            on_error: function(){ 
+              toastr.options = {
+                  "closeButton": true,
+                  "debug": false,
+                  "newestOnTop": false,
+                  "progressBar": true,
+                  "positionClass": "toast-top-right",
+                  "onclick": null,
+                  "showDuration": "300",
+                  "hideDuration": "1000",
+                  "timeOut": "5000",
+                  "extendedTimeOut": "1000",
+                  "showEasing": "swing",
+                  "hideEasing": "linear",
+                  "showMethod": "fadeIn",
+                  "hideMethod": "fadeOut"
+                };
+                    $( "#rut_empresa_sigesco" ).css(  "border-color","red" );
+                    $( "#rut_empresa_sigesco" ).focus();
+                    $( "#rut_empresa_sigesco" ).val("");
+                    Command: toastr["error"]("El <strong>'RUT'</strong> ingresado es Incorrecto.", "RUT")
+            },
+            on_success: function(){ $( "#rut_empresa_sigesco" ).css( "border-color","#ccc" );}
+        });
+        
     });  
     
     $('#tags').tagsInput();
@@ -302,7 +348,7 @@ input[type="text"]{
         $("#lista_sucursales").css('height',($(".location-content").height()+3));
         $("#label_sucursal").css('height',($(".location-content").height()+3));
         
-        $( "#lista_sucursales" ).append('<div id="location-details'+(cantidad+1)+'" class="location-details" style="height:100px;width:100%;margin:0px;padding:0px"><div style="heigh:100px;" id="fila'+(cantidad+1)+'_sucursal_empresa_sigesco" name="fila'+(cantidad+1)+'_sucursal_empresa_sigesco" class="location-one clearfix"><div class="city"><input id="ciudad'+(cantidad+1)+'_buscar_empresa_sigesco" name="ciudad'+(cantidad+1)+'_buscar_empresa_sigesco" type="text" placeholder="Ciudad"><input id="ciudad'+(cantidad+1)+'_empresa_sigesco" name="ciudad'+(cantidad+1)+'_empresa_sigesco" type="text" style="display:none"></div><div class="zip-code" style="width:60%"><input id="direccion'+(cantidad+1)+'_empresa_sigesco" name="direccion'+(cantidad+1)+'_empresa_sigesco" type="text" placeholder="Dirección"></div>&nbsp;&nbsp;&nbsp;<i onClick="eliminar_sucursal('+(cantidad+1)+')" title="Eliminar" style="text-align:center;cursor: pointer;color:red;" class="fa fa-minus-circle fa-2x" aria-hidden="true"></i><div class="unit-name" style="width:47%"><input id="telefono'+(cantidad+1)+'_empresa_sigesco" name="telefono'+(cantidad+1)+'_empresa_sigesco" type="text" placeholder="Teléfono"></div><div class="floor" style="width:46%"><input id="email'+(cantidad+1)+'_empresa_sigesco" name="email'+(cantidad+1)+'_empresa_sigesco" type="text" placeholder="Email"></div></div></div>');
+        $( "#lista_sucursales" ).append('<div id="location-details'+(cantidad+1)+'" class="location-details" style="height:100px;width:100%;margin:0px;padding:0px"><div style="heigh:100px;" id="fila'+(cantidad+1)+'_sucursal_empresa_sigesco" name="fila'+(cantidad+1)+'_sucursal_empresa_sigesco" class="location-one clearfix"><div class="city"><input id="ciudad'+(cantidad+1)+'_buscar_empresa_sigesco" name="ciudad'+(cantidad+1)+'_buscar_empresa_sigesco" type="text" placeholder="Ciudad"><input id="ciudad'+(cantidad+1)+'_empresa_sigesco" name="ciudad'+(cantidad+1)+'_empresa_sigesco" type="text" style="display:none"></div><div class="zip-code" style="width:60%"><input id="direccion'+(cantidad+1)+'_empresa_sigesco" name="direccion'+(cantidad+1)+'_empresa_sigesco" type="text" placeholder="Dirección"></div>&nbsp;&nbsp;&nbsp;<i onClick="eliminar_sucursal('+(cantidad+1)+')" title="Eliminar" style="text-align:center;cursor: pointer;color:red;" class="fa fa-minus-circle fa-2x" aria-hidden="true"></i><div class="unit-name" style="width:47%"><input id="telefono'+(cantidad+1)+'_empresa_sigesco" name="telefono'+(cantidad+1)+'_empresa_sigesco" type="text" placeholder="Teléfono Ej: 52 2 2137XX / +569 512325XX"></div><div class="floor" style="width:46%"><input id="email'+(cantidad+1)+'_empresa_sigesco" name="email'+(cantidad+1)+'_empresa_sigesco" type="text" placeholder="Email"></div></div></div>');
         
         $("#ciudad"+(cantidad+1)+"_buscar_empresa_sigesco").typeahead({
         displayKey: "name",  
@@ -335,8 +381,6 @@ input[type="text"]{
         });
         
         $("#cantidad_sucursal_empresa_sigesco").val(cantidad+1);
-        
-        
         
     }
     
@@ -481,11 +525,14 @@ input[type="text"]{
                 processData: false,
                 cache: false,
                 success: function(data){
-                                
+                    if(data == true){
+                        //toastr.options.onHidden = function() { redireccionarPagina('<?=base_url()?>') }
+                        Command: toastr["success"]("Empresa Creada Correctamente.", "Empresa Creada")
+                    }else{
+                       Command: toastr["error"]("Ocurrio un problema, Por favor intentelo nuevamente.", "Ocurrio un Problema")
+                       }
                 }
             });
-            
-            
             
         }else{
             $( "#pass_empresa_sigesco" ).css(  "border-color","red" );
@@ -558,5 +605,49 @@ input[type="text"]{
         }
         
     }
+    
+    $( "#archivo_logo" ).change(function() {
+        var img_logo = new FormData();
+        img_logo.append( "archivo_logo", $("#archivo_logo")[0].files[0]);
+        
+        $.ajax({
+            type: 'POST',
+            url: '<?=base_url()?>empresa/subir_logo',
+            contentType: false,
+            data: img_logo, 
+            processData: false,
+            cache: false,
+            success: function(data){
+                if(data != false){
+                    $("#titulo_logo_previo").remove();
+                    $("#archivo_logo_previo").attr("src",'<?=base_url()?>'+data);
+                }else{
+                    Command: toastr["error"]("Ocurrio un Problema, intente nuevamente por favor.", "Error al subir Logo")
+                }
+            }
+        });
+    });
+    
+    $( "#archivo_portada" ).change(function() {
+        var img_portada = new FormData();
+        img_portada.append( "archivo_portada", $("#archivo_portada")[0].files[0]);
+        
+        $.ajax({
+            type: 'POST',
+            url: '<?=base_url()?>empresa/subir_portada',
+            contentType: false,
+            data: img_portada, 
+            processData: false,
+            cache: false,
+            success: function(data){
+                if(data != false){
+                    $("#titulo_portada_previo").remove();
+                    $("#archivo_portada_previo").attr("src",'<?=base_url()?>'+data);
+                }else{
+                    Command: toastr["error"]("Ocurrio un Problema, intente nuevamente por favor.", "Error al subir Logo")
+                }
+            }
+        });
+    });
     
 </script>

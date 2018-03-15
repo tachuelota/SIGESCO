@@ -3104,7 +3104,7 @@ html[xmlns] .slides {
 .pagination > li:last-child {
   border-right: 0;
 }
-.pagination > li > a {
+/*.pagination > li > a {
   display: block;
   width: 30px;
   height: 28px;
@@ -3113,6 +3113,7 @@ html[xmlns] .slides {
   text-decoration: none;
   line-height: 28px;
 }
+*/
 .pagination > li > a:hover {
   color: #346abb;
 }

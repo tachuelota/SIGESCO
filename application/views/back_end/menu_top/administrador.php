@@ -12,7 +12,7 @@
                 <div class="row">
                   <div class="col-md-3 col-sm-3">
                     <div class="logo-section">
-                      <a href="<?=base_url()?>laboral"><img height="100" src="<?=base_url();?>img/logo_superior.png" alt=""></a>
+                      <a href="<?=base_url()?>empresa"><img height="100" src="<?=base_url()?>img/logo_superior.png" alt=""></a>
                     </div>
                   </div>
 
@@ -60,7 +60,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" href="<?=base_url()?>laboral"><img id="foto_editar_perfil_superior" src="img/logo_superior.png" alt=""></a>
+                  <a class="navbar-brand" href="<?=base_url()?>empresa"><img id="foto_editar_perfil_superior" src="img/logo_superior.png" alt=""></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -79,7 +79,14 @@
 
                       </ul>
                     </li>
-                    <li><a href="<?=base_url()?>documentacion">Trabajadores</a></li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Trabajadores
+                        <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="job-search.html">Interno</a></li>
+                        <li><a href="job-preview.html">Externos</a></li>
+                      </ul>
+                    </li>
                   </ul>
 
                 </div><!-- /.navbar-collapse -->
