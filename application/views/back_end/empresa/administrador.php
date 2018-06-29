@@ -190,7 +190,7 @@
         <div class="container">
               <div id="candidate-profile">
                 <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <div class="motijob-sidebar">
                       <div class="candidate-profile-picture">
                         <img id="foto_editar_perfil" src="<?=base_url().$this->session->userdata('sigesco_laboral_foto')?>" alt="">
@@ -235,7 +235,7 @@
                     </div>
                   </div> <!-- end .3col grid layout -->
 
-                  <div id="datos_candidato" class="col-md-8">
+                  <div id="datos_candidato" class="col-md-9">
                     <div class="candidate-description">
 
 

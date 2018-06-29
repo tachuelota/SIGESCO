@@ -18,10 +18,12 @@
     <link rel="stylesheet" href="<?=base_url()?>css/bootstrap-datepicker.css">
     <link rel="stylesheet" href="<?=base_url()?>css/datatables.css">
     <link rel="stylesheet" href="<?=base_url()?>css/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="<?=base_url()?>css/dataTables.fontAwesome.css">
+      
       
     <!-- Scripts -->
       <script src="<?=base_url()?>js/jquery-3.1.1.min.js"></script>
-      <script src="<?=base_url()?>js/jquery-ui.js"></script>
+      <script src="<?=base_url()?>js/jquery-ui.min.js"></script>
       <script src="<?=base_url()?>js/bootstrap.js"></script>
       <script src="<?=base_url()?>js/toastr.js"></script>
       <script src="<?=base_url()?>js/bootbox.min.js"></script>
@@ -29,8 +31,8 @@
       <script src="<?=base_url()?>js/jquery.mask.js"></script>
       <script src="<?=base_url()?>js/typeahead.js"></script>
       <script src="<?=base_url()?>js/bootstrap-datepicker.js"></script>
-      <script src="<?=base_url()?>js/datatables.js"></script>
-      <script src="<?=base_url()?>js/dataTables.bootstrap.js"></script>
+      <script src="<?=base_url()?>js/datatables.min.js"></script>
+      <script src="<?=base_url()?>js/dataTables.bootstrap.min.js"></script>
 
     <!--[if IE 9]>
     <script src="js/media.match.min.js"></script>
@@ -55,10 +57,11 @@
                         return this.simbol + splitLeft  +splitRight;
                      },
                      new:function(num, simbol){
-                        this.simbol = simbol ||'';
+                        this.simbol = simbol || '';
                         return this.formatear(num);
                      }
                     }
+                
             //////////////////////////////////////////////////////////////////////////////////////////////////////////// 
 
             ///////////////////////////////////// R E D I R E C C I O N A R  //////////////////////////////////////////
@@ -70,8 +73,7 @@
             //////////////////////////////////////////////////////////////////////////////////////////////////////////
         
             ////////////////////////////// V A L I D A R   F E C H A    //////////////////////////////////////////
-            
-                    function validador_fecha(fecha){
+                function validador_fecha(fecha){
                         var dtCh= "-";
                         var minYear=1900;
                         var maxYear=2100;
@@ -142,8 +144,63 @@
                             return false;
                         }
                     }
-                //////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ////////////////////////////// V A L I D A R   F E C H A    //////////////////////////////////////////
+                function comparar_fechas(fechaInicial,fechaFinal)
+                {
+                    valuesStart=fechaInicial.split("-");
+                    valuesEnd=fechaFinal.split("-");
 
+                    // Verificamos que la fecha no sea posterior a la actual
+                    var dateStart=new Date(valuesStart[2],(valuesStart[1]-1),valuesStart[0]);
+                    var dateEnd=new Date(valuesEnd[2],(valuesEnd[1]-1),valuesEnd[0]);
+                    if(dateStart>=dateEnd)
+                    {
+                        return 0;
+                    }
+                    return 1;
+                }
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ////////////////////////////// V A L I D A R   E M A I L    //////////////////////////////////////////
+                function validar_email(id_div) {
+                    var aux = $("#"+id_div).val();
+                    var filter = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                    if(filter.test(aux)) {
+                        $("#"+id_div).val(aux);
+                    }
+                    else {
+                        Command: toastr["error"]("Ingrese un correo electronico valido.", "Email no Válido")
+                        $("#"+id_div).val('');
+                    }
+                }
+            ////////////////////////////// V A L I D A R   E M A I L    //////////////////////////////////////////
+                function validar_numero(id_div) {
+                    var inicio = $("#"+id_div).val().length;
+                    var aux = $("#"+id_div).val().replace(/[$abcdefghijklmnopqrstuxwyz`+¨ç{}]/gi,"");
+                    var fin = aux.length;
+                    
+                    if(inicio > fin){
+                        if(fin > 0){
+                            Command: toastr["warning"]("Por favor, Verifique el Número Ingresado.", "Verifique el Numero");
+                            aux = $("#"+id_div).val().replace(/./gi,"");
+                            aux = $("#"+id_div).val().replace(/,/gi,".");
+                            $("#"+id_div).val(formatNumber.new(parseFloat(aux).toFixed(2)));
+                        }else{
+                            Command: toastr["error"]("Por favor, Ingrese un Número correcto.", "Error el en Numero");
+                            $("#"+id_div).val('');
+                        }
+                        
+                        
+                    }else{
+                        aux = $("#"+id_div).val().replace(/./gi,"");
+                        aux = $("#"+id_div).val().replace(/,/gi,".");
+                        $("#"+id_div).val(formatNumber.new(parseFloat(aux).toFixed(2)));
+
+                    }
+                        
+                }
+        
     </script>
       
     <div id="main-wrapper" class="our-agents-content">

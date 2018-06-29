@@ -21,6 +21,7 @@
       
     <!-- Scripts -->
       <script src="<?=base_url()?>js/jquery-3.1.1.min.js"></script>
+      <script src="<?=base_url()?>js/jquery-ui.min.js"></script>
       <script src="<?=base_url()?>js/bootstrap.js"></script>
       <script src="<?=base_url()?>js/toastr.js"></script>
       <script src="<?=base_url()?>js/bootbox.min.js"></script>

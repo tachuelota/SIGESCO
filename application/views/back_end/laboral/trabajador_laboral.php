@@ -1,3 +1,7 @@
+<script type="text/javascript" src="<?=base_url()?>js/pdf.js"></script>
+<script type="text/javascript">
+    PDFJS.workerSrc = "<?=base_url()?>js/pdf.worker.js";
+</script>
 <style>
     .assigned-job-list{
         margin-top: 10px;
@@ -190,7 +194,7 @@
         <div class="container">
               <div id="candidate-profile">
                 <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <div class="motijob-sidebar">
                       <div class="candidate-profile-picture">
                         <img id="foto_editar_perfil" src="<?=base_url().$perfil->foto_perfil_trabajador_laboral?>" alt="">
@@ -235,7 +239,7 @@
                     </div>
                   </div> <!-- end .3col grid layout -->
 
-                  <div id="datos_candidato" class="col-md-8">
+                  <div id="datos_candidato" class="col-md-9">
                     <div class="candidate-description">
                       <div class="candidate-details" style="padding-top: 30px;">
                         <ul class="nav nav-tabs">
@@ -458,7 +462,7 @@
                                                 $fecha_termino = $educacion_universitaria->mes_termino_trabajador_laboral_educacion_universitaria."-".$educacion_universitaria->anno_termino_trabajador_laboral_educacion_universitaria;
                                             }
                                             if($educacion_universitaria->situacion_trabajador_laboral_educacion_universitaria == 1){$situacion = 'Titulado';}
-                                            if($educacion_universitaria->situacion_trabajador_laboral_educacion_universitaria == 1){$situacion = 'Egresado';}
+                                            if($educacion_universitaria->situacion_trabajador_laboral_educacion_universitaria == 2){$situacion = 'Egresado';}
                                             if($educacion_universitaria->situacion_trabajador_laboral_educacion_universitaria == 3){$situacion = 'Cursando';}
                                             if($educacion_universitaria->situacion_trabajador_laboral_educacion_universitaria == 4){$situacion = 'Incompleto';}
                                         ?>
@@ -467,7 +471,7 @@
                                               <div class="css-table">
                                                 <div class="table-details css-table-cell">
                                                   <div class="job-description">
-                                                    <h4><a id="titulo_institucion_universitaria<?=$educacion_universitaria->id_trabajador_laboral_educacion_universitaria?>" href="#"><?=$educacion_universitaria->nombre_educacion_universitaria?></a><a id="titulo_situacion_universitaria<?=$educacion_universitaria->id_trabajador_laboral_educacion_universitaria?>" style="color: #666;font-size: 12px;">  -  <i class="fa fa-bell"></i><?$situacion?></a></h4>
+                                                    <h4><a id="titulo_institucion_universitaria<?=$educacion_universitaria->id_trabajador_laboral_educacion_universitaria?>" href="#"><?=$educacion_universitaria->nombre_educacion_universitaria?></a><a id="titulo_situacion_universitaria<?=$educacion_universitaria->id_trabajador_laboral_educacion_universitaria?>" style="color: #666;font-size: 12px;">  -  <i class="fa fa-bell"></i><?=$situacion?></a></h4>
                                                   </div> <!-- end .job-description -->
                                                     
                                                   <?php
@@ -532,7 +536,7 @@
                                                 $fecha_termino = $educacion_posterior->mes_termino_educacion_posterior."-".$educacion_posterior->anno_termino_educacion_posterior;
                                             }
                                             if($educacion_posterior->situacion_educacion_posterior == 1){$situacion = 'Titulado';}
-                                            if($educacion_posterior->situacion_educacion_posterior == 1){$situacion = 'Egresado';}
+                                            if($educacion_posterior->situacion_educacion_posterior == 2){$situacion = 'Egresado';}
                                             if($educacion_posterior->situacion_educacion_posterior == 3){$situacion = 'Cursando';}
                                             if($educacion_posterior->situacion_educacion_posterior == 4){$situacion = 'Incompleto';}
                                         ?>
@@ -879,64 +883,97 @@
                                 <div class="col-md-12 page-content2">               
                                   <div class="white-container mb0">
                                     <div class="row">
-                                        <div class="col-xs-12 col-md-12">
-                                            <div class="col-xs-6 col-lg-5">
-                                                <div class="input-group input-group-lg" style="width:100%">
-                                                    <select id="tipo_documentacion" name="tipo_documentacion">
-                                                        <option name='inicio_option' selected>Tipo de Documentación</option>
-                                                        <option value="Certificado de Antecedente">Certificado de Antecedente</option>
-                                                        <option value="Cerficado Militar al Día">Cerficado Militar al Día</option>
-                                                        <option value="Certificado X">Certificado X</option>
-                                                        <option value="Otro">Otro</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-6 col-lg-5  icono_idioma">
-                                                <div class="input-group input-group-lg" style="width:100%">
-                                                    <input id="archivo_documentacion" name="archivo_documentacion" type="file" class="custom-file-input" placeholder="Ingrese Documento" aria-label="Documento" value="">
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-1 col-lg-1" onClick="subir_documentacion()" style="">
-                                                <i class="fa fa-cloud-upload icono_idioma" aria-hidden="true"> </i>
-                                            </div>
-                                            <div class="col-xs-12 col-lg-9 col-lg-offset-1">
-                                            <div id="div_titulo_otro_documentacion" class="input-group input-group-lg" style="width:100%;margin-top:2%;display:none">
-                                                <input id="titulo_otro_documentacion" name="titulo_otro_documentacion" type="text" class="form-control" placeholder="Ingrese Título de Archivo" aria-label="Carrera" value="">
-                                            </div>
-                                        </div>
-                                        </div>
-                                        <div class="col-lg-12" style="margin-top:2%; margin-bottom:2%; text-align:center;">
-                                            <h4>Lista de Documentos</h4>
-                                        </div>
+
                                         <div class="col-lg-12" style="margin-top:2%;">
-                                                <div class="assigned-job-list" id="lista_documentacion">
-                                                            <?php
-                                                                foreach($documentos_trabajador as $documento_trabajador){
-                                                            ?>
-                                                        <div id="fila_documento<?=$documento_trabajador->id_trabajador_laboral_documentacion?>" class="assigned-job-single">
-                                                            <div class="row" style="padding:10px 0px 10px 0px">
-                                                                <div class="col-xs-12 col-md-12"></div>
-                                                                <div class="col-xs-12 col-md-7" style="text-align:center;">
-                                                                    <p class="titulo_idioma_tabla2" style="color:#346abb;"><?=$documento_trabajador->titulo_trabajador_laboral_documentacion?></p>
-                                                                </div>
-                                                                <div class="col-xs-12 col-md-3">
-                                                                    <div class="row">
-                                                                        <div class="col-xs-6 col-md-12" style="text-align:center;">
-                                                                            <p class="detalle_idioma_tabla3"><strong>Fecha de Subida</strong></p>
-                                                                        </div>
-                                                                        <div class="col-xs-6 col-md-12" style="text-align:center;">
-                                                                            <p class="detalle_idioma_tabla3"><?=$documento_trabajador->fecha?></p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-md-2" style="text-align:center;">
-                                                                    <i onClick="abrir_archivo('<?=base_url().$documento_trabajador->url_trabajador_laboral_documentacion?>')" class="fa fa-file-o icono_idioma" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;
-                                                                    <i onclick="eliminar_documento(<?=$documento_trabajador->id_trabajador_laboral_documentacion?>,'<?=$documento_trabajador->url_trabajador_laboral_documentacion?>')" class="fa fa-trash icono_idioma" aria-hidden="true"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <?php }?>
-                                                    </div>
+                                             <table id="tabla_listas_documentos" class="table table-bordered hover" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th>Título</th>
+                                    <th>Fecha Subida</th>
+                                    <th>Tamaño</th>
+                                    <th>Solicitado Por</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                <?php 
+                                
+                                function formatSizeUnits($bytes){
+                                    if ($bytes >= 1073741824){$bytes = number_format($bytes / 1073741824, 2,',','.') . ' GB';}
+                                        elseif ($bytes >= 1048576){$bytes = number_format($bytes / 1048576, 2,',','.') . ' MB';}
+                                            elseif ($bytes >= 1024){$bytes = number_format($bytes / 1024, 2,',','.') . ' KB';}
+                                                elseif ($bytes > 1){$bytes = $bytes . ' Bytes';}
+                                                    elseif ($bytes == 1){$bytes = $bytes . ' Byte';}
+                                                        else{ $bytes = '0 Bytes';}
+                                                            return $bytes;
+                                }
+                                    foreach($documentos_trabajador as $documento){
+                                        $ACCIONES = '';
+                                        if($documento->tipo_documentacion_trabajador_id_tipo_documentacion_trabajador == 1){
+                                            if($documento->url_trabajador_laboral_documentacion != ''){
+                                                $trozos = explode(".", $documento->url_trabajador_laboral_documentacion); 
+                                                $extension = end($trozos);
+                                                if((strtolower ($extension) == 'jpg') || (strtolower($extension) == 'png')|| (strtolower($extension) == 'jpeg')){
+                                                    $ACCIONES = '<a href="'.base_url().$documento->url_trabajador_laboral_documentacion.'" target="a_blank"><i style="color:green" class="fa fa-file-image-o fa-2x" aria-hidden="true"></i></a>';
+                                                }
+
+                                                if((strtolower ($extension) == 'pdf')){
+                                                    $ACCIONES = '<a href="'.base_url().$documento->url_trabajador_laboral_documentacion.'" target="a_blank"><i style="color:green" class="fa fa-file-pdf-o fa-2x" aria-hidden="true"></i></a>';
+                                                }
+                                                
+                                                if((strtolower ($extension) == 'doc')||(strtolower ($extension) == 'docx')){
+                                                    $ACCIONES = '<a href="'.base_url().$documento->url_trabajador_laboral_documentacion.'" target="a_blank"><i style="color:green" class="fa fa-file-word-o fa-2x" aria-hidden="true"></i></a>';
+                                                }
+                                            }else{
+                                                $ACCIONES = '<a href="'.base_url().$documento->url_trabajador_laboral_documentacion.'" target="a_blank"><i style="color:green,cursor:pointer;" class="fa fa-cloud-upload fa-2x" aria-hidden="true"></i></a>';
+                                            }
+                                        }
+                                        
+                                        if($documento->tipo_documentacion_trabajador_id_tipo_documentacion_trabajador == 2){
+                                            $ACCIONES = '<input type="file" id="documento_pedido_trabajador'.$documento->id_trabajador_laboral_documentacion.'" name="documento_pedido_trabajador'.$documento->id_trabajador_laboral_documentacion.'" style="display:none"  onchange="adjuntar_documento_solicitado('.$documento->id_trabajador_laboral_documentacion.','.$documento->trabajador_laboral_id_trabajador_laboral.',\''.$documento->codigo_trabajador_laboral_documentacion.'\')"><span style="width:100px;" class="mi_archivo'.$documento->id_trabajador_laboral_documentacion.'"></span>
+                        <label id="label_documento_pedido_trabajador'.$documento->id_trabajador_laboral_documentacion.'" for="documento_pedido_trabajador'.$documento->id_trabajador_laboral_documentacion.'">
+                            <i style="color:#346abb; cursor:pointer;" class="fa fa-cloud-upload fa-2x" aria-hidden="true"></i>
+                        </label>';
+                                        }
+                                        
+                                        if($documento->tipo_documentacion_trabajador_id_tipo_documentacion_trabajador == 3){
+                                            $trozos = explode(".", $documento->url_trabajador_laboral_documentacion); 
+                                            $extension = end($trozos);
+                                            if((strtolower ($extension) == 'jpg') || (strtolower($extension) == 'png')|| (strtolower($extension) == 'jpeg')){
+                                                $ACCIONES = '<label id="label_documento_pedido_trabajador'.$documento->id_trabajador_laboral_documentacion.'"><a target="a_blank" href="'.base_url().$documento->url_trabajador_laboral_documentacion.'"><i style="color:red;cursor:pointer;" class="fa fa-file-image-o fa-2x" aria-hidden="true"></i></a></label>';
+                                            }
+                                            
+                                            if((strtolower ($extension) == 'pdf')){
+                                                $ACCIONES = '<label id="label_documento_pedido_trabajador'.$documento->id_trabajador_laboral_documentacion.'"><a target="a_blank" href="'.base_url().$documento->url_trabajador_laboral_documentacion.'"><i style="color:red;cursor:pointer;" class="fa fa-file-pdf-o fa-2x" aria-hidden="true"></i></a></label>';
+                                            }
+                                            
+                                            if((strtolower ($extension) == 'doc')||(strtolower ($extension) == 'docx')){
+                                                    $ACCIONES = '<label id="label_documento_pedido_trabajador'.$documento->id_trabajador_laboral_documentacion.'"><a target="a_blank" href="'.base_url().$documento->url_trabajador_laboral_documentacion.'"><i onCLick="validar_archivo('.$documento->id_trabajador_laboral_documentacion.')" style="color:red;cursor:pointer;" class="fa fa-file-word-o fa-2x" aria-hidden="true"></i></a></label>';
+                                                }
+                                        }
+                                        
+                                        
+                                ?>
+                                
+                                    <tr style="cursor:pointer" onmouseover="this.style.backgroundColor='#66ABE2',this.style.color= 'white'"  onmouseout="this.style.backgroundColor='transparent',this.style.color= 'black'" id="trabajador_" style ="cursor:pointer;">
+                                        <td><?=$documento->titulo_trabajador_laboral_documentacion?></td>
+                                        <td><?=$documento->fecha?></td>
+                                        <td><?php                                  
+                                            if($documento->url_trabajador_laboral_documentacion != ''){
+                                                echo formatSizeUnits(filesize($documento->url_trabajador_laboral_documentacion));
+                                            }else{ echo "0 KB";}
+                                            ?>
+                                        </td>
+                                        <td><?=$documento->solicitado_por_trabajador_laboral_documentacion?></td>
+                                        <td><?=$ACCIONES?></td>
+                                    </tr>
+                                
+                                <?php
+                                    }
+                                ?>  
+                                </tbody>
+                        </table>  
                                         </div>
                                     </div>
                                   </div>
@@ -963,191 +1000,7 @@
               </div> <!-- end .tabe pane -->
         </div> <!-- end .container -->
       </div> <!-- end #page-content -->
-<!-- MODAL INFORMACION PERSONAL -->
-<div id="modal_informacion_personal" class="modal fade">
-    <div class="vertical-alignment-helper">
-      <div class="modal-dialog vertical-align-center" role="document">
-        <div class="modal-content">
-          <div class="modal-body">
-              <form id="form_modificacion_laboral" method="post" >
-                  <div class="row" style="padding:5px 10px;">
-                    <div class="col-sm col-lg-3">
-                        <div class="input-group input-group-lg" style="width:100%">
-                            <label for="nombre_editar_sigesco_laboral">Primer Nombre</label>
-                            <input id="nombre_editar_sigesco_laboral" name="nombre_editar_sigesco_laboral" type="text" class="form-control validate" required="true" placeholder="Nombre" aria-label="Nombre" value="<?=$perfil->nombre_trabajador_laboral?>">
-                        </div>
-                    </div>
-                    <div class="col-sm col-lg-3">
-                        <div class="input-group input-group-lg" style="width:100%">
-                            <label for="nombre2_editar_sigesco_laboral">Segundo Nombre</label>
-                            <input id="nombre2_editar_sigesco_laboral" name="nombre2_editar_sigesco_laboral" type="text" class="form-control validate" placeholder="Segundo Nombre" aria-label="Segundo Nombre" value="<?=$perfil->nombre2_trabajador_laboral?>">
-                        </div>
-                    </div>
-                    <div class="col-sm col-lg-3">
-                        <div class="input-group input-group-lg" style="width:100%">
-                            <label for="paterno_editar_sigesco_laboral">Apellido Paterno</label>
-                            <input id="paterno_editar_sigesco_laboral" name="paterno_editar_sigesco_laboral" type="text" class="form-control validate" required="true" placeholder="Apellido Paterno" aria-label="Apellido Paterno" value="<?=$perfil->paterno_trabajador_laboral?>">
-                        </div>
-                    </div>
-                    <div class="col-sm col-lg-3">
-                        <div class="input-group input-group-lg" style="width:100%">
-                            <label for="materno_editar_sigesco_laboral">Apellido Materno</label>
-                            <input id="materno_editar_sigesco_laboral" name="materno_editar_sigesco_laboral" type="text" class="form-control validate" placeholder="Apellido Materno" aria-label="Apellido Materno" value="<?=$perfil->materno_trabajador_laboral?>">
-                        </div>
-                    </div>
-                  </div>
-                  
-                  <div class="row" style="padding:5px 10px;">
-                    <div class="col-sm col-lg-3">
-                        <div class="input-group input-group-lg" style="width:100%">
-                            <label for="paterno_editar_sigesco_laboral">RUN</label>
-                            <input id="run_editar_sigesco_laboral" name="run_editar_sigesco_laboral" type="text" class="form-control validate" required="true" placeholder="RUN" aria-label="RUN" value="<?=$perfil->rut_trabajador_laboral?>" disabled>
-                        </div>
-                    </div>
-                    <div class="col-sm col-lg-3">
-                        <div class="input-group input-group-lg" style="width:100%">
-                            <label for="nacimiento_editar_sigesco_laboral">Fecha de Nacimiento</label>
-                            <input id="nacimiento_editar_sigesco_laboral" onChange="validar_fecha(this.value)" name="nacimiento_editar_sigesco_laboral" type="text" class="form-control validate" placeholder="Fecha de Nacimiento" aria-label="Fecha de Nacimiento" value="<?=$perfil->nacimiento?>">
-                        </div>
-                    </div>
 
-                    <div class="col-sm col-lg-3">
-                        <div class="input-group input-group-lg" style="width:100%">
-                            <label for="celular_editar_sigesco_laboral">Celular Contacto</label>
-                            <input id="celular_editar_sigesco_laboral" name="celular_editar_sigesco_laboral" type="text" class="form-control validate" required="true" placeholder="Celular Contacto" aria-label="Celular Contacto" value="<?=$perfil->celular_trabajador_laboral?>" >
-                        </div>
-                    </div>
-                    <div class="col-sm col-lg-3">
-                        <div class="input-group input-group-lg" style="width:100%">
-                            <label for="celular_referencia_editar_sigesco_laboral">Celular Referencia</label>
-                            <input id="celular_referencia_editar_sigesco_laboral" name="celular_referencia_editar_sigesco_laboral" type="text" class="form-control validate" required="true" placeholder="Celular Referencia" aria-label="Celular Referencia" value="<?=$perfil->celular_referencia_trabajador_laboral?>" >
-                        </div>
-                    </div>
-                  </div>
-                  <div class="row" style="padding:5px 10px">
-                        <div class="col-sm col-lg-6" style="margin-top:10px;">
-                            <div class="input-group input-group-lg" style="width:100%">
-                                <label for="direccion_editar_sigesco_laboral">Dirección</label>
-                                <input id="direccion_editar_sigesco_laboral" name="direccion_editar_sigesco_laboral" type="text" class="form-control" placeholder="Dirección" aria-label="Dirección" value="<?=$perfil->direccion_trabajador_laboral?>">
-                            </div>
-                        </div>
-                        <div class="col-sm col-lg-3" style="margin-top:10px;">
-                            <div class="input-group input-group-lg" style="width:100%">
-                                <label for="ciudad_editar_sigesco_laboral">Ciudad</label>
-                                <input id="ciudad_buscar_sigesco_laboral" name="ciudad_buscar_sigesco_laboral" type="text" class="form-control" placeholder="Ciudad" aria-label="Ciudad"  value="<?=$perfil->nombre_ciudad?>">
-                                <input id="ciudad_editar_sigesco_laboral" name="ciudad_editar_sigesco_laboral" value="<?=$perfil->ciudad_id_ciudad?>" style="display:none">
-                            </div>
-                        </div>
-                        <div class="col-sm col-lg-3" style="margin-top:10px;">
-                            <div class="input-group input-group-lg" style="width:100%">
-                                <label for="nacionalidad_editar_sigesco_laboral">Nacionalidad</label>
-                                <select id="nacionalidad_editar_sigesco_laboral" name="nacionalidad_editar_sigesco_laboral">
-                                    <option name='inicio_option' value="<?=$perfil->nacionalidad_trabajador_laboral?>" selected><?=$perfil->nacionalidad_trabajador_laboral?></option>
-                                    <option value="Chileno">Chileno/a</option>
-                                    <option value="Argentino/a">Argentino/a</option>
-                                    <option value="Peruano/a">Peruano/a</option>
-                                    <option value="Boliviano/a">Boliviano/a</option>
-                                    <option value="Haitiano/a">Haitiano/a</option>
-                                    <option value="Brasileño/a">Brasileño/a</option>
-                                    <option value="Otra">Otra</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                  </div>
-                  <div class="row" style="padding:5px 10px">
-                        <div class="col-sm col-lg-4" style="margin-top:10px;">
-                            <div class="input-group input-group-lg" style="width:100%">
-                                <label for="email_editar_sigesco_laboral">Email</label>
-                                <input id="email_editar_sigesco_laboral" name="email_editar_sigesco_laboral" type="email" class="form-control validate" required="true" placeholder="Email" aria-label="Email"  value="<?=$perfil->email_trabajador_laboral?>">
-                            </div>
-                        </div>
-                        <div class="col-sm col-lg-2" style="margin-top:10px;">
-                            <div class="input-group input-group-lg" style="width:100%">
-                                <label for="pretencion_editar_sigesco_laboral">Pretención de Sueldo</label>
-                                <input id="pretencion_editar_sigesco_laboral" name="pretencion_editar_sigesco_laboral" type="text" class="form-control validate" placeholder="Pretencion de Sueldo" onChange="formatear(this.id,this.value)" aria-label="Pretencion de Sueldo"  value="<?=$perfil->pretencion_salarial_trabajador_laboral?>">
-                            </div>
-                        </div>
-                        <div class="col-sm col-lg-2" style="margin-top:10px;">
-                            <div class="input-group input-group-lg" style="width:100%">
-                                <label for="genero_editar_sigesco_laboral">Género</label>
-                                <select id="genero_editar_sigesco_laboral" name="genero_editar_sigesco_laboral">
-                                    <option name='inicio_option' value="<?=$perfil->genero_trabajador_laboral?>" selected><?=$perfil->genero_trabajador_laboral?></option>
-                                    <option value="Masculino">Masculino</option>
-                                    <option value="Femenimo">Femenimo</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-sm col-lg-2" style="margin-top:10px;">
-                            <div class="input-group input-group-lg" style="width:100%">
-                                <label for="estado_civil_editar_sigesco_laboral">Estado Civil</label>
-                                <select id="estado_civil_editar_sigesco_laboral" name="estado_civil_editar_sigesco_laboral">
-                                    <option name='inicio_option' value="<?=$perfil->estado_civil_trabajador_laboral?>" selected><?=$perfil->estado_civil_trabajador_laboral?></option>
-                                    <option value="Soltero/a">Soltero/a</option>
-                                    <option value="Comprometido/a">Comprometido/a</option>
-                                    <option value="Casado/a">Casado/a</option>
-                                    <option value="Divorciado/a">Divorciado/a</option>
-                                    <option value="Viudo/a">Viudo/a</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div class="col-sm col-lg-2" style="margin-top:10px;">
-                            <div class="input-group input-group-lg" style="width:100%">
-                                <label for="discapacidad_editar_sigesco_laboral">Discapacidad</label>
-                                <select id="discapacidad_editar_sigesco_laboral" name="discapacidad_editar_sigesco_laboral">
-                                    <option name='inicio_option' value="<?=$perfil->discapacidad_trabajador_laboral?>" selected><?=$perfil->discapacidad_trabajador_laboral?></option>
-                                    <option value="SI">SI</option>
-                                    <option value="NO">NO</option>
-                                </select>
-                            </div>
-                        </div>
-                  </div>
-
-                  <div class="row" style="padding:5px 10px">
-                    <div class="col-sm col-lg-6" style="margin-top:10px;">
-                            <div class="input-group input-group-lg" style="width:100%">
-                                <label for="objetivo_editar_sigesco_laboral">Objetivo Profesional</label>
-                                <input id="objetivo_editar_sigesco_laboral" name="objetivo_editar_sigesco_laboral" type="text" class="form-control validate" required="true" placeholder="Objetivo" aria-label="Objetivo" value="<?=$perfil->objetivo_laboral_trabajador_laboral?>">
-                            </div>
-                        </div>
-                      <div class="col-sm col-lg-6" style="margin-top:10px;">
-                        <div class="input-group input-group-lg" style="width:100%">
-                            <label for="licencia_referencia_editar_sigesco_laboral">Licencia(s) Conducir</label>
-                            <div class="row">
-                              <div class="col-lg-3 col-xs-3"><input id="a1_editar_sigesco_laboral" name="a1_editar_sigesco_laboral" type="checkbox" value="A1" <?php if($perfil->a1_licencia_conducir_trabajador_laboral != ''){ echo "checked";}?>> Clase A1</div>
-                              <div class="col-lg-3 col-xs-3"><input id="a2_editar_sigesco_laboral" name="a2_editar_sigesco_laboral" type="checkbox" value="A2" <?php if($perfil->a2_licencia_conducir_trabajador_laboral != ''){ echo "checked";}?>> Clase A2</div>
-                              <div class="col-lg-3 col-xs-3"><input id="a3_editar_sigesco_laboral" name="a3_editar_sigesco_laboral" type="checkbox" value="A3" <?php if($perfil->a3_licencia_conducir_trabajador_laboral != ''){ echo "checked";}?>> Clase A3</div>
-                              <div class="col-lg-3 col-xs-3"><input id="a4_editar_sigesco_laboral" name="a4_editar_sigesco_laboral" type="checkbox" value="A4" <?php if($perfil->a4_licencia_conducir_trabajador_laboral != ''){ echo "checked";}?>> Clase A4</div>
-                            </div>
-                            <div class="row">
-                              <div class="col-lg-3 col-xs-3"><input id="a5_editar_sigesco_laboral" name="a5_editar_sigesco_laboral" type="checkbox" value="A5" <?php if($perfil->a5_licencia_conducir_trabajador_laboral != ''){ echo "checked";}?>> Clase A5</div>
-                              <div class="col-lg-3 col-xs-3"><input id="b_editar_sigesco_laboral" name="b_editar_sigesco_laboral" type="checkbox" value="B" <?php if($perfil->b_licencia_conducir_trabajador_laboral != ''){ echo "checked";}?>> Clase B</div>
-                              <div class="col-lg-3 col-xs-3"><input id="c_editar_sigesco_laboral" name="c_editar_sigesco_laboral" type="checkbox" value="C" <?php if($perfil->c_licencia_conducir_trabajador_laboral != ''){ echo "checked";}?>> Clase C</div>
-                              <div class="col-lg-3 col-xs-3"><input id="d_editar_sigesco_laboral" name="d_editar_sigesco_laboral" type="checkbox" value="D" <?php if($perfil->d_licencia_conducir_trabajador_laboral != ''){ echo "checked";}?>> Clase D</div>
-                            </div>
-                        </div>
-                    </div>
-                  </div>
-                  <div class="row" style="padding:5px 10px">
-                    <div class="col-sm col-lg-12" style="margin-top:10px;">
-                            <div class="input-group input-group-lg" style="width:100%">
-                                <label for="presentacion_editar_sigesco_laboral">Presentación</label>
-                                <textarea rows="4" id="presentacion_editar_sigesco_laboral" name="presentacion_editar_sigesco_laboral" placeholder="Ingrese una breve Presentación" aria-label="Presentación"><?=$perfil->presentacion_trabajador_laboral?></textarea>
-                            </div>
-                        </div>
-                  </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button id="boton_modificar_trabajador_laboral" style="color:white;" type="button" class="btn btn-success"> <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</button>
-            <button type="button" class="btn btn-danger" data-dismiss="modal"> <i class="fa fa-times" aria-hidden="true"></i> Cerrar</button>
-          </div>
-        </div>
-      </div>
-    </div>
-</div>
-<!-- FIN MODAL INFORMACION PERSONAL -->
 <!-- MODAL ESTUDIO -->
 <div id="modal_estudio" class="modal fade" tabindex="-1" role="dialog">
    <div class="vertical-alignment-helper">
@@ -3010,6 +2863,77 @@
     </div>
 </div><!-- /.modal -->
 <!-- FIN MODAL EDITAR FOTO PERFIL -->
+<!-- Inicio Modal Agregar -->
+<div class="modal fade" id="modal_agregar" tabindex="-1" role="dialog" aria-labelledby="Agregar Documento">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Agregar Documento</h4>
+      </div>
+      <div class="modal-body">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-8">
+                        <input type="text" class="form-control" id="titulo_documento_trabajador" name="titulo_documento_trabajador" placeholder="Ingrese título para el documento">
+                    </div>
+                    <div class="col-md-4">
+                        <span style="width:100px;" class="mi_archivo">
+                            <input type="file" id="documento_trabajador" name="documento_trabajador" style="display:none">
+                        </span>
+                        <label class="btn btn-default" for="documento_trabajador" style="">
+                            <span>Subir Documento</span>
+                        </label>
+                    </div>
+                    <div id="" class="col-md-12" style="margin-top:3%;text-align:center" align="center">
+                        <div id="icono_archivo" class="col-md-12  col-centered" style="max-height:300px; width:100%">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+        <button id="subir_documentacion" type="button" class="btn btn-success">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fin Modal Agregar -->
+<!-- Inicio Modal Agregar Documento Solicitado -->
+<div class="modal fade" id="modal_agregar_documento_solicitado" tabindex="-1" role="dialog" aria-labelledby="Agregar Documento Solicitado">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Agregar Documento Solicitado</h4>
+      </div>
+      <div class="modal-body">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="text" class="form-control" id="fecha_documento_solicitado" name="fecha_documento_solicitado" placeholder="Ingrese Fecha de Caducidad del Documento, si la tuviese.">
+                        <input type="text" id="id_trabajador_documento_solicitado" name="id_trabajador_documento_solicitado" style="display:none">
+                        <input type="text" id="id_documento_solicitado" name="id_documento_solicitado" style="display:none">
+                        <input type="text" id="codigo_documento_solicitado" name="codigo_documento_solicitado" style="display:none">
+                    </div>
+                    <div class="col-md-12" style="margin-top:3%;text-align:center" align="center">
+                        <div id="icono_archivo_documentacion" class="col-md-12  col-centered" style="max-height:300px; width:100%">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+        <button id="subir_documentacion_solicitada" type="button" class="btn btn-success">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fin Modal Agregar  Documento Solicitado-->
 <script>
 $( document ).ready(function() { 
     
@@ -3019,6 +2943,14 @@ $(".candidate-profile-picture").mouseover(function() {
 
 $(".candidate-profile-picture").mouseleave(function() {
     $("#editar_perfil").slideUp( "slow" );
+});
+    
+$("#foto_editar_perfil_superior").mouseover(function() {
+    $("#foto_superior_top").addClass( "open" );
+});
+
+$(".dropdown-menu").mouseleave(function() {
+    $("#foto_superior_top").removeClass( "open" );
 });
     
 $('#nacimiento_editar_sigesco_laboral').mask('00-00-0000');
@@ -3538,13 +3470,30 @@ $("#nombre_idioma").change(function() {
     
 //////////////////////////////////////////////////////////////////////////////////
 ////////////////////////   D O C U M E N T A C I O N  ////////////////////////////
-    $( "#tipo_documentacion" ).click(function() {
-        if($( "#input_tipo_documentacion" ).val() == "Otro"){
-           $( "#div_titulo_otro_documentacion" ).slideDown( "slow" );
-        }else{
-            $( "#div_titulo_otro_documentacion" ).slideUp( "slow" );
+    $('#tabla_listas_documentos').DataTable({
+        "dom": '<"row separar"<"col-md-12 col-xs-12"<"row"<"col-md-3 col-xs-6" l><"col-md-5 col-xs-6" f><"#botones_tabla.col-md-4 col-xs-12">>>>t<"row"<"col-md-4 col-xs-4" i><"col-md-8 col-xs-8" p>>',
+        "pagingType": "full_numbers",
+        "language": {
+            "lengthMenu": "Mostrar _MENU_",
+            "zeroRecords": "Sin Resultados - Lo Siento",
+            "info": "Mostrando _PAGE_ Página de _PAGES_",
+            "infoEmpty": "Sin trabajadores",
+            "infoFiltered": "(filtered from _MAX_ total records)",
+            "search":"",
+            "paginate": {
+                "previous": "Anterior",
+                "first": "Primero",
+                "last": "Último",
+                "next": "Siguiente"
+            }
         }
     });
+    $("#botones_tabla").append('<button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal_agregar">Agregar</button>');
+    $("#tabla_listas_documentos_filter").css("width","100%");
+    $("#tabla_listas_documentos_filter label").css("width","100%");
+    $("#tabla_listas_documentos_filter label input").css("width","100%");
+    $("#tabla_listas_documentos_info").css("width","45%");
+    $("#tabla_listas_documentos_paginate").css("width","100%");
 //////////////////////////////////////////////////////////////////////////////////
 });
 
@@ -5540,7 +5489,12 @@ $("#nombre_idioma").change(function() {
                                                 check_universitaria = datos[6]+'-'+datos[7];
                                             }
                                             
-                                            $( "#lista_educacion_universitaria" ).append('<div id="fila_educacion_universitaria'+datos[1]+'" class="assigned-job-single"><div class="css-table"><div class="table-details css-table-cell"><div class="job-description">                                  <h4><a href="#">'+datos[3]+'</a><a style="color: #666;font-size: 12px;">  -  <i class="fa fa-bell"></i>'+datos[8]+'</a></h4></div><div class="company-name"><h4><a href="#">'+datos[9]+'</a></h4></div><div class="job-location-stat"><p><a href="#"><i class="fa fa-calendar"></i>'+datos[4]+'-'+datos[5]+' / '+check_universitaria+'</a></p></div></div><div class="days-left css-table-cell"><h3 style="cursor:pointer; color:#346abb;"><i onclick="modificar_universitaria('+datos[1]+')" class="fa fa-pencil-square-o" aria-hidden="true"></i><i onclick="eliminar_universitaria('+datos[1]+')" class="fa fa-trash" aria-hidden="true"></i></h3></div></div></div>');
+                                            if(datos[8] == 1){ var estado = "Titulado";}
+                                            if(datos[8] == 2){ var estado = "Egresado";}
+                                            if(datos[8] == 3){ var estado = "Cursando";}
+                                            if(datos[8] == 4){ var estado = "Completo";}
+                                            
+                                            $( "#lista_educacion_universitaria" ).append('<div id="fila_educacion_universitaria'+datos[1]+'" class="assigned-job-single"><div class="css-table"><div class="table-details css-table-cell"><div class="job-description">                                  <h4><a href="#">'+datos[3]+'</a><a style="color: #666;font-size: 12px;">  -  <i class="fa fa-bell"></i>'+estado+'</a></h4></div><div class="company-name"><h4><a href="#">'+datos[9]+'</a></h4></div><div class="job-location-stat"><p><a href="#"><i class="fa fa-calendar"></i>'+datos[4]+'-'+datos[5]+' / '+check_universitaria+'</a></p></div></div><div class="days-left css-table-cell"><h3 style="cursor:pointer; color:#346abb;"><i onclick="modificar_universitaria('+datos[1]+')" class="fa fa-pencil-square-o" aria-hidden="true"></i><i onclick="eliminar_universitaria('+datos[1]+')" class="fa fa-trash" aria-hidden="true"></i></h3></div></div></div>');
                                             
                                             empty_universitaria();
                                             Command: toastr["success"]("Se ingreso Correctamente Educación Basica.", "Registro Realizado")
@@ -5593,7 +5547,7 @@ $("#nombre_idioma").change(function() {
                         }
                 break;
             case 'posterior':
-                /*Inicio Institucion */  if(($("#institucion_educacion_posterior_sigesco_laboral").val() != '') && ($("#institucion_buscar_educacion_posterior_sigesco_laboral").val() != '')){
+            /*Inicio Institucion */  if(($("#institucion_educacion_posterior_sigesco_laboral").val() != '') && ($("#institucion_buscar_educacion_posterior_sigesco_laboral").val() != '')){
                             $( "#institucion_buscar_educacion_posterior_sigesco_laboral" ).css( "border-color","#ccc" );
             /*Inicio Mes Inicio */  if(($("#mes_inicio_educacion_posterior_sigesco_laboral").val() != 'Seleccione Mes')){
                             $( "#input_select_mes_inicio_posterior" ).css( "border-color","#ccc" );
@@ -5672,7 +5626,12 @@ $("#nombre_idioma").change(function() {
                                                 check_posterior = datos[6]+'-'+datos[7];
                                             }
                                             
-                                            $( "#lista_educacion_posterior" ).append('<div id="fila_educacion_posterior'+datos[1]+'" class="assigned-job-single"><div class="css-table"><div class="table-details css-table-cell"><div class="job-description">  <h4><a href="#">'+datos[3]+'</a><a style="color: #666;font-size: 12px;">  -  <i class="fa fa-bell"></i>'+datos[8]+'</a></h4></div><div class="company-name"><h4><a href="#">'+datos[9]+'</a></h4></div><div class="job-location-stat"><p><a href="#"><i class="fa fa-calendar"></i>'+datos[4]+'-'+datos[5]+' / '+check_posterior+'  &nbsp;&nbsp;&nbsp; <i class="fa fa-clock-o"></i>'+datos[14]+' &nbsp;&nbsp;&nbsp; <i class="fa fa-pencil"></i>'+datos[13]+'</a></p></div></div><div class="days-left css-table-cell"><h3 style="cursor:pointer; color:#346abb;"><i onclick="modificar_posterior('+datos[1]+')" class="fa fa-pencil-square-o" aria-hidden="true"></i><i onclick="eliminar_posterior('+datos[1]+')" class="fa fa-trash" aria-hidden="true"></i></h3></div></div></div>');
+                                            if(datos[8] == 1){ var estado = "Titulado";}
+                                            if(datos[8] == 2){ var estado = "Egresado";}
+                                            if(datos[8] == 3){ var estado = "Cursando";}
+                                            if(datos[8] == 4){ var estado = "Completo";}
+                                            
+                                            $( "#lista_educacion_posterior" ).append('<div id="fila_educacion_posterior'+datos[1]+'" class="assigned-job-single"><div class="css-table"><div class="table-details css-table-cell"><div class="job-description">  <h4><a href="#">'+datos[3]+'</a><a style="color: #666;font-size: 12px;">  -  <i class="fa fa-bell"></i>'+estado+'</a></h4></div><div class="company-name"><h4><a href="#">'+datos[9]+'</a></h4></div><div class="job-location-stat"><p><a href="#"><i class="fa fa-calendar"></i>'+datos[4]+'-'+datos[5]+' / '+check_posterior+'  &nbsp;&nbsp;&nbsp; <i class="fa fa-clock-o"></i>'+datos[14]+' &nbsp;&nbsp;&nbsp; <i class="fa fa-pencil"></i>'+datos[13]+'</a></p></div></div><div class="days-left css-table-cell"><h3 style="cursor:pointer; color:#346abb;"><i onclick="modificar_posterior('+datos[1]+')" class="fa fa-pencil-square-o" aria-hidden="true"></i><i onclick="eliminar_posterior('+datos[1]+')" class="fa fa-trash" aria-hidden="true"></i></h3></div></div></div>');
                                             
                                             empty_posterior();
                                             Command: toastr["success"]("Se ingreso Correctamente Educación Basica.", "Registro Realizado")
@@ -6249,7 +6208,7 @@ $("#nombre_idioma").change(function() {
      }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////   I D I O M A   ////////////////////////////////////////////////////
-        $( "#slider_idioma_oral" ).slider({
+    $( "#slider_idioma_oral" ).slider({
           range: "max",
               min: 0,
               max: 100,
@@ -6260,7 +6219,7 @@ $("#nombre_idioma").change(function() {
               }
           });
     
-        $( "#slider_idioma_escrito" ).slider({
+    $( "#slider_idioma_escrito" ).slider({
           range: "max",
               min: 0,
               max: 100,
@@ -6271,7 +6230,7 @@ $("#nombre_idioma").change(function() {
               }
           });
     
-        function agregar_idioma(){
+    function agregar_idioma(){
         /*Inicio Nombre Conocimiento */  if(($("#nombre_idioma").val() != '')){
             $( "#nombre_idioma" ).css( "border-color","#ccc" );
         /*Inicio Descripcion Conocimiento   if(($("#descripcion_conocimiento").val() != '')){
@@ -6331,7 +6290,7 @@ $("#nombre_idioma").change(function() {
         }
     }
     
-        function eliminar_idioma(fila_idioma){
+    function eliminar_idioma(fila_idioma){
          $.ajax({
             type: 'POST',
             url: '<?=base_url()?>trabajador_laboral/eliminar_idioma',
@@ -6348,88 +6307,241 @@ $("#nombre_idioma").change(function() {
      }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ///////////////////////////////////   D O C U M E N T A C I O N   ////////////////////////////////////////////
-    function subir_documentacion(){
+    $("#subir_documentacion").click(function(){
+            /*Inicio Titulo */  if(($("#titulo_documento_trabajador").val() != '')){
+            $( "#titulo_documento_trabajador" ).css( "border-color","#ccc" );
+                
+            /*Inicio Titulo */  if(($("#documento_trabajador").val() != '')){
+            $( "#documento_trabajador" ).css( "border-color","#ccc" );
+            
+                var documento_trabajador = new FormData();
+                documento_trabajador.append( "documento_trabajador", $("#documento_trabajador")[0].files[0]);
+                documento_trabajador.append( "titulo_documento_trabajador", $("#titulo_documento_trabajador").val());
+                documento_trabajador.append( "id_trabajador_busqueda", <?=$this->session->userdata('sigesco_laboral_id')?>);
+                $.ajax({
+                    type: 'POST',
+                    url: '<?=base_url()?>empresa/agregar_documento_trabajador',
+                    contentType: false,
+                    data: documento_trabajador, 
+                    processData: false,
+                    cache: false,
+                    success: function(data){
+                        if(data != false){
+                               var datos = JSON.parse(data);
+                            if(datos[0] == 1){
+                                    $('#tabla_listas_documentos').DataTable().row.add( [
+                                        datos[1],
+                                        datos[3],
+                                        datos[4],
+                                        'Personal',
+                                        '<a href="'+datos[2]+'" target="a_blank"><i style="color:red" class="fa fa-file-image-o fa-2x" aria-hidden="true"></i></a>'
+
+                                    ] ).draw( false );
+
+                                    $("[data-dismiss=modal]").trigger({ type: "click" });
+                                    Command: toastr["success"]("Documento agregado correctamente.", "Documento Agregado")
+                                    $("#imagen_preview").remove();
+                                    $("#the-canvas").remove();
+                                    $("#titulo_documento_trabajador").val('');
+                                }
+                            if(datos[0] == 2){
+                                $('#tabla_listas_documentos').DataTable().row.add( [
+                                            datos[1],
+                                            datos[3],
+                                            datos[4],
+                                            'Personal',
+                                            '<a href="'+datos[2]+'" target="a_blank"><i style="color:red" class="fa fa-file-pdf-o fa-2x" aria-hidden="true"></i></a>'
+
+                                        ] ).draw( false );
+                                $("[data-dismiss=modal]").trigger({ type: "click" });
+                                Command: toastr["success"]("Documento agregado correctamente.", "Documento Agregado")
+                                $("#imagen_preview").remove();
+                                $("#the-canvas").remove();
+                                $("#titulo_documento_trabajador").val('');
+                            }
+                            
+                            if(datos[0] == 3){
+                                $('#tabla_listas_documentos').DataTable().row.add( [
+                                            datos[1],
+                                            datos[3],
+                                            datos[4],
+                                            'Personal',
+                                            '<a href="'+datos[2]+'" target="a_blank"><i style="color:red" class="fa fa-file-o fa-2x" aria-hidden="true"></i></a>'
+
+                                        ] ).draw( false );
+                                $("[data-dismiss=modal]").trigger({ type: "click" });
+                                Command: toastr["success"]("Documento agregado correctamente.", "Documento Agregado")
+                                $("#imagen_preview").remove();
+                                $("#the-canvas").remove();
+                                $("#titulo_documento_trabajador").val('');
+                            }
+                        } else{ Command: toastr["error"]("Ocurrio un Problema, intente nuevamente por favor.", "Error al subir Logo")}
+                    }
+                });
+                
+        }else{
+            $( "#documento_trabajador" ).css(  "border-color","red" );
+            $( "#documento_trabajador" ).focus();
+            Command: toastr["error"]("Primero <strong>'Suba'</strong> un documento por favor.", "Subir Documento")
+        }
+        }else{
+            $( "#titulo_documento_trabajador" ).css(  "border-color","red" );
+            $( "#titulo_documento_trabajador" ).focus();
+            Command: toastr["error"]("Ingrese el <strong>'Título'</strong> por favor.", "Título")
+        }
+    });
     
+    $( "#documento_trabajador" ).change(function() {
+        var documento_trabajador = new FormData();
+        documento_trabajador.append( "documento_trabajador", $("#documento_trabajador")[0].files[0]);
+        documento_trabajador.append( "titulo_documento_trabajador", $("#titulo_documento_trabajador").val());
+        $.ajax({
+            type: 'POST',
+            url: '<?=base_url()?>empresa/subir_documento_trabajador',
+            contentType: false,
+            data: documento_trabajador, 
+            processData: false,
+            cache: false,
+            success: function(data){
+                var datos = JSON.parse(data);
+                if(datos[0] == '1'){
+                    $("#imagen_preview").remove();
+                    $("#the-canvas").remove();
+                    $("#icono_archivo_documentacion").append('<img id="imagen_preview" style="max-height:300px;margin: auto;width: 90%;" src="'+datos[1]+'" >');
+                }else{
+                    $("#imagen_preview").remove();
+                    $("#the-canvas").remove();
+                    $("#icono_archivo_documentacion").append('<canvas style="max-height:300px;margin: auto;" id="the-canvas" height="300" width="230"></canvas>');
+                    var url = datos[1];
+
+                    // Asynchronous download PDF
+                    PDFJS.getDocument(url)
+                    .then(function(pdf) {
+                                    return pdf.getPage(1);
+                                  })
+                    .then(function(page) {
+                                    // Set scale (zoom) level
+                                    var desiredWidth = 230;
+                                    var viewport = page.getViewport(1);
+                                    var scale = desiredWidth / viewport.width;
+                                    var scaledViewport = page.getViewport(scale);
+
+                                    // Get viewport (dimensions)
+                                    var viewport = page.getViewport(scale);
+
+                                    // Get canvas#the-canvas
+                                    var canvas = document.getElementById('the-canvas');
+
+                                    // Fetch canvas' 2d context
+                                    var context = canvas.getContext('2d');
+
+                                    // Prepare object needed by render method
+                                    var renderContext = {
+                                      canvasContext: context,
+                                      viewport: viewport
+                                    };
+
+                                    // Render PDF page
+                                    page.render(renderContext);
+                                  });
+                }
+            }
+        });
+    });
+    
+    $( "#subir_documentacion_solicitada" ).click(function() {
         var fd = new FormData();
-    
-        fd.append( "archivo_documentacion", $("#archivo_documentacion")[0].files[0]);
+        fd.append("id_documentacion_trabajador", $("#id_documento_solicitado").val());
+        fd.append("codigo_documentacion_trabajador", $("#codigo_documento_solicitado").val());
+        fd.append("id_trabajador", $("#id_trabajador_documento_solicitado").val());
+        fd.append( "documento_pedido_trabajador", $("#documento_pedido_trabajador"+$("#id_documento_solicitado").val())[0].files[0]);
         
+        $.ajax({
+                type: 'POST',
+                url: '<?=base_url()?>trabajador_laboral/adjuntar_documento_solicitado',
+                contentType: false,
+                data: fd, 
+                processData: false,
+                cache: false,
+                success: function(data){
+                    var datos = JSON.parse(data);
+                    if(datos[0] == true){
+                        $("#label_documento_pedido_trabajador"+$("#id_documento_solicitado").val()).empty();
+                        $("#label_documento_pedido_trabajador"+$("#id_documento_solicitado").val()).attr('for','');
+                        $("#label_documento_pedido_trabajador"+$("#id_documento_solicitado").val()).html('<a href="'+datos[1]+'" target="a_blank"><i style="color:red" class="fa '+datos[2]+' fa-2x" aria-hidden="true"></i></a>');
+                        $("[data-dismiss=modal]").trigger({ type: "click" });
+                        Command: toastr["success"]("Se Adjunto Correctamente el Documento.", "Documento Adjuntado")
+                        //redireccionarPagina('<?=base_url()?>laboral');
+                    }else{
+                        $("[data-dismiss=modal]").trigger({ type: "click" });
+                        Command: toastr["error"]("Ocurrio un Problema.", "Intente Nuevamente")
+                    }
+                }
+            });
+    });
     
-    /*Inicio Tipo Dcumentacion */   if(($("#input_tipo_documentacion").val() != '')){
-                                    $( "#input_tipo_documentacion" ).css( "border-color","#ccc" );
-                                    fd.append("input_tipo_documentacion", $( "#input_tipo_documentacion" ).val());
-        
-    /*Inicio Documento */   if(($("#archivo_documentacion").val() != '')){
-                                    $( "#archivo_documentacion" ).css( "border-color","#ccc" );
-                                    fd.append("archivo_documentacion", $( "#archivo_documentacion" ).val());
-        
-                            if(($("#input_tipo_documentacion").val() == 'Otro') && ($("#titulo_otro_documentacion").val() != '')){
-                                fd.append("titulo_otro_documentacion", $( "#titulo_otro_documentacion" ).val());
-                                
-                                $.ajax({
-                                    type: 'POST',
-                                    url: '<?=base_url()?>trabajador_laboral/agregar_documentacion',
-                                    contentType: false,
-                                    data: fd, 
-                                    processData: false,
-                                    cache: false,
-                                    success: function(data){
-                                        var datos = JSON.parse(data);
-                                        if(datos[0] == true){
+    function adjuntar_documento_solicitado(id_documentacion,id_trabajador,codigo){
+        var documento_trabajador = new FormData();
+        documento_trabajador.append( "documento_trabajador", $("#documento_pedido_trabajador"+id_documentacion)[0].files[0]);
+        documento_trabajador.append( "titulo_documento_trabajador", $("#titulo_documento_trabajador").val());
+        $.ajax({
+            type: 'POST',
+            url: '<?=base_url()?>empresa/subir_documento_trabajador',
+            contentType: false,
+            data: documento_trabajador, 
+            processData: false,
+            cache: false,
+            success: function(data){
+                var datos = JSON.parse(data);
+                if(datos[0] == '1'){
+                    $("#imagen_preview").remove();
+                    $("#the-canvas").remove();
+                    $("#icono_archivo_documentacion").append('<img id="imagen_preview" style="max-height:300px;margin: auto;width: 90%;" src="'+datos[1]+'" >');
+                }else{
+                    $("#imagen_preview").remove();
+                    $("#the-canvas").remove();
+                    $("#icono_archivo_documentacion").append('<canvas style="max-height:300px;margin: auto;" id="the-canvas" height="300" width="230"></canvas>');
+                    var url = datos[1];
 
-                                            $( "#lista_documentacion" ).append('<div id="fila_documento'+datos[0]+'" class="assigned-job-single"><div class="row" style="padding:10px 0px 10px 0px"><div class="col-xs-12 col-md-12"></div><div class="col-xs-12 col-md-7" style="text-align:center;"><p class="titulo_idioma_tabla2" style="color:#346abb;">'+datos[3]+'</p></div><div class="col-xs-12 col-md-3"><div class="row"><div class="col-xs-6 col-md-12" style="text-align:center;"><p class="detalle_idioma_tabla2"><strong>Fecha de Subida</strong></p></div><div class="col-xs-6 col-md-12" style="text-align:center;"><p class="detalle_idioma_tabla2">'+datos[2]+'</p></div></div></div><div class="col-md-2" style="text-align:center;"><i onClick="abrir_archivo(\'<?=base_url()?>'+datos[4]+'\')" class="fa fa-file-o icono_idioma" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<i onclick="eliminar_documento(\''+datos[1]+'\',\''+datos[4]+'\')" class="fa fa-trash icono_idioma" aria-hidden="true"></i></div></div></div>');
-                                            
-                                            Command: toastr["success"]("Se agrego correctamente la Documentación.", "Documentación")
-                                            //redireccionarPagina('<?=base_url()?>laboral');
-                                            
-                                        }else{
-                                            $("[data-dismiss=modal]").trigger({ type: "click" });
-                                            Command: toastr["error"]("Ocurrio un Problema.", "Intente Nuevamente")
-                                            
-                                        }
-                                    }
+                    // Asynchronous download PDF
+                    PDFJS.getDocument(url)
+                    .then(function(pdf) {
+                                    return pdf.getPage(1);
+                                  })
+                    .then(function(page) {
+                                    // Set scale (zoom) level
+                                    var desiredWidth = 230;
+                                    var viewport = page.getViewport(1);
+                                    var scale = desiredWidth / viewport.width;
+                                    var scaledViewport = page.getViewport(scale);
 
-                                });
-                                
-                               }else{
-                                   $.ajax({
-                                    type: 'POST',
-                                    url: '<?=base_url()?>trabajador_laboral/agregar_documentacion',
-                                    contentType: false,
-                                    data: fd, 
-                                    processData: false,
-                                    cache: false,
-                                    success: function(data){
-                                        var datos = JSON.parse(data);
-                                        if(datos[0] == true){
+                                    // Get viewport (dimensions)
+                                    var viewport = page.getViewport(scale);
 
-                                            $( "#lista_documentacion" ).append('<div id="fila_documento'+datos[0]+'" class="assigned-job-single"><div class="row" style="padding:10px 0px 10px 0px"><div class="col-xs-12 col-md-12"></div><div class="col-xs-12 col-md-7" style="text-align:center;"><p class="titulo_idioma_tabla2" style="color:#346abb;">'+datos[3]+'</p></div><div class="col-xs-12 col-md-3"><div class="row"><div class="col-xs-6 col-md-12" style="text-align:center;"><p class="detalle_idioma_tabla3"><strong>Fecha de Subida</strong></p></div><div class="col-xs-6 col-md-12" style="text-align:center;"><p class="detalle_idioma_tabla3">'+datos[2]+'</p></div></div></div><div class="col-md-2" style="text-align:center;"><i onClick="abrir_archivo(\'<?=base_url()?>'+datos[4]+'\')" class="fa fa-file-o icono_idioma" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<i onclick="eliminar_documento(\''+datos[1]+'\',\''+datos[4]+'\')" class="fa fa-trash icono_idioma" aria-hidden="true"></i></div></div></div>');
-                                            
-                                            Command: toastr["success"]("Se agrego correctamente la Documentación.", "Documentación")
-                                            //redireccionarPagina('<?=base_url()?>laboral');
-                                            
-                                        }else{
-                                            $("[data-dismiss=modal]").trigger({ type: "click" });
-                                            Command: toastr["error"]("Ocurrio un Problema.", "Intente Nuevamente")
-                                            
-                                        }
-                                    }
+                                    // Get canvas#the-canvas
+                                    var canvas = document.getElementById('the-canvas');
 
-                                });
-                               }
-    
-    /* Fin Documento */   }else{
-                            $( "#archivo_documentacion" ).css(  "border-color","red" );
-                            $( "#archivo_documentacion" ).focus();
-                            Command: toastr["error"]("Ingrese el <strong>'Archivo'</strong> por favor.", "Archivo")
-                        }
-    
-    /* Fin Tipo Documentacion */   }else{
-                            $( "#input_tipo_documentacion" ).css(  "border-color","red" );
-                            $( "#input_tipo_documentacion" ).focus();
-                            Command: toastr["error"]("Seleccione el campo <strong>'Tipo de Documentación'</strong> por favor.", "Tipo de Documentación")
-                        }
-}
+                                    // Fetch canvas' 2d context
+                                    var context = canvas.getContext('2d');
+
+                                    // Prepare object needed by render method
+                                    var renderContext = {
+                                      canvasContext: context,
+                                      viewport: viewport
+                                    };
+
+                                    // Render PDF page
+                                    page.render(renderContext);
+                                  });
+                }
+                $("#id_trabajador_documento_solicitado").val(id_trabajador);
+                $("#id_documento_solicitado").val(id_documentacion);
+                $("#codigo_documento_solicitado").val(codigo);
+                $('#modal_agregar_documento_solicitado').modal('show');
+            }
+        });
+       
+    }
     
     function eliminar_documento(fila_documento,url_documento){
             bootbox.confirm({ 
@@ -6468,11 +6580,7 @@ $("#nombre_idioma").change(function() {
                   }
                 }  
             });
-        }
-    
-    function abrir_archivo(url){
-        window.open(url, '_blank');
-    }  
+        } 
 
     function subir_foto_perfil_editar(){
         var fd = new FormData();

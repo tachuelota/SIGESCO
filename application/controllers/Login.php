@@ -47,7 +47,7 @@ class Login extends CI_Controller {
             else{
                 $remplazar = array('-','.');
                 $auxiliar_usuario = str_replace($remplazar, '' ,$this->input->post('user'));
-                $usuario = number_format( substr (intval($auxiliar_usuario), 0 , -1 ) , 0, "", ".") . '-' . substr (intval($auxiliar_usuario), strlen(intval($auxiliar_usuario)) -1 , 1 );
+                $usuario = number_format(substr(intval($auxiliar_usuario), 0 , -1 ) , 0, "", ".") . '-' . substr(intval($auxiliar_usuario), strlen(intval($auxiliar_usuario)) -1 , 1 );
             }
             
             $this->load->model('trabajador_laboral_MO','trabajador',true);
@@ -58,19 +58,20 @@ class Login extends CI_Controller {
     
         public function validar_empresa()
         {
-                        
-            if(!strpos($this->input->post('user'), '@')){
+            if(strpos($this->input->post('user'), '@')){
                $usuario = $this->input->post('user');
-                
-            }
-            else{
-                $remplazar = array('-','.');
-                $auxiliar_usuario = str_replace($remplazar, '' ,$this->input->post('user'));
-                $usuario = number_format( substr (intval($auxiliar_usuario), 0 , -1 ) , 0, "", ".") . '-' . substr (intval($auxiliar_usuario), strlen(intval($auxiliar_usuario)) -1 , 1 );
+            }else{
+                if(strpos($this->input->post('user'), '-')){
+                    $remplazar = array('-','.');
+                    $auxiliar_usuario = str_replace($remplazar, '' ,$this->input->post('user'));
+                    $usuario = number_format(substr(intval($auxiliar_usuario), 0 , -1 ) , 0, "", ".") . '-' . substr(intval($auxiliar_usuario), strlen(intval($auxiliar_usuario)) -1 , 1 );
+                }else{
+                    $usuario = $this->input->post('user');
+                }
             }
             
-            $this->load->model('Empresas','trabajador',true);
-            $query = $this->trabajador->validar_empresa($usuario,$this->input->post('pass'));    
+                $this->load->model('Empresas','trabajador',true);
+                $query = $this->trabajador->validar_empresa($usuario,$this->input->post('pass'));    
                 echo $query;
             
         }
@@ -80,6 +81,13 @@ class Login extends CI_Controller {
             $this->load->model('trabajador_laboral_MO','trabajador',true);
             $query = $this->trabajador->validad_trabajador_laboral($this->input->post('user'),$this->input->post('pass'));    
                 echo $query;
+        }
+    
+        public function cerrar_sesion()
+        {
+            $this->session->sess_destroy();
+            header("Location: ".base_url());
+
         }
 
     

@@ -1,0 +1,38 @@
+<!-- Inicio Modal Pedir Solicitar Documento -->
+<div class="modal fade" id="modal_solicitar_documento" tabindex="-10" role="dialog" aria-labelledby="Agregar Documento">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Solicitar Documentos</h4>
+      </div>
+      <div class="modal-body">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-md-8">
+                        <input id="lista_tipo_documento_solicitar" name="lista_tipo_documento_solicitar" style="display:none" value="<?=$id_lista?>">
+                        <select id="tipo_documento_solicitar" name="tipo_documento_solicitar">
+                            <option name='inicio_option' selected>Seleccione Tipo de Documento</option>
+                            <?php 
+                                foreach($tipo_documentos as $tipo_documento){
+                            ?>
+                                <option value="<?=$tipo_documento->id_empresa_contratista_documentacion?>"><?=$tipo_documento->nombre_empresa_contratista_documentacion?></option>
+                            <?php
+                                }
+                            ?>
+                        </select>
+                    </div>
+                    <div class="col-xs-3 col-md-3">
+                        <button data-toggle="modal" data-target="#modal_agregar_tipo_documento" type="button" class="btn btn-success btn-lg"><i class="fa fa-plus fa-4x"></i> Nuevo Documento</button>
+                    </div>
+                </div>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal"> Cerrar </button>
+        <button id="solicitar_documento_trabajador" type="button" class="btn btn-info"> Solicitar </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Fin Modal Pedir -->

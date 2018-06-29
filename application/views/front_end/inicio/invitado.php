@@ -57,7 +57,7 @@
           </div>
           <div class="container">
             <div class="search-holder">
-              <h1 style="font-size:40px">Sistema de Gestion de Contratos</h1>
+              <h1 style="font-size:40px">Sistema de Gestion de Contratación</h1>
               <h2 style="font-size:25px">Busca, Selecciona y Contrata!!!</h2>
 
               <div id="header-search">

@@ -1,0 +1,6 @@
+ALTER TABLE conocimiento ADD FULLTEXT (nombre_conocimiento);
+ALTER TABLE trabajador_laboral_educacion_universitaria ADD FULLTEXT (especialidad_trabajador_laboral_educacion_universitaria);
+ALTER TABLE educacion_posterior ADD FULLTEXT (especialidad_educacion_posterior);
+ALTER TABLE trabajador_laboral ADD FULLTEXT (presentacion_trabajador_laboral);
+ALTER TABLE experiencia_laboral ADD FULLTEXT (descripcion_experiencia_laboral);
+ALTER TABLE trabajador_laboral_educacion_media ADD FULLTEXT (especialidad_trabajador_laboral_educacion_media);

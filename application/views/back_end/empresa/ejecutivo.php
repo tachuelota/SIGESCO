@@ -190,11 +190,11 @@
         <div class="container">
               <div id="candidate-profile">
                 <div class="row">
-                  <div class="col-md-4">
+                  <div class="col-md-3">
                     <div class="motijob-sidebar">
                       <div class="candidate-profile-picture">
                         <img id="foto_editar_perfil" src="<?=base_url().$this->session->userdata('sigesco_laboral_foto')?>" alt="">
-                          <div id="editar_perfil" style="height:50px;width:100%;margin-top:-70px;background-color:black;opacity:0.5; display:none;"><a  href="#" data-toggle="modal" data-target="#modal_foto_perfil"><h5 style="opacity:0.9;color:white;margin:0px;font-size:14px;heigh:20px;padding:15px 10px 15px 10px;"><i class="fa fa-pencil" aria-hidden="true"></i> Editar Foto Perfil</h5></a></div>
+                          <div id="editar_perfil" style="height:50px;width:100%;margin-top:-70px;background-color:black;opacity:0.5; display:none;"><a  href="#" data-toggle="modal" data-target="#modal_foto_perfil"><h5 style="opacity:0.9;color:white;margin:0px;font-size:14px;padding:15px 10px 15px 10px;"><i class="fa fa-pencil" aria-hidden="true"></i> Editar Foto Perfil</h5></a></div>
                         <div>&nbsp;</div>
                         <a style="margin-top:15px" href="#"><?=$this->session->userdata('sigesco_laboral_nombre')." ".$this->session->userdata('sigesco_laboral_paterno')?></a>
                       </div> <!-- end .agent-profile-picture -->
@@ -235,7 +235,7 @@
                     </div>
                   </div> <!-- end .3col grid layout -->
 
-                  <div id="datos_candidato" class="col-md-8">
+                  <div id="datos_candidato" class="col-md-9">
                     <div class="candidate-description">
 
 

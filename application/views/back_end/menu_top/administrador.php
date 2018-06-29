@@ -1,4 +1,39 @@
-     <!-- HEADER -->
+<style>
+    .dropdown-menu li a{
+        padding: 5px 0px;
+    }
+    
+    .dropdown-menu{
+        margin-left: -74%;
+        margin-top: 15%;
+    }
+    
+    .dropdown-menu li a:hover{
+        padding-left: 20px;
+        background-color: transparent;
+    }
+    
+    .dropdown-menu li a{
+        padding-left: 10px;
+    }
+    
+    @media screen and (max-width: 375px) and (min-width: 300px) {
+        #lista_mensaje{
+            margin-left: -180%;
+        }      
+    }
+    
+    @media screen and (min-width: 600px) {
+        #lista_mensaje{
+            margin-left:-160px;
+            width:360px;
+            overflow:scroll;
+            max-height:250px;
+        }      
+    }
+    
+</style>  
+<!-- HEADER -->
       <header id="header">
         <div class="header-top-bar">
 
@@ -30,9 +65,15 @@
                   <div class="col-md-3 col-sm-4">
                     <div class="notification-section text-right">
                       <ul class="list-inline">
-                        <li><a href="#"><i class="fa fa-envelope-o"></i></a><span class="new-notification">3</span></li>
                         <li><a href="#"><i class="fa fa-bell-o"></i></a><span class="new-notification">3</span></li>
-                        <li class="user-profile-pic"><a href="#"><img id="foto_editar_perfil_superior" src="<?=base_url().$this->session->userdata('sigesco_laboral_foto')?>" alt=""></a></li>
+                        <li><a href="#"><i class="fa fa-envelope-o"></i></a><span class="new-notification">3</span></li>
+                        <li class="user-profile-pic dropdown" style="">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img id="foto_editar_perfil_superior" src="<?=base_url().$this->session->userdata('sigesco_laboral_foto')?>" alt=""></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="<?=base_url()?>empresa/editar_perfil">Editar</a></li>
+                                <li><a href="<?=base_url()?>login/cerrar_sesion">Cerrar Sesion</a></li>
+                            </ul>
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -66,27 +107,32 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul class="nav navbar-nav">
-                    <li class="active"><a href="<?=base_url()?>laboral">Inicio</a></li>
+                    <?php
+                                                                                                                                                     
+                        $modulos = json_decode($this->session->userdata('sigesco_laboral_menu'));
 
-                    <li class="dropdown" style="display:none;">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Job
+                        foreach ($modulos as $product) {
+                            
+                            if($product->url == "#"){
+                                echo '<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">'.$product->modulo.'
                         <span class="caret"></span></a>
-                      <ul class="dropdown-menu">
-                        <li><a href="job-search.html">job search</a></li>
-                        <li><a href="job-preview.html">Job Preview</a></li>
-                        <li><a href="job-registration(full-width).html">Job Registration (full-width)</a></li>
-                        <li><a href="job-registration(sidebar).html">Job Registration (sidebar)</a></li>
+                      <ul class="dropdown-menu">';
+                                $i=1;
+                                   foreach ($product->submodulos as $submodulo) {
+                                       
+                                        echo '<li><a href="'.base_url().$submodulo->url.'">'.$submodulo->nombre.'</a></li>';
+                                   }
+                                echo '</ul></li>';
+                            }else{
+                                echo '<li class=""><a href="'.base_url().$product->url.'">'.$product->modulo.'</a></li>';
+                            }
+                           
+                            
+                        }
 
-                      </ul>
-                    </li>
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Trabajadores
-                        <span class="caret"></span></a>
-                      <ul class="dropdown-menu">
-                        <li><a href="job-search.html">Interno</a></li>
-                        <li><a href="job-preview.html">Externos</a></li>
-                      </ul>
-                    </li>
+
+
+                      ?>
                   </ul>
 
                 </div><!-- /.navbar-collapse -->
@@ -98,10 +144,17 @@
 
 
       </header>
-      <!-- end #header -->
+<script>
+$( document ).ready(function() { 
+    
+    $(".candidate-profile-picture").mouseover(function() {
+        $("#editar_perfil").slideDown( "slow" );
+    });
 
-      <!-- header Search bar -->
-
-
-
-      <!-- end .header-banner -->
+    $(".candidate-profile-picture").mouseleave(function() {
+        $("#editar_perfil").slideUp( "slow" );
+    });
+});
+   $(".user-profile-pic").mouseover(function(){$(".user-profile-pic").addClass("open");});
+   $(".user-profile-pic").mouseout(function(){$(".user-profile-pic").removeClass("open");});
+</script>

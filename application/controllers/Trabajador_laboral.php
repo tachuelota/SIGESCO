@@ -93,7 +93,8 @@ class Trabajador_laboral extends CI_Controller {
                     '',/////URL
                     '',/////TIPO
                     '',///NOTAS
-                    ''/////HORAS
+                    '',/////HORAS
+                    '' //////FECHA CARGA URL
                     );
 
                 $query = explode(",",$query);
@@ -131,7 +132,8 @@ class Trabajador_laboral extends CI_Controller {
                     '',/////URL
                     '',/////TIPO
                     '',///NOTAS
-                    ''/////HORAS
+                    '',/////HORAS
+                    '' //////FECHA CARGA URL
                      ); 
 
                 $query = explode(",",$query);
@@ -166,9 +168,11 @@ class Trabajador_laboral extends CI_Controller {
                 $extension = end($trozos);
                 $tmpFile = $_FILES['titulo_sigesco_laboral']['tmp_name'];
                 $filename = $uploadDir."/".$codigo_titulo.".".$extension;
+                $fecha_carga = date('Y-m-d');
                 move_uploaded_file($tmpFile,$filename);
                 }else{
                     $filename = '';
+                    $fecha_carga = '';
                 }
                 
                 $query = $this->trabajador->agregar_estudio(
@@ -186,7 +190,8 @@ class Trabajador_laboral extends CI_Controller {
                     $filename,
                     '',/////TIPO
                     '',///NOTAS
-                    ''/////HORAS
+                    '',/////HORAS
+                    $fecha_carga
                     );
 
                 $query = explode(",",$query);
@@ -221,9 +226,11 @@ class Trabajador_laboral extends CI_Controller {
                 $extension = end($trozos);
                 $tmpFile = $_FILES['titulo_sigesco_laboral']['tmp_name'];
                 $filename = $uploadDir."/".$CODIGO.".".$extension;
+                $fecha_carga = date('Y-m-d');
                 move_uploaded_file($tmpFile,$filename);
                 }else{
                     $filename = '';
+                    $fecha_carga = '';
                 }
                 
                 $query = $this->trabajador->agregar_estudio(
@@ -241,7 +248,8 @@ class Trabajador_laboral extends CI_Controller {
                     $filename,
                     $this->input->post('tipo_posterior_educacion_posterior_sigesco_laboral',TRUE),
                     str_replace(',', ".", $this->input->post('nota_educacion_posterior_sigesco_laboral',TRUE)),
-                    $this->input->post('horas_educacion_posterior_sigesco_laboral',TRUE)
+                    $this->input->post('horas_educacion_posterior_sigesco_laboral',TRUE),
+                    $fecha_carga
                 );    
 
                 $query = explode(",",$query);
@@ -782,7 +790,7 @@ class Trabajador_laboral extends CI_Controller {
                         $filename
                     );
                 
-                    $query = explode(",",$query);
+                    $query = explode(",",$query);                    
                     $datos = array(
                         $query[0],
                         $query[1],
@@ -802,6 +810,58 @@ class Trabajador_laboral extends CI_Controller {
                 );    
                 echo $query;
             }
+    
+            public function adjuntar_documento_solicitado(){
+                $CODIGO = $this->input->post('codigo_documentacion_trabajador',TRUE);
+                $uploadDir = 'archivos/'.$this->input->post('id_trabajador',TRUE);
+                if (!file_exists($uploadDir)) {
+                       mkdir($uploadDir, 0777, true);
+                }
+                $trozos = explode(".", $_FILES['documento_pedido_trabajador']['name']); 
+                $extension = end($trozos);
+                $tmpFile = $_FILES['documento_pedido_trabajador']['tmp_name'];
+                $filename = $uploadDir."/".$CODIGO.".".$extension;
+                if(move_uploaded_file($tmpFile,$filename)){
+                    $this->load->model('Trabajador_laboral_MO','trabajador',true);
+                    if($query = $this->trabajador->modificar_documentacion(
+                        $this->input->post('id_documentacion_trabajador',TRUE),
+                        $filename
+                    )){
+                        $EXTENSION = '';
+                        if((strtolower($extension) == 'jpg')||(strtolower($extension) == 'jpeg')||(strtolower($extension) == 'png')){$EXTENSION = "fa-file-image-o";}
+                        if((strtolower($extension) == 'pdf')){$EXTENSION = "fa-file-pdf-o";}
+                        if((strtolower($extension) == 'doc')||(strtolower($extension) == 'docx')){$EXTENSION = "fa-file-word-o";}
+                        if((strtolower($extension) == 'xls')||(strtolower($extension) == 'xlsx')){$EXTENSION = "fa-file-excel-o";}
+                        if($EXTENSION==''){$EXTENSION = "fa-file-o";}
+                        
+                        $variables = array(
+                            TRUE,
+                            base_url().$filename,
+                            $EXTENSION,
+                            $query
+                        );
+                        
+                        echo json_encode($variables);
+                    }
+                }else{
+                        echo FALSE;
+                }
+            }
+    
+            public function validar_documento(){
+
+                    $this->load->model('Trabajador_laboral_MO','trabajador',true);
+                    if($query = $this->trabajador->validar_documento(
+                        $this->input->post('id_documento',TRUE)
+                    )){
+                        echo TRUE;
+                    }else{
+                        echo FALSE;
+                    }
+
+            }
+    
+    
     
         //////////////////////////////////////////////////////////////////////////////////////////////////////
         /////////////////////////////////// S E C C I O N   F O T O   P E R F I L    /////////////////////

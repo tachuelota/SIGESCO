@@ -75,7 +75,7 @@ $query_builder = TRUE;
 
 $db['escritura'] = array(
 	'dsn'	=> '',
-	'hostname' => '54.83.178.22',
+	'hostname' => '54.88.177.203',
 	'username' => 'sigesco_escritura',
 	'password' => 'system2012',
 	'database' => 'sigesco_laborum',
@@ -97,7 +97,7 @@ $db['escritura'] = array(
 
 $db['lectura'] = array(
 	'dsn'	=> '',
-	'hostname' => '52.91.59.4',
+	'hostname' => '54.86.4.196',
 	'username' => 'sigesco_lectura',
 	'password' => 'system2012',
 	'database' => 'sigesco_laborum',

@@ -109,16 +109,33 @@ $('.responsive-tabs').responsiveTabs();
       
       /////////////////////////////////////////////////// D O C U M E N T A C I O N  ///////////////////////////////////////////////////////
       if($select.attr( "name" ) == "tipo_documentacion"){ id = "tipo_documentacion";}
+      
       //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       /////////////////////////////////////////////////// E J E C U T I V O  ///////////////////////////////////////////////////////
       if($select.attr( "name" ) == "tipo_ejecutivo_sigesco_laboral"){ id = "tipo_ejecutivo_sigesco_laboral";}
       if($select.attr( "name" ) == "sucursal_ejecutivo_sigesco_laboral"){ id = "sucursal_ejecutivo_sigesco_laboral";}
+      if($select.attr( "name" ) == "lista_listas_ejecutivo"){ id = "lista_listas_ejecutivo";}
+      if($select.attr( "name" ) == "tipo_documento_solicitar"){ id = "tipo_documento_solicitar";}
+      //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      /////////////////////////////////////////////////// P R O D U C T O  ///////////////////////////////////////////////////////
+      if($select.attr( "name" ) == "producto_bodega_sigesco"){ id = "producto_bodega_sigesco";}
+      if($select.attr( "name" ) == "bodega_sigesco"){ id = "bodega_sigesco";}
+      if($select.attr( "name" ) == "categoria_producto_bodega"){ id = "categoria_producto_bodega";}
+      if($select.attr( "name" ) == "subcategoria_producto_bodega"){ id = "subcategoria_producto_bodega";}
+      if($select.attr( "name" ) == "producto_bodega_sigesco"){ id = "producto_bodega_sigesco";}
+      if($select.attr( "name" ) == "faena_minera_bodega_sigesco"){ id = "faena_minera_bodega_sigesco";}
+      if($select.attr( "name" ) == "mandante_faena_minera_sigesco"){ id = "mandante_faena_minera_sigesco";}
+      if($select.attr( "name" ) == "responsable_faena_minera_bodega"){ id = "responsable_faena_minera_bodega";}
+      if($select.attr( "name" ) == "quien_retira_bodega_sigesco"){ id = "quien_retira_bodega_sigesco";}
+      //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      ////////////////////////////////////////////////////////// B O D E G A   /////////////////////////////////////////////////////////////
+      if($select.attr( "name" ) == "bodega_sigesco"){ id = "bodega_sigesco";}
       //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     $select.wrap('<div id="'+id+'" class="uou-custom-select"></div>');
 
     var $container = $select.parent('.uou-custom-select');
 
-    $container.append('<ul class="select-clone"></ul>');
+    $container.append('<ul id="select_'+id+'" class="select-clone"></ul>');
 
     var $list = $container.children('.select-clone'),
       placeholder = $select.data('placeholder') ? $select.data('placeholder') : $select.find('option:eq(0)').text();
@@ -156,7 +173,6 @@ $('.responsive-tabs').responsiveTabs();
     // Option Select
     $list.children('li').on('click', function () {
       var $this = $(this);
-
       $valueHolder.val($this.text());
       $valueHolder.attr("valor",$this.data('value'));
       $select.find('option[value="' + $this.data('value') + '"]').prop('selected', true);
@@ -402,7 +418,7 @@ $('.responsive-tabs').responsiveTabs();
       $('.toggle-content-client').hide();
 
 
-      $('.toggle-details a').on('click', function(e){
+      $('.toggle-details .info').on('click', function(e){
         e.preventDefault();
 
         $(this).parent().siblings('.toggle-content-client').slideToggle(350);

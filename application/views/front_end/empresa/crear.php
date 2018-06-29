@@ -26,7 +26,7 @@ a{
 <div id="page-content" class="job-registration job-registration full-width">
         <div class="container">
           <div class="row">
-              <form id="form_crear_empresa">
+            <form id="form_crear_empresa">
             <div class="col-sm-12 page-content mt30">
                 <h4 class=" client-registration-title">Información <span>Empresarial</span></h4>
                 <div class="row">

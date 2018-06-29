@@ -139,6 +139,32 @@ class Inicio extends CI_Controller {
             //} else {redirect('/login', 'refresh');}
         }
     
+    
+        public function agregar_palabra(){
+                        
+            $palabras = explode(",", $this->session->userdata('palabra_busqueda_sigesco'));
+            array_push($palabras,$this->input->post('palabra_clave',TRUE));
+            $this->session->set_userdata('palabra_busqueda_sigesco',implode(',',array_unique($palabras)));
+            
+            if($this->session->userdata('palabra_busqueda_sigesco')){
+                echo TRUE;
+            }else{
+                echo FALSE;
+            }
+        }
+        
+        public function eliminar_palabra(){
+                        
+            $palabras = explode(",", $this->session->userdata('palabra_busqueda_sigesco'));
+            unset($palabras[array_search($this->input->post('palabra_clave',TRUE),$palabras,true)]);
+            $this->session->set_userdata('palabra_busqueda_sigesco',implode(',',array_unique($palabras)));
+            
+            if($this->session->userdata('palabra_busqueda_sigesco')){
+                echo TRUE;
+            }else{
+                echo FALSE;
+            }
+        }
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     

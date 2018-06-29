@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<body>
+    <h1>Prueba de Molino</h1>
+    <canvas id="myCanvas" width="200" height="100" style="border:1px solid #000000;">
+Your browser does not support the HTML5 canvas tag.
+</canvas>
+</body>
+    
+<script>
+var canvas = document.getElementById('myCanvas');
+var ctx = canvas.getContext('2d');
+
+var hitCanvas = document.createElement('canvas');
+var hitCtx = hitCanvas.getContext('2d');
+
+var colorsHash = {};
+
+function getRandomColor() {
+ var r = Math.round(Math.random() * 255);
+ var g = Math.round(Math.random() * 255);
+ var b = Math.round(Math.random() * 255);
+ return `rgb(${r},${g},${b})`;
+}
+
+
+
+var circles = [{
+  id: '1', x: 40, y: 40, radius: 10, color: 'rgb(255,0,0)'
+}, {
+  id: '2', x: 100, y: 70, radius: 10, color: 'rgb(0,255,0)'
+}];
+
+circles.forEach(circle => {
+	while(true) {
+     var colorKey = getRandomColor();
+     if (!colorsHash[colorKey]) {
+        circle.colorKey = colorKey;
+        colorsHash[colorKey] = circle;
+        return;
+     }
+  }
+});
+
+circles.forEach(circle => {
+  ctx.beginPath();
+  ctx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI, false);
+  ctx.fillStyle = circle.color;
+  ctx.fill();
+  
+  hitCtx.beginPath();
+  hitCtx.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI, false);
+  hitCtx.fillStyle = circle.colorKey;
+  hitCtx.fill();
+});
+
+function hasSameColor(color, shape) {
+  return shape.color === color;
+}
+
+canvas.addEventListener('click', (e) => {
+  var mousePos = {
+    x: e.clientX - canvas.offsetLeft,
+    y: e.clientY - canvas.offsetTop
+  };
+  var pixel = hitCtx.getImageData(mousePos.x, mousePos.y, 1, 1).data;
+  var color = `rgb(${pixel[0]},${pixel[1]},${pixel[2]})`;
+  var shape = colorsHash[color];
+  if (shape) {
+     alert('click en Circulo: ' + shape.id);
+  }
+ });
+
+    </script>
+</html>

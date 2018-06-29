@@ -452,7 +452,7 @@
                                           $.ajax({
                                                 type: 'POST',
                                                 url: '<?=base_url()?>inicio/registro_trabajador_laboral',
-                                                data: $('#form_registro_laboral_extranjero').serialize(),
+                                                data: $('#form_registro_laboral').serialize(),
                                                 success: function(data){
                                                     switch(data) {
                                                         case '1':
@@ -629,7 +629,7 @@
                                           $.ajax({
                                                 type: 'POST',
                                                 url: '<?=base_url()?>inicio/registro_trabajador_laboral',
-                                                data: $('#form_registro_laboral').serialize(),
+                                                data: $('#form_registro_laboral_extranjero').serialize(),
                                                 success: function(data){
                                                     switch(data) {
                                                         case '1':

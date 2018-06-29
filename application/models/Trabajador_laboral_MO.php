@@ -94,7 +94,7 @@
             }
                 
                 //////////////////////////////////////  E D U C A C I O N   /////////////////////////////////////////////////////
-                function agregar_estudio($tipo,$codigo,$id,$institucion,$mes_inicio,$anno_inicio,$mes_termino,$anno_termino,$situacion,$especialidad,$alpresente,$url,$posterior,$nota,$horas){
+                function agregar_estudio($tipo,$codigo,$id,$institucion,$mes_inicio,$anno_inicio,$mes_termino,$anno_termino,$situacion,$especialidad,$alpresente,$url,$posterior,$nota,$horas,$fecha_carga){
                     $this->db_escritura->reconnect();
                     switch ($tipo) {
                         case 1:
@@ -113,15 +113,15 @@
                             }
                             break;
                         case 3:
-                            if($this->db_escritura->query("INSERT INTO `trabajador_laboral_educacion_universitaria` (`codigo_trabajador_laboral_educacion_universitaria`, `mes_inicio_trabajador_laboral_educacion_universitaria`, `anno_inicio_trabajador_laboral_educacion_universitaria`, `mes_termino_trabajador_laboral_educacion_universitaria`, `anno_termino_trabajador_laboral_educacion_universitaria`, `alpresente_trabajador_laboral_educacion_universitaria`, `especialidad_trabajador_laboral_educacion_universitaria`, `educacion_universitaria_id_educacion_universitaria`, `trabajador_laboral_id_trabajador_laboral`, `situacion_trabajador_laboral_educacion_universitaria`, `url_titulo_trabajador_laboral_educacion_universitaria`) 
-                            VALUES ('".$codigo."', '".$mes_inicio."', '".$anno_inicio."', '".$mes_termino."', '".$anno_termino."', '".$alpresente."', '".$especialidad."','".$institucion."','".$id."','".$situacion."','".$url."');")){
+                            if($this->db_escritura->query("INSERT INTO `trabajador_laboral_educacion_universitaria` (`codigo_trabajador_laboral_educacion_universitaria`, `mes_inicio_trabajador_laboral_educacion_universitaria`, `anno_inicio_trabajador_laboral_educacion_universitaria`, `mes_termino_trabajador_laboral_educacion_universitaria`, `anno_termino_trabajador_laboral_educacion_universitaria`, `alpresente_trabajador_laboral_educacion_universitaria`, `especialidad_trabajador_laboral_educacion_universitaria`, `educacion_universitaria_id_educacion_universitaria`, `trabajador_laboral_id_trabajador_laboral`, `situacion_trabajador_laboral_educacion_universitaria`, `url_titulo_trabajador_laboral_educacion_universitaria`,`fecha_carga_url_trabajador_laboral_educacion_universitaria`) 
+                            VALUES ('".$codigo."', '".$mes_inicio."', '".$anno_inicio."', '".$mes_termino."', '".$anno_termino."', '".$alpresente."', '".$especialidad."','".$institucion."','".$id."','".$situacion."','".$url."','".$fecha_carga."');")){
                                 return TRUE.",".$this->db_escritura->insert_id();
                             }else{
                                 echo FALSE;
                             }
                             break;
                         case 4:
-                            if($this->db_escritura->query("INSERT INTO `educacion_posterior` (`codigo_educacion_posterior`, `mes_inicio_educacion_posterior`, `anno_inicio_educacion_posterior`, `mes_termino_educacion_posterior`, `anno_termino_educacion_posterior`, `alpresente_educacion_posterior`, `situacion_educacion_posterior`, `especialidad_educacion_posterior`, `cantidad_horas_educacion_posterior`, `nota_educacion_posterior`, `url_certificado_educacion_posterior`, `educacion_universitaria_id_educacion_universitaria`, `tipo_educacion_posterior_id_tipo_educacion_posterior`, `trabajador_laboral_id_trabajador_laboral`) VALUES ('".$codigo."', '".$mes_inicio."', '".$anno_inicio."', '".$mes_termino."', '".$anno_termino."', '".$alpresente."', '".$situacion."', '".$especialidad."', '".$horas."', '".$nota."', '".$url."', '".$institucion."', '".$posterior."', '".$id."');
+                            if($this->db_escritura->query("INSERT INTO `educacion_posterior` (`codigo_educacion_posterior`, `mes_inicio_educacion_posterior`, `anno_inicio_educacion_posterior`, `mes_termino_educacion_posterior`, `anno_termino_educacion_posterior`, `alpresente_educacion_posterior`, `situacion_educacion_posterior`, `especialidad_educacion_posterior`, `cantidad_horas_educacion_posterior`, `nota_educacion_posterior`, `url_certificado_educacion_posterior`, `educacion_universitaria_id_educacion_universitaria`, `tipo_educacion_posterior_id_tipo_educacion_posterior`, `trabajador_laboral_id_trabajador_laboral`, `fecha_carga_url_educacion_posterior`) VALUES ('".$codigo."', '".$mes_inicio."', '".$anno_inicio."', '".$mes_termino."', '".$anno_termino."', '".$alpresente."', '".$situacion."', '".$especialidad."', '".$horas."', '".$nota."', '".$url."', '".$institucion."', '".$posterior."', '".$id."', '".$fecha_carga."');
 ")){
                                 return TRUE.",".$this->db_escritura->insert_id();
                             }else{
@@ -516,7 +516,7 @@
                     }
                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
-                ///////////////////////////////////////////      I D I O M A   ////////////////////////////////////////////////////        
+                ///////////////////////////////////////  D O C U M E N T A C I O N   //////////////////////////////////////////////        
                 function agregar_documentacion($id,$codigo,$fecha,$titulo,$url){                        
                         $this->db_escritura->reconnect();
                             if($this->db_escritura->query("INSERT INTO `trabajador_laboral_documentacion` (`codigo_trabajador_laboral_documentacion`, `titulo_trabajador_laboral_documentacion`, `fecha_subida_trabajador_laboral_documentacion`, `url_trabajador_laboral_documentacion`, `trabajador_laboral_id_trabajador_laboral`) VALUES ('".$codigo."', '".$titulo."', '".$fecha."', '".$url."', '".$id."');")){
@@ -537,6 +537,32 @@
                             }
                         $this->db_escritura->close();
                     }
+                
+                function modificar_documentacion($id_documento,$url){
+                
+                        $this->db_escritura->reconnect();
+                            if($this->db_escritura->query("
+                                UPDATE `trabajador_laboral_documentacion` SET `fecha_subida_trabajador_laboral_documentacion`='".date('Y-m-d')."', `url_trabajador_laboral_documentacion`='".$url."', `tipo_documentacion_trabajador_id_tipo_documentacion_trabajador`= 3 WHERE `id_trabajador_laboral_documentacion`='".$id_documento."';")){
+                                return TRUE;
+                            } else {
+                                return FALSE;
+                            }
+                        $this->db_escritura->close();
+                }
+        
+                function validar_documento($id_documento){                        
+                        $this->db_escritura->reconnect();
+                            if($this->db_escritura->query("
+                                UPDATE `trabajador_laboral_documentacion` 
+                                SET `tipo_documentacion_trabajador_id_tipo_documentacion_trabajador`='1' 
+                                WHERE `id_trabajador_laboral_documentacion`='".$id_documento."';")){
+                                return TRUE;
+                            } else {
+                                return FALSE;
+                            }
+                        $this->db_escritura->close();
+                }
+                
                 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
         //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -629,7 +655,8 @@
         
             function documentos_trabajador($id_trabajador){
                 $this->db_lectura->reconnect();
-                 if($query = $this->db_lectura->query("SELECT trabajador_laboral_documentacion.*, DATE_FORMAT(STR_TO_DATE(fecha_subida_trabajador_laboral_documentacion,'%Y-%m-%d'),'%d/%m/%Y') as fecha FROM sigesco_laborum.trabajador_laboral_documentacion where trabajador_laboral_id_trabajador_laboral = '".$id_trabajador."' ORDER BY(titulo_trabajador_laboral_documentacion) ASC;")){
+                 if($query = $this->db_lectura->query("SELECT trabajador_laboral_documentacion.*, DATE_FORMAT(STR_TO_DATE(fecha_subida_trabajador_laboral_documentacion,'%Y-%m-%d'),'%d/%m/%Y') as fecha 
+                 FROM trabajador_laboral_documentacion where trabajador_laboral_id_trabajador_laboral = '".$id_trabajador."' ORDER BY(titulo_trabajador_laboral_documentacion) ASC;")){
                      return $query->result();
                 } else {
                     return FALSE;

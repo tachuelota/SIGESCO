@@ -1,0 +1,18 @@
+<?php
+	class Busquedas extends CI_Model {
+        
+        private $db_escritura;
+        private $db_lectura;
+                
+		public function __construct()
+		{
+			parent::__construct();
+            $this->db_escritura = $this->load->database('escritura', TRUE); 
+            $this->db_lectura = $this->load->database('lectura', TRUE);             
+		}
+        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	}
+?>
